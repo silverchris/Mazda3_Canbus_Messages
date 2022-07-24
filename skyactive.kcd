@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-->
+<NetworkDefinition
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://kayak.2codeornot2code.org/1.0" xsi:noNamespaceSchemaLocation="Definition.xsd">
+    <Document name="Mazda SkyActiv CANbus" version="0.01" date="2016-12-11"/>
+    <Node id="1" name="Powertrain Control Module"/>
+    <Node id="2" name="Start Stop Unit"/>
+    <Node id="3" name="Traction Control"/>
+    <Node id="4" name="Sophisticated Airbag Sensor"/>
+    <Node id="5" name="Electric Power Steering"/>
+    <Node id="6" name="Rear Body Control Module"/>
+    <Node id="7" name="CMU"/>
+    <Node id="8" name="HUD"/>
+    <Bus name="HS-CAN" baudrate="500000">
+        <Message id="0x202" name="speed" interval="10">
+            <!-- TODO test this -->
+            <Producer>
+                <NodeRef id="1"/>
+            </Producer>
+            <Signal name="RPM" offset="12" length="13" endianess="big">
+                <Value slope="0.5" unit="rev/min"/>
+            </Signal>
+            <Signal name="Speedometer Enable" offset="15"/>
+            <Signal name="SpeedKm" offset="31" length="15" endianess="big">
+                <Value slope="0.00390625" unit="km/h"/>
+            </Signal>
+        </Message>
+        <Message id="0x215" name="Wheel Speed" interval="10">
+            <Producer>
+                <NodeRef id="2"/>
+            </Producer>
+            <Signal name="FrontLeft" offset="0" length="16" endianess="big"/>
+            <Signal name="FrontRight" offset="16" length="16" endianess="big"/>
+            <Signal name="RearLeft" offset="32" length="16" endianess="big"/>
+            <Signal name="RearRight" offset="48" length="16" endianess="big"/>
+        </Message>
+        <Message id="0x228" name="transmission" interval="20" length="8">
+            <!-- TODO test this -->
+            <Producer>
+                <NodeRef id="1"/>
+            </Producer>
+            <Signal name="TransmChangeLeverPosition" offset="0" length="4"/>
+            <Signal name="TransmDesiredGearPosition" offset="4" length="4">
+                <Value max="7"/>
+                <LabelSet>
+                    <Label name="1st" value="1"/>
+                    <Label name="2nd" value="2"/>
+                    <Label name="3rd" value="3"/>
+                    <Label name="4th" value="4"/>
+                    <Label name="5th" value="5"/>
+                    <Label name="6th" value="6"/>
+                    <Label name="7th" value="7"/>
+                </LabelSet>
+            </Signal>
+            <Signal name="OD_Hold_Sport" offset="15" length="1"/>
+            <Signal name="OD_Hold_Sport_flash" offset="14" length="1"/>
+            <Signal name="gearTelltaleFlash" offset="13" length="1"/>
+            <!--            <Signal name="Mode" offset="10" length="3">-->
+            <!--                <LabelSet>-->
+            <!--                    <Label name="Park" value="1"/>-->
+            <!--                    <Label name="Reverse" value="2"/>-->
+            <!--                    <Label name="Neutral" value="3"/>-->
+            <!--                    <Label name="Drive" value="4"/>-->
+            <!--                </LabelSet>-->
+            <!--            </Signal>-->
+            <!--            <Signal name="Automatic Transaxle Manual" offset="8"/>-->
+            <!--            <Signal name="Automatic Transaxle Warning" offset="9"/>-->
+            <Signal name="quickManualFlag" offset="37" length="1"/>
+            <Signal name="gearPos_D_Trg" offset="33" length="4"/>
+            <Signal name="gearDisplayMode" offset="32" length="1"/>
+        </Message>
+        <Message id="0x09A" name="lights" interval="100">
+            <!-- TODO test this -->
+            <Producer>
+                <NodeRef id="2"/>
+            </Producer>
+            <Signal name="Brake Warning" offset="9"/>
+            <Signal name="Left Turn" offset="21"/>
+            <Signal name="Right Turn" offset="20"/>
+            <Signal name="Lights On" offset="19"/>
+            <Signal name="Low Washer Fluid Level Warning" offset="25"/>
+            <Signal name="Headlight High Beams On" offset="31"/>
+        </Message>
+        <Message id="0x420" name="temperature" interval="100">
+            <!-- TODO test this -->
+            <Producer>
+                <NodeRef id="1"/>
+            </Producer>
+            <Signal name="Coolant Temperature" offset="7" length="8" endianess="big">
+                <LabelSet>
+                    <LabelGroup name="Blue Coolant Temp Light" from="0" to="90"/>
+                    <Label name="Red Coolant Temp Light" value="255"/>
+                </LabelSet>
+            </Signal>
+            <Signal name="Charging System Malfunction" offset="38"/>
+            <Signal name="Check Fuel Cap" offset="40"/>
+            <Signal name="Low Engine Oil Pressure" offset="43"/>
+            <Signal name="Outdoor Temperature" offset="63" length="9" endianess="big">
+                <Value slope="0.25" intercept="-512" unit="cel" min="-40" max="160"/>
+            </Signal>
+        </Message>
+        <Message id="0x415" name="traction" interval="100">
+            <!-- TODO test this -->
+            <Producer>
+                <NodeRef id="3"/>
+            </Producer>
+            <Signal name="Antilock Brake System (ABS) Malfunction" offset="1" length="2" endianess="big">
+                <LabelSet>
+                    <Label name="off" value="0"/>
+                    <Label name="solid" value="1"/>
+                    <Label name="slow blink" value="2"/>
+                    <Label name="fast blink" value="3"/>
+                </LabelSet>
+            </Signal>
+            <Signal name="Brake Warning" offset="2"/>
+            <Signal name="Dynamic Stability Control (DSC) OFF" offset="3"/>
+            <Signal name="Traction Control System (TCS) / Dynamic Stability Control (DSC)" offset="6" length="2"
+                    endianess="big">
+                <LabelSet>
+                    <Label name="off" value="0"/>
+                    <Label name="solid" value="1"/>
+                    <Label name="slow blink" value="2"/>
+                    <Label name="fast blink" value="3"/>
+                </LabelSet>
+            </Signal>
+            <Signal name="loud beep" offset="28"/>
+            <Signal name="Tire Pressure Monitoring System (TPMS) Warning" offset="30" length="2" endianess="big">
+                <LabelSet>
+                    <Label name="off" value="0"/>
+                    <Label name="solid" value="1"/>
+                    <Label name="slow blink" value="2"/>
+                    <Label name="fast blink" value="3"/>
+                </LabelSet>
+            </Signal>
+            <Signal name="momentary beep with TPMS double-blink" offset="31"/>
+        </Message>
+        <Message id="0x165" name="cruise control" interval="10">
+            <!-- TODO test this -->
+            <Producer>
+                <NodeRef id="1"/>
+            </Producer>
+            <Signal name="Cruise Main Indicator" offset="6" length="3" endianess="big">
+                <LabelSet>
+                    <Label name="off" value="0"/>
+                    <Label name="ready, not active (yellow)" value="2"/>
+                    <Label name="ready, value set (yellow)" value="3"/>
+                    <Label name="active, value set (green)" value="5"/>
+                </LabelSet>
+            </Signal>
+            <Signal name="cruise speed" offset="16" length="8" endianess="big"/>
+        </Message>
+        <Message id="0x0FD" name="Master Warning" interval="20">
+            <!-- TODO test this -->
+        </Message>
+        <Message id="0x340" name="safety" interval="100">
+            <!-- TODO test this -->
+            <Producer>
+                <NodeRef id="4"/>
+            </Producer>
+            <Signal name="Seat Belt Unbuckled/Malfunction" offset="28"/>
+        </Message>
+        <Message id="0x240" name="power steering" interval="12">
+            <!-- TODO -->
+            <Producer>
+                <NodeRef id="5"/>
+            </Producer>
+        </Message>
+        <Message id="0x40A" name="Car Data" interval="100">
+            <Producer>
+                <NodeRef id="1"/>
+            </Producer>
+            <Multiplex name="Data_InfoMux" offset="0" length="16" endianess="big">
+                <MuxGroup count="48896">
+                    <!-- TODO -->
+                    <!-- 0xbf00 -->
+                    <Notes>Value of runningStatus_Diag = 0x%x, ig_OnTimer = 0x%x, state_Of_ Charge = 0x%x</Notes>
+                </MuxGroup>
+                <MuxGroup count="48897">
+                    <!-- TODO -->
+                    <!-- 0xbf01 -->
+                    <Notes>Destination = 0x%x,Drive Type = 0x%x"</Notes>
+                </MuxGroup>
+                <MuxGroup count="48898">
+                    <!-- TODO -->
+                    <!-- 0xbf02 -->
+                    <Notes>"ABS DSC Types = 0x%x,DSC Configuration 1 = 0x%x,DSC Configuratio n 2 = 0x%x"</Notes>
+                </MuxGroup>
+                <MuxGroup count="48899">
+                    <!-- TODO -->
+                    <!-- 0xbf03 -->
+                    <Notes>"Light Types = 0x%x, Light Configuration = 0x%x"</Notes>
+                </MuxGroup>
+                <MuxGroup count="48900">
+                    <!-- TODO -->
+                    <Signal name="EPAS Types" offset="16" length="4" endianess="big">
+                        <Consumer>
+                            <NodeRef id="7"/>
+                        </Consumer>
+                    </Signal>
+                    <Signal name="EPAS Configuration" offset="24" length="4" endianess="big">
+                        <Consumer>
+                            <NodeRef id="7"/>
+                        </Consumer>
+                        <Notes>Possibly incorrect</Notes>
+                    </Signal>
+                    <Signal name="PSM Types" offset="44" length="4" endianess="big">
+                        <Consumer>
+                            <NodeRef id="7"/>
+                        </Consumer>
+                        <Notes>Possibly incorrect</Notes>
+                    </Signal>
+                    <Signal name="PSM Configuration" offset="48" length="8" endianess="big">
+                        <Consumer>
+                            <NodeRef id="7"/>
+                        </Consumer>
+                        <Notes>Possibly incorrect</Notes>
+                    </Signal>
+                </MuxGroup>
+                <MuxGroup count="48901">
+                    <!-- TODO -->
+                    <!-- 0xbf05 -->
+                    <Notes>"PCS MRCC Types = 0x%x,PCS MRCC Configuration 1 = 0x%x,PCS MRCC Configuration 2 = 0x%x"
+                    </Notes>
+                </MuxGroup>
+                <MuxGroup count="48902">
+                    <!-- TODO -->
+                    <!-- 0xbf06 -->
+                    <Notes>"FSC Types = 0x%x,RVM Types = 0x%x,RVM Configuration = 0x%x"</Notes>
+                </MuxGroup>
+                <MuxGroup count="48903">
+                    <!-- TODO -->
+                    <!-- 0xbf07 -->
+                    <Notes>"ACU Configuration = 0x%x, BSM Types = 0x%x, BSM Configuration = 0x %x"</Notes>
+                </MuxGroup>
+                <MuxGroup count="48904">
+                    <!-- TODO -->
+                    <!-- 0xbf08 -->
+                    <Notes>"Heater Types = 0x%x,PTC Heater Types = 0x%x,AC Compressor Types = 0x%x,EATC Configuration =
+                        0x%x"
+                    </Notes>
+                </MuxGroup>
+                <MuxGroup count="48905">
+                    <!-- TODO -->
+                    <Signal name="ASC Types" offset="16" length="4" endianess="big">
+                        <Consumer>
+                            <NodeRef id="7"/>
+                        </Consumer>
+                    </Signal>
+                    <Signal name="ASC Configuration" offset="24" length="8" endianess="big">
+                        <Consumer>
+                            <NodeRef id="7"/>
+                        </Consumer>
+                        <Notes>Possibly incorrect</Notes>
+                    </Signal>
+                    <Signal name="ICA Types" offset="40" length="4" endianess="big">
+                        <Consumer>
+                            <NodeRef id="7"/>
+                        </Consumer>
+                    </Signal>
+                    <Signal name="ICA Configuration" offset="48" length="8" endianess="big">
+                        <Consumer>
+                            <NodeRef id="7"/>
+                        </Consumer>
+                        <Notes>Possibly incorrect</Notes>
+                    </Signal>
+                </MuxGroup>
+                <MuxGroup count="48912">
+                    <!-- TODO -->
+                    <!-- 0xbf10 -->
+                    <Notes>"REGEN Types = 0x%x, REGEN Configuration = 0x%x ,AMP Types = 0x%x ,AMP Configuration =
+                        0x%x"
+                    </Notes>
+                </MuxGroup>
+                <MuxGroup count="48913">
+                    <!-- TODO -->
+                    <!-- 0xbf11 -->
+                    <Notes>"CMU Types = 0x%x, driveChart_Log_Distance = 0x%x, topView = 0x%x, rearWideView = 0x%x,
+                        destination_1 = 0x%x , destination_2 = 0x%x , driveChart_Display = 0x%x ,driveChart_DataTrans =
+                        0x%x , myDoctor_D isplay = 0x%x , driverIdentification = 0x%x ,stDis_IDM_Req = 0x%x ,
+                        endDis_IDM_Req = 0x%x , stDis_Eco_Req = 0x%x , endDis_Eco_Req = 0x %x ,custmzDisp_SW = 0x%x ,
+                        vehiclePic = 0x%x , hiCamera = %d, DSP_m ic = %d Mic_Type = %d Android_Auto = %d, Siri = %d
+                        Car_Play = %d"
+                    </Notes>
+                </MuxGroup>
+                <MuxGroup count="49152">
+                    <!-- TODO -->
+                    <Signal name="global Real Time" offset="16" length="32" endianess="big">
+                        <Consumer>
+                            <NodeRef id="7"/>
+                        </Consumer>
+                    </Signal>
+                    <Notes>Should also have pwMdeExtern_D_Actl and mecu_supply_ voltage</Notes>
+                </MuxGroup>
+                <MuxGroup count="49153">
+                    <!-- TODO -->
+                    <!-- 0xC001 -->
+                    <Notes>"Value of total_Distance = 0x%x,out_car_temperature = 0x%x"</Notes>
+                </MuxGroup>
+                <MuxGroup count="49408">
+                    <Signal name="VIN1" offset="16" length="8"/>
+                    <Signal name="VIN2" offset="24" length="8"/>
+                    <Signal name="VIN3" offset="32" length="8"/>
+                    <Signal name="VIN4" offset="40" length="8"/>
+                    <Signal name="VIN5" offset="48" length="8"/>
+                    <Signal name="VIN6" offset="56" length="8"/>
+                </MuxGroup>
+                <MuxGroup count="49409">
+                    <Signal name="VIN7" offset="16" length="8"/>
+                    <Signal name="VIN8" offset="24" length="8"/>
+                    <Signal name="VIN9" offset="32" length="8"/>
+                    <Signal name="VIN10" offset="40" length="8"/>
+                    <Signal name="VIN11" offset="48" length="8"/>
+                    <Signal name="VIN12" offset="56" length="8"/>
+                </MuxGroup>
+                <MuxGroup count="49410">
+                    <Signal name="VIN13" offset="16" length="8"/>
+                    <Signal name="VIN14" offset="24" length="8"/>
+                    <Signal name="VIN15" offset="32" length="8"/>
+                    <Signal name="VIN16" offset="40" length="8"/>
+                    <Signal name="VIN17" offset="48" length="8"/>
+                </MuxGroup>
+                <MuxGroup count="49411">
+                    <Signal name="Brand" offset="19" length="5"/>
+                    <Signal name="Engine Fuel Capability" offset="24" length="8"/>
+                    <Signal name="Vehicle Type" offset="33" length="8" endianess="big"/>
+                    <Signal name="Body Style" offset="41" length="8" endianess="big"/>
+                    <Signal name="Gearbox Type" offset="49" length="4" endianess="big"/>
+                    <Signal name="Steering  Wheel Location" offset="53" length="1" endianess="big"/>
+                </MuxGroup>
+                <MuxGroup count="49412">
+                    <Signal name="Tire Circumference" offset="32" length="16" endianess="big"/>
+                </MuxGroup>
+            </Multiplex>
+        </Message>
+        <Message id="0x4F7" name="ParkingAssistance" interval="200">
+            <!-- TODO -->
+            <Notes>Values of VWM Parking Assist Control for EPB_RedTelltale_copy = 0, EPB_DisplayRequest3_copy = 0,
+                DHS_RILReq_copy = 0, EvpWrn_B_Rq_copy = 0,EvpBrkWrn_B_Rq_copy = 0, Runflattire_Wrn_B_Rq =
+                0,ViewSystem_Status = 0, AccepttViewChange = 0, Camera_View_Status =0
+            </Notes>
+        </Message>
+        <Message id="0x274" name="KeyLessControl_Status" interval="100">
+            <!-- TODO -->
+            <Signal name="Key_Green_Cntrl" offset="12" length="1"/>
+            <Signal name="Lamp_Key_Red_Cntrl" offset="8" length="1"/>
+            <Notes>Values of [Sec_Ind_Req1 = 0]
+                [Sec_Ind_Req2 = 0]
+                [Buzzer_Cntrl = 0]
+                [Key_Green_Cntrl = 1]
+                [Lamp_Key_Red_Cntrl = 0]
+                [ESCL_Display = 0]
+                [BUZZ_for_ESCL = 0]
+                [Power_Not_Off = 0]
+                [Key_Battery_Low = 0]
+                [Key_Not_Found = 0]
+                [TransmitterNo = 0]
+                [DrLockStat_D_Actl = 0]
+                [System_Check = 0]
+            </Notes>
+        </Message>
+        <Message id="0x482" name="SSU_Customised_Group" interval="100">
+            <!-- TODO -->
+            <Notes>SSU_CUSTOMIZE_STATUS1: CstmzStat_KylssWal_OnOff = 1 CstmzStat_KylssAtLck_T = 2
+                CstmzStat_KylssUnlck_Mde = 2 CstmzStat_KylssChm_Vol = 3
+            </Notes>
+        </Message>
+        <Message id="0x436" name="EATC_SIS_Group" interval="100">
+            <!-- TODO -->
+            <Notes>Values of [HvacEngStopDis_B_Rq = 0] [HvacEngStopDis_B_Falt = 0] [HvacAirCond_B_Rq = 1]
+                [HvacHeaterCal_D_Rq = 0] [HvacHeaterCal_B_Falt = 0] [BlowerSpeed = 0] [HvacHeatStats_D_Actl = 0]
+                [HvacCtrlMode_D_Rq1 = 0]
+            </Notes>
+        </Message>
+        <Message id="0x425" name="AFS_Info_Status" interval="100">
+            <!-- TODO -->
+            <Notes>Values of [Warn_AFS_Warning_Status = 0] [Warn_LVL_Warning_Status = 0] [Warn_AFS_LVL_Configuration =
+                3] [Warn_ADB_Warning_Status = 0]
+            </Notes>
+        </Message>
+        <Message id="0x477" name="BSM_Control" interval="100">
+            <!-- TODO -->
+            <Notes>Values for [Warn_BSM_BuzzerRequest = 0] [Warn_BSM_OffIndicator = 0] [Warn_BSM_Warn_R = 0]
+                [Warn_BSM_Warn_L = 0] [Warn_BSM_Status = 1] [Warn_RCTA_Warn_Status_R = 0] [Warn_RCTA_Warn_Indicator_R =
+                0] [Warn_RCTA_Warn_Status_L = 0] [Warn_RCTA_Warn_Indicator_L = 0] [Warn_RCTA_BuzzerRequest = 0]
+                [Warn_RCTA_OffIndicator = 0] [Warn_RCTA_Status = 1] [Warn_BSM_Ext_Status_info = 0]
+            </Notes>
+        </Message>
+        <Message id="0x47B" name="RVM_Status" interval="100">
+            <!-- TODO -->
+            <Notes>Value of Warn_RVM_state = 0 Value of Warn_RVM_EME = 0 Value of Warn_RVM_BuzzerRequest = 0</Notes>
+        </Message>
+        <Message id="0x485" name="FSC_Customised_Group1" interval="100">
+            <!-- TODO -->
+            <Notes>FSC Stat1: cstmzStat_LdwJudge_Thres = 4 cstmzStat_LdwCancel_Sens = 1 cstmzStat_LdwVibration_OnOff = 0
+                cstmzRsp_LkaBzVolume = 0 cstmzRsp_LdwLka_Mode = 3 cstmzRsp_Lka_Alart = 2 AEB_OnOff = 2 AEB_Sens = 1
+            </Notes>
+        </Message>
+        <Message id="0x488" name="FSC_Customised_Group2" interval="100">
+            <!-- TODO -->
+            <Notes>FSC_CUSTOMIZE_STATUS_2: cstmzStat_HBC_OnOff = 2 cstmzStat_HBC_Sens = 0</Notes>
+        </Message>
+        <Message id="0x48B" name="RBCM_CustomizedStatus" interval="100">
+            <!-- TODO -->
+        </Message>
+        <Message id="0x499" name="CCM_Customised_Group" interval="100">
+            <!-- TODO -->
+
+            <Notes>Value of cstmzStat_PCS_OnOff = 0 cstmzStat_PCS_Warning_Thres = 0 cstmzStat_DRSS_OnOff = 2
+                cstmzStat_DRSS_Warning_Thres = 1
+            </Notes>
+        </Message>
+        <Message id="0x078" name="YAW_ACCEL_BRAKE" interval="20">
+            <!-- TODO -->
+        </Message>
+        <Message id="0x079" name="LateralAcceleration" interval="20">
+            <!-- TODO -->
+
+        </Message>
+        <Message id="0x4D1" name="BatteryAnalysisData_Group" interval="100">
+            <!-- TODO -->
+
+        </Message>
+        <Message id="0x4D4" name="DR_OpeAsses" interval="100">
+            <!-- TODO -->
+
+            <Notes>Values of [DR_OpeAsses_Accel_Soft = 0] [DR_OpeAsses_Accel_Swing = 0] [DR_OpeAsses_Brk_Soft = 0]
+                [DR_OpeAsses_Brk_Swing = 0] [DR_OpeAsses_Hndl_Soft = 0] [DR_OpeAsses_Hndl_Swing = 0]
+                [DR_Lngdnl_Flap_Count = 0] [DR_Lateral_Flap_Count = 0]
+            </Notes>
+        </Message>
+        <Message id="0x4D5" name="Battery_Monitor1" interval="100">
+            <!-- TODO -->
+
+            <Notes>Values of [IDMMntr_A = 7990] [IDMMntr_B = 10566] [IDMMntr_C = 583] [IDMMntr_D = 7950]</Notes>
+        </Message>
+        <Message id="0x4D6" name="Battery_Monitor2" interval="100">
+            <!-- TODO -->
+
+            <Notes>Values of Values of [IDMMntr_E = 0] [IDMMntr_F = 13440] [IDMMntr_G = 4886] [IDMMntr_H = 0]</Notes>
+        </Message>
+        <Message id="0x4D7" name="Battery_Monitor3" interval="100">
+            <!-- TODO -->
+
+            <Notes>Values of Values of[DR_StaticMonAA = 0] [DR_StaticMonAB = 0] [DR_StaticMonBA = 0] [DR_StaticMonBB =
+                0] [DR_StaticMonCA = 0] [DR_StaticMonCB = 15] [DR_StaticMonDA = 3]
+            </Notes>
+        </Message>
+        <Message id="0x4DA" name="IDM_DispData1" interval="50">
+            <!-- TODO -->
+
+            <Notes>Value of [IDM_SD_AccelEvaluation = 50] [IDM_SD_BrakeEvaluation = 50] [IDM_SD_SteerEvaluation = 50]
+                [IDM_SD_Calc_Kibikibi_Num = 0] [IDM_SD_Calc_Cluch_Point = 60] [IDM_SD_ClutchEvaluation = 0]
+                [IDM_SD_Calc_Kibikibi_Point = 850] [IDM_SD_Calc_Smooth_Point = 510] [IDM_SD_Calc_Smooth_Num = 0]
+                [IDM_SD_Calc_Cluch_Num = 0]
+            </Notes>
+        </Message>
+        <Message id="0x4DB" name="IDM_DispData2" interval="100">
+            <!-- TODO -->
+
+            <Notes>RgnPwr_Lvl_D_Actl = 0 pctCrg_Lvl_D_Actl = 1 CapToElc_B_Actl = 1</Notes>
+        </Message>
+        <Message id="0x4DC" name="IDM_DispData3" interval="100">
+            <!-- TODO -->
+
+            <Notes>SvdFuelRate_D_Actl = 32500 SvdFuelByIEL_D_Actl = 0 RgnGrtPwr_IEL_D_Actl = 0 PwrCons_IEL_D_Actl =
+                2240
+            </Notes>
+        </Message>
+        <Message id="0x4F0" name="EngineConf_Fuel" interval="1000">
+            <!-- TODO -->
+
+            <Notes>fuelType_Delivery = 1</Notes>
+        </Message>
+        <Message id="0x4F2" name="HUD_CONFIG" length="8">
+            <Producer>
+                <NodeRef id="7"/>
+            </Producer>
+            <Signal name="HUD_BRIGHTNESS_AUTO" offset="36" length="3" endianess="big">
+                <Value intercept="-2" min="-2" max="2"/>
+            </Signal>
+            <Signal name="HUD_BRIGHTNESS_MANUAL" offset="48" length="6" endianess="big">
+                <Value intercept="-20" min="-20" max="20"/>
+            </Signal>
+            <Signal name="HUD_BRIGHTNESS_MODE" offset="47" endianess="big">
+                <LabelSet>
+                    <Label name="AUTO" value="0"/>
+                    <Label name="MANUAL" value="1"/>
+                </LabelSet>
+            </Signal>
+            <Signal name="HUD_POSITION" offset="28" length="5" endianess="big">
+                <Value slope="-1" intercept="14" min="-13" max="13"/>
+            </Signal>
+            <Signal name="HUD_ACTIVE" offset="33" endianess="big">
+                <Consumer>
+                    <NodeRef id="8"/>
+                </Consumer>
+            </Signal>
+        </Message>
+        <Message id="0x3D0" name="HUD_3" length="8">
+            <Producer>
+                <NodeRef id="7"/>
+            </Producer>
+        </Message>
+        <Message id="0x3D1" name="HUD_1" length="8">
+            <Producer>
+                <NodeRef id="7"/>
+            </Producer>
+            <Signal name="HUD_ICON" offset="0" length="6" endianess="big">
+                <Consumer>
+                    <NodeRef id="8"/>
+                </Consumer>
+            </Signal>
+            <Signal name="HUD_DISTANCE" offset="6" length="15" endianess="big">
+                <Consumer>
+                    <NodeRef id="8"/>
+                </Consumer>
+            </Signal>
+        </Message>
+        <Message id="0x3D2" name="HUD_2" length="8">
+            <Producer>
+                <NodeRef id="7"/>
+            </Producer>
+            <Signal name="HUD2_SEQ" offset="6" length="3" endianess="big">
+                <Consumer>
+                    <NodeRef id="8"/>
+                </Consumer>
+            </Signal>
+            <Signal name="HUD2_MSG" offset="10" length="3" endianess="big">
+                <Consumer>
+                    <NodeRef id="8"/>
+                </Consumer>
+            </Signal>
+            <Signal name="HUD_CHR_3" offset="45" length="16" endianess="big">
+                <Consumer>
+                    <NodeRef id="8"/>
+                </Consumer>
+            </Signal>
+            <Signal name="HUD_CHR_2" offset="29" length="16" endianess="big">
+                <Consumer>
+                    <NodeRef id="8"/>
+                </Consumer>
+            </Signal>
+            <Signal name="HUD_CHR_1" offset="13" length="16" endianess="big">
+                <Consumer>
+                    <NodeRef id="8"/>
+                </Consumer>
+            </Signal>
+        </Message>
+        <Message id="0x4F3" name="HEC_DispControl_Group" interval="100">
+            <Signal name="type_16" offset="40" length="8"/>
+            <Signal name="type_24" offset="48" length="3"/>
+            <Signal name="type_13" offset="26" length="1"/>
+            <Signal name="type_12" offset="27" length="5"/>
+            <Signal name="type_11" offset="16" length="1"/>
+            <Signal name="type_10" offset="17" length="1"/>
+            <Signal name="type_9" offset="18" length="2">
+                <Notes>MID On/Off Display FOW Indicators</Notes>
+            </Signal>
+            <Signal name="type_8" offset="20" length="1">
+                <Notes>Multi Display MRCC B status with value = 1</Notes>
+            </Signal>
+            <Signal name="type_7" offset="21" length="2">
+                <Notes>Multi Display MRCC D status with Value = 1</Notes>
+            </Signal>
+            <Signal name="type_6" offset="23" length="1">
+                <Notes>MultiDisplay LDW B status with Value = 1</Notes>
+            </Signal>
+            <Signal name="type_5" offset="8" length="2">
+                <Notes>MultiDisplay status with Value = 1</Notes>
+            </Signal>
+            <Signal name="type_4" offset="10" length="1">
+                <Notes>MultiDisplay status with Value = 1</Notes>
+            </Signal>
+            <Signal name="type_14" offset="25" length="1"/>
+            <Signal name="AVGFUELUNITCNFG_D_INIT" offset="14" length="2"/>
+            <Signal name="type_2" offset="0" length="1"/>
+            <Signal name="type_18" offset="52" length="1">
+                <Notes>Multi Display DRS B status with Value = 1 ??</Notes>
+            </Signal>
+            <Signal name="Drs_D_Init" offset="53" length="2">
+                <Notes>Type = 17</Notes>
+            </Signal>
+            <Signal name="type_23" offset="55" length="1"/>
+            <Signal name="HUD_ACTIVE_B" offset="51" length="1"/>
+            <Signal name="MULTIDISPLD_HUD_TYPE" offset="59" length="2"/>
+            <Signal name="MULTIDISPLD_IELOOPCHARGEWG" offset="58" length="1"/>
+        </Message>
+        <Message id="0x4F6" name="ODR_Data1" interval="1000">
+            <!-- TODO -->
+        </Message>
+        <Message id="0x4FE" name="ODR_Data2" interval="50">
+            <!-- TODO -->
+        </Message>
+        <Message id="0x4FA" name="Engine_Info" length="8" interval="100">
+            <Signal name="SdsSmothStat_D_Rq_2" offset="5" length="1"/>
+            <Signal name="SdsActvStat_D_Rq_2" offset="2" length="3"/>
+            <Signal name="Sds_TotNG_Par_D_Rq_2" offset="21" length="3"/>
+            <Signal name="Engine_Load" offset="19" length="7" endianess="big"/>
+            <Signal name="DR_Slope" offset="26" length="6" endianess="big"/>
+            <Signal name="IntakeAirTemp" offset="32" length="8" endianess="big"/>
+            <Signal name="Fault_Status" offset="40" length="1" endianess="big"/>
+            <Signal name="Neutral_SW" offset="41" length="1" endianess="big"/>
+            <Signal name="Clutch_SW" offset="42" length="1" endianess="big"/>
+            <Signal name="Oil_deteriorate_Level" offset="43" length="4" endianess="big"/>
+            <Signal name="l_iDM_SD_CalcInfo_Category" offset="48" length="3" endianess="big"/>
+            <Signal name="l_iDM_SD_CalcInfo_Value" offset="51" length="7" endianess="big"/>
+            <Signal name="oilLvlSnsWrn_B_Rq" offset="62" length="1" endianess="big"/>
+        </Message>
+        <Message id="0x086" name="SteeringWheelAngle" interval="12">
+            <Signal name="SteeringWheelAngle" offset="29" length="16" endianess="big">
+                <Notes>
+                    CMU handles this signal by floor(SteeringWheelAngle/2)
+                    May be some other magic in this message to denote if this signal is valid or not.
+                </Notes>
+            </Signal>
+        </Message>
+        <Message id="0x09E" name="GCC_HEC_MultiSwitch_info" interval="100">
+            <Signal name="SISSEngNotify" offset="40" length="8">
+            </Signal>
+        </Message>
+        <Message id="0x09F" name="" interval="200" length="8">
+            <Signal name="Parking_Brake" offset="4" length="2"/>
+            <Signal name="rev_Lamp_Resp" offset="0" length="3"/>
+            <Signal name="Panel_Brightness_Level" offset="8" length="8"/>
+            <Signal name="Ignition_Control_Status" offset="16" length="4">
+                <LabelSet>
+                    <Label name="N/A" value="0"/>
+                    <Label name="OFF" value="1"/>
+                    <Label name="ACC" value="2"/>
+                    <Label name="RUN" value="4"/>
+                    <Label name="RUNNING" value="5"/>
+                    <Label name="START" value="8"/>
+                </LabelSet>
+            </Signal>
+            <Signal name="Dimmer_Cancel" offset="47" length="1"/>
+            <Signal name="Low_Speed_CMB_SCBS" offset="54" length="1"/>
+        </Message>
+        <Message id="0x130" name="SISS" interval="20">
+            <Signal name="SISS_Status" offset="0" length="1"/>
+            <Signal name="SISS_AlarmBuzzer" offset="13" length="3"/>
+            <Signal name="SISS_WarningLamp_G" offset="10" length="3"/>
+            <Signal name="SISS_WarningLamp_R" offset="14" length="3" endianess="big"/>
+            <Signal name="SlaCtl_B_Rq" offset="22" length="1"/>
+            <Signal name="iStp_Deny_Batt_B_Actl" offset="21" length="1"/>
+            <Signal name="iStpReady_Rq" offset="20" length="1"/>
+            <Signal name="SISS_Mode_for_SKE" offset="19" length="1"/>
+            <Signal name="SKE_Control" offset="17" length="2"/>
+            <Signal name="SISS_IRCutReq" offset="16" length="1"/>
+            <Signal name="SISS_EngineState" offset="28" length="4">
+                <Value max="10"/>
+            </Signal>
+            <Signal name="iStp_Deny_DPF_B_Actl" offset="38" length="1"/>
+            <Signal name="iStp_Deny_Nrange_B_Actl" offset="37" length="1"/>
+            <Signal name="iStp_Deny_AC_B_Actl" offset="36" length="1"/>
+            <Signal name="iStp_KeySta_B_Actl" offset="35" length="1"/>
+            <Signal name="iStp_DenyPwStr_B_Actl" offset="34" length="1"/>
+            <Signal name="iStp_DenyBrk_B_Actl" offset="33" length="1"/>
+            <Signal name="PTiStp_Rdy_B_Actl" offset="32" length="1"/>
+            <Signal name="Clutch_Stroke" offset="56" length="8"/>
+        </Message>
+        <Message id="0x20A" name="Regen_Control" interval="15">
+            <Signal name="Warn_RegenCtlStat_D_Actl" offset="17" length="2"/>
+            <Signal name="Warn_CapaSOC_Pc_Actl" offset="25" length="7">
+                <Value max="100" unit="%"/>
+            </Signal>
+            <Signal name="Warn_RegenPw_Watt_Actl" offset="47" length="4" endianess="big"/>
+            <Signal name="Warn_DcdcWarningDisp_B_Rq" offset="62" length="1"/>
+            <Signal name="VWM_REGEN_CONTROL_PID" offset="61" length="1"/>
+        </Message>
+        <Message id="0x21B" name="CCM_Control" interval="20">
+            <!-- TODO Had a reaction in the logs, but no useful data -->
+        </Message>
+        <Message id="0x21C" name="SmartBrake_System" interval="20">
+            <!-- TODO -->
+            <Notes>
+                [Warn_ACC_Status_Lamp = 0] [Warn_LDW_Status_Lamp = 3] [Warn_HBC_Status_Lamp = 3]
+            </Notes>
+        </Message>
+        <Message id="0x21D" name="CitySafety" interval="20">
+            <!-- TODO -->
+            <Notes>
+                00:19:53.048 VBS_BUS_CAN[326] Debug (mod_can_public.c:8189 VBS_BUS_CAN_CitySafety) Vaues of
+                [cvSnsObjRng_D_Actl_left = 63] [cvSnsObjRng_D_Actl_center = 63] [cvSnsObjRng_D_Actl_right = 63]
+                [amplitudeLeft = 0] [amplitudeCenter = 0] [amplitudeRight = 0] [cvSnsObjRngRate_left = 31]
+                [cvSnsObjRngRate_center = 31] [cvSnsObjRngRate_right = 31] [EBAEngineBrakeReq = 0]
+            </Notes>
+        </Message>
+        <Message id="0x25D" name="SCBS_Control" interval="20">
+            <!-- TODO -->
+            <Notes>
+                00:28:54.103 VBS_BUS_CAN[326] Debug (mod_can_public.c:4316 VBS_BUS_CAN_SCBS_Control) Vaues of
+                [Warn_SCBSServiceReqFlg = 0] [Warn_SensorBlkgMsg = 0] [Warn_SCBSUnavailableFlg = 0] [Warn_EBAPostInctMsg
+                = 0] [Warn_EBABrakeDecelReqEnbl = 0] [Warn_EBABrakeDecelReq = 255] [Warn_EBABrakePrechargeReq = 0]
+                [Warn_EBABrkCtlUnitStats = 0] [Warn_EBAHBASensReq = 0] [Warn_Camera_high_temperature = 0]
+                [Warn_SCBS_Status = 0]
+            </Notes>
+        </Message>
+        <Message id="0x35F" name="TSR_Control" interval="100">
+            <!-- TODO -->
+            <Notes>
+                TSR_Control[CAN ID = 0x35F]TSR_Feature_Status = [0x00] / TSR_Feature_Mode = [0x00]
+            </Notes>
+        </Message>
+        <Message id="0x492" name="BSM_Customised_Group" interval="100">
+            <!-- TODO -->
+        </Message>
+        <Message id="0x49C" name="HEC_Customised_Group" interval="100">
+            <!-- TODO -->
+        </Message>
+        <Message id="0x4D9" name="IDM_DispData" interval="50">
+            <!-- TODO -->
+        </Message>
+        <Message id="0x08A" name="Regen_Control" interval="10">
+            <!-- TODO -->
+        </Message>
+        <Message id="0x211" name="DSCControl_Status" interval="20">
+            <!-- TODO -->
+        </Message>
+    </Bus>
+    <Bus name="MS-CAN" baudrate="125000">
+        <Message id="0x43E" name="doors" interval="500">
+            <Producer>
+                <NodeRef id="6"/>
+            </Producer>
+            <Signal name="Door Ajar" offset="36" length="4" endianess="big">
+                <LabelSet>
+                    <Label name="Door Ajar Indicator" value="13"/>
+                    <Label name="Door Ajar Indicator" value="14"/>
+                </LabelSet>
+            </Signal>
+            <Signal name="continuous audible tone" offset="59"/>
+        </Message>
+    </Bus>
+</NetworkDefinition>
