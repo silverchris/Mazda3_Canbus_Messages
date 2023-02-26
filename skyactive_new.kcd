@@ -84,7 +84,7 @@
             <Signal name="RearLeft" offset="32" length="16" endianess="big" />
             <Signal name="RearRight" offset="48" length="16" endianess="big" />
         </Message>
-        <Message id="0x228" name="transmission" interval="20" length="8">
+        <Message id="0x228" name="transmission" interval="20" length="5">
             <Signal name="TransmChangeLeverPosition" offset="0" length="4">
                 <LabelSet>
                     <Label name="Park" value="1" />
@@ -186,6 +186,23 @@
             <Signal name="BattTracSoc_Pc_Actl" offset="32" length="8"/>
             <Signal name="BattTrac_I_Actl" offset="40" length="10" endianess="big"></Signal>
             <Signal name="BattTrac_U_Actl" offset="50" length="14" endianess="big"></Signal>
+        </Message>
+        <Message id="0x249" name="HV_PowerMeter" length="8">
+            <Signal name="HvTmP_Tq_LimMx" offset="0" length="16" endianess="big" />
+            <Signal name="HvEngPcm_Tq_Actl" offset="16" length="16" endianess="big" />
+            <Signal name="HvTmPcm_Tq_Actl" offset="32" length="16" endianess="big" />
+            <Signal name="HvRgBrkP_Tq_Rq" offset="48" length="16" endianess="big" />
+        </Message>
+        <Message id="0x240" name="EPAS_Control" length="8">
+            <!-- TODO: this one is hard to decode -->
+            <Signal name="Warn_SteWhlComp_An_Est" offset="0" length="16" endianess="big" />
+            <Signal name="3" offset="21" length="3"></Signal>
+            <Signal name="4" offset="24" length="8"></Signal>
+            <Signal name="5" offset="33" length="2"></Signal>
+            <Signal name="6" offset="63" length="1"></Signal>
+            <Signal name="7" offset="48" length="8"></Signal>
+            <Signal name="8" offset="57" length="2"></Signal>
+            <Signal name="9" offset="40" length="7"></Signal>
         </Message>
     </Bus>
 </NetworkDefinition>
