@@ -204,5 +204,18 @@
             <Signal name="8" offset="57" length="2"></Signal>
             <Signal name="9" offset="40" length="7"></Signal>
         </Message>
+        <Message id="0x21D" name="CitySafety" length="8">
+            <!-- TODO: Test this cvSnsObjRng_D_Actl_right feels wrong?-->
+            <Signal name="cvSnsObjRng_D_Actl_left" offset="0" length="6"></Signal>
+            <Signal name="cvSnsObjRng_D_Actl_center" offset="8" length="6"></Signal>
+            <Signal name="cvSnsObjRng_D_Actl_right" offset="18" length="4"></Signal>
+            <Signal name="amplitudeLeft" offset="24" length="8"></Signal>
+            <Signal name="amplitudeCenter" offset="32" length="8"></Signal>
+            <Signal name="amplitudeRight" offset="40" length="8"></Signal>
+            <Signal name="cvSnsObjRngRate_left" offset="50" length="5"></Signal>
+            <Signal name="cvSnsObjRngRate_center" offset="54" length="5" endianess="big"></Signal>
+            <Signal name="cvSnsObjRngRate_right" offset="56" length="5"></Signal>
+            <Signal name="EBAEngineBrakeReq" offset="7" length="1"></Signal>
+        </Message>
     </Bus>
 </NetworkDefinition>
