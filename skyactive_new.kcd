@@ -169,5 +169,15 @@
             <Signal name="Warn_Camera_high_temperature" offset="33" length="1"></Signal>
             <Signal name="Warn_SCBS_Status" offset="8" length="1"></Signal>
         </Message>
+        <Message id="0x24B" name="HEV_HV_CNTRECORD2">
+            <!-- Not sure I can test this. May be for hybrids? -->
+            <Signal name="HV_ET" offset="0" length="16" endianess="big" />
+            <Signal name="HV_M1T" offset="16" length="16" endianess="big" />
+            <Signal name="HV_M2T" offset="32" length="16" endianess="big" />
+            <Signal name="HV_EP" offset="54" length="2"></Signal>
+            <Signal name="HV_EM" offset="52" length="2"></Signal>
+            <Signal name="HV_MP" offset="50" length="2"></Signal>
+            <Signal name="HV_MB" offset="48" length="2"></Signal>
+        </Message>
     </Bus>
 </NetworkDefinition>
