@@ -131,8 +131,7 @@
             <Signal name="Deply_Rear" offset="0" length="1" />
             <Signal name="RIL_Req" offset="18" length="2" />
             <Signal name="Airbag_Warning" offset="17" length="1" />
-            <Signal name="PAD_Ind1" offset="30" length="2" />
-            <Signal name="PAD_Ind2" offset="16" length="1" />
+            <Signal name="PAD_Ind" offset="23" length="3" endianess="big" />
             <Signal name="OCS_Status" offset="28" length="2" />
             <Signal name="Buckle_Driver" offset="27" length="1" />
             <Signal name="Buckle_Passenger" offset="26" length="1" />
