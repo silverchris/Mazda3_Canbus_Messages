@@ -1,0 +1,174 @@
+<NetworkDefinition
+    xmlns="http://kayak.2codeornot2code.org/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="Definition.xsd"
+    xsi:schemaLocation="http://kayak.2codeornot2code.org/1.0 Definition.xsd">
+    <Document name="Mazda SkyActiv CANbus" version="0.01" date="2016-12-11" />
+    <Node id="1" name="Powertrain Control Module (PCM)" />
+    <Node id="2" name="DSC HU/CM (ABS)" />
+    <Node id="3" name="Radar unit (SBS/MRCC)" />
+    <Node id="4" name="Adaptive front lighting system (AFS)" />
+    <Node id="5" name="DC-DC Converter i-ELOOP (DCDC)" />
+    <Node id="6" name="Transmission Control Module (TCM)" />
+    <Node id="7" name="Front body control module (FBCM)" />
+    <Node id="8" name="Forward sensing camera (FSC)" />
+    <Node id="9" name="EPS control module (EPS)" />
+    <Node id="10" name="Start stop unit (SSU)" />
+    <Node id="11" name="Connectivity master unit (CMU)" />
+    <Node id="12" name="SAS control module (RCM)" />
+    <Node id="13" name="Audio amplifier (AM)" />
+    <Node id="14" name="Electric parking brake control module (EPB)" />
+    <Node id="15" name="Occupant classification sensor" />
+    <Node id="16" name="Instrument cluster (IC)" />
+    <Node id="17" name="Climate control unit (EATC)" />
+    <Node id="18" name="Blind spot monitoring control module (BSML)" />
+    <Node id="19" name="Rear body control module (RBCM)" />
+    <Bus name="HS-CAN" baudrate="500000">
+        <Message id="0x09A" name="Instrument Cluster Lights" interval="100" length="8">
+            <Signal name="Warn_HiBeamIpcDsply_B_Rq" offset="7" />
+            <Signal name="Warn_HeadLght_D_Actl" offset="4" length="3">
+                <LabelSet>
+                    <Label name="OFF" value="0" />
+                    <Label name="Markers" value="2" />
+                    <Label name="On" value="3" />
+                    <Label name="High" value="4" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Warn_FrntFogLght_B_Actl" offset="3" />
+            <Signal name="Warn_RearFogLght_B_Rq" offset="2" />
+            <Signal name="Warn_TNS_LampStatus" offset="1" />
+            <Signal name="Warn_BrkFluidLvl_D_Actl" offset="14" length="2" />
+            <Signal name="Warn_Turn_Ind_Cmd_Left" offset="18" />
+            <Signal name="Warn_Turn_Ind_Cmd_Right" offset="19" />
+            <Signal name="Warn_WshrLvl_D_Actl" offset="30" />
+            <Signal name="Warn_FrntWipr_D_Actl" offset="33" length="2">
+                <LabelSet>
+                    <Label name="OFF" value="0" />
+                    <Label name="Low" value="1" />
+                    <Label name="High" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Warn_Equip_AutLghtOf_B_Actl" offset="39" />
+            <Signal name="Warn_RLS_HeadReq_D_Actl" offset="50" length="3" />
+            <Signal name="Warn_RLS_WiperReq_D_Actl" offset="53" length="2" />
+            <Signal name="Warn_ESS_Active" offset="61" length="3" />
+        </Message>
+        <Message id="0x09F" name="" interval="200" length="7">
+            <!-- These two look wrong by the code, but seem right with testing?
+                <Signal name="Dimming Inactive" offset="4" length="1">
+                <Notes> This is a guess based on behavior </Notes>
+            </Signal>
+            <Signal name="Parking_Brake" offset="3" length="1" /> -->
+            <Signal name="Parking_Brake" offset="4" length="2" />
+            <Signal name="rev_Lamp_Resp" offset="0" length="3" />
+            <Signal name="Panel_Brightness_Level" offset="8" length="8" />
+            <Signal name="Ignition_Control_Status" offset="16" length="4">
+                <LabelSet>
+                    <Label name="N/A" value="0" />
+                    <Label name="OFF" value="1" />
+                    <Label name="ACC" value="2" />
+                    <Label name="RUN" value="4" />
+                    <Label name="RUNNING" value="5" />
+                    <Label name="START" value="8" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Unknown_20" offset="20" length="4" />
+            <Signal name="Unknown_24" offset="24" length="16" />
+            <Signal name="Dimmer_Cancel" offset="47" length="1" />
+            <Signal name="Low_Speed_CMB_SCBS" offset="54" length="1" />
+            <Signal name="CSDeniedByMonitor" offset="55" length="1" />
+        </Message>
+        <Message id="0x215" name="Wheel Speed" interval="10">
+            <Signal name="FrontLeft" offset="0" length="16" endianess="big" />
+            <Signal name="FrontRight" offset="16" length="16" endianess="big" />
+            <Signal name="RearLeft" offset="32" length="16" endianess="big" />
+            <Signal name="RearRight" offset="48" length="16" endianess="big" />
+        </Message>
+        <Message id="0x228" name="transmission" interval="20" length="8">
+            <Signal name="TransmChangeLeverPosition" offset="0" length="4">
+                <LabelSet>
+                    <Label name="Park" value="1" />
+                    <Label name="Reverse" value="2" />
+                    <Label name="Neutral" value="3" />
+                    <Label name="Drive" value="4" />
+                </LabelSet>
+            </Signal>
+            <Signal name="TransmDesiredGearPosition" offset="4" length="4">
+                <Value max="7" />
+                <LabelSet>
+                    <Label name="1st" value="1" />
+                    <Label name="2nd" value="2" />
+                    <Label name="3rd" value="3" />
+                    <Label name="4th" value="4" />
+                    <Label name="5th" value="5" />
+                    <Label name="6th" value="6" />
+                    <Label name="7th" value="7" />
+                </LabelSet>
+            </Signal>
+            <Signal name="OD_Hold_Sport" offset="15" length="1">
+                <Notes> Active when in Manual shift mode</Notes>
+            </Signal>
+            <Signal name="OD_Hold_Sport_flash" offset="14" length="1" />
+            <Signal name="gearTelltaleFlash" offset="13" length="1">
+                <Notes> Active when not in Manual shift mode</Notes>
+            </Signal>
+            <Signal name="quickManualFlag" offset="37" length="1" />
+            <Signal name="gearPos_D_Trg" offset="33" length="4" />
+            <Signal name="gearDisplayMode" offset="32" length="1" />
+        </Message>
+        <Message id="0x35F" name="TSR_Control" length="8">
+            <!-- TODO: Test -->
+            <Notes>These may be swapped?</Notes>
+            <Signal name="TSR_Feature_Status" offset="26" length="2" />
+            <Signal name="TSR_Feature_Mode" offset="33" length="1" />
+        </Message>
+        <Message id="0x340" name="RCM_Control_Status" length="4">
+            <!-- TODO: Test -->
+            <Notes></Notes>
+            <Signal name="Fuel_Cut_Off" offset="4" length="4" />
+            <Signal name="Fuel_Cut_Status" offset="3" length="1" />
+            <Signal name="Deply_Front" offset="1" length="1" />
+            <Signal name="Deply_Rear" offset="0" length="1" />
+            <Signal name="RIL_Req" offset="18" length="2" />
+            <Signal name="Airbag_Warning" offset="17" length="1" />
+            <Signal name="PAD_Ind1" offset="30" length="2" />
+            <Signal name="PAD_Ind2" offset="16" length="1" />
+            <Signal name="OCS_Status" offset="28" length="2" />
+            <Signal name="Buckle_Driver" offset="27" length="1" />
+            <Signal name="Buckle_Passenger" offset="26" length="1" />
+        </Message>
+        <Message id="0x274" name="KeyLessControl_Status" length="6">
+            <!-- TODO: Test -->
+            <Notes></Notes>
+            <Signal name="Sec_Ind_Req1" offset="7"></Signal>
+            <Signal name="Sec_Ind_Req2" offset="4"></Signal>
+            <Signal name="Buzzer_Cntrl" offset="0" length="4"></Signal>
+            <Signal name="Key_Green_Cntrl" offset="12" length="4"></Signal>
+            <Signal name="Lamp_Key_Red_Cntrl" offset="8" length="4"></Signal>
+            <Signal name="ESCL_Display" offset="17" length="4"></Signal>
+            <Signal name="BUZZ_for_ESCL" offset="25" length="4"></Signal>
+            <Signal name="Power_Not_Off" offset="24" length="1"></Signal>
+            <Signal name="Key_Battery_Low" offset="32" length="1"></Signal>
+            <Signal name="Key_Not_Found" offset="36" length="3"></Signal>
+            <Signal name="TransmitterNo" offset="46" length="2"></Signal>
+            <Signal name="DrLockStat_D_Actl" offset="44" length="2"></Signal>
+            <Signal name="System_Check" offset="41" length="1"></Signal>
+        </Message>
+        <Message id="0x25D" name="SCBS_Control" length="5">
+            <!-- TODO: Test -->
+            <Producer>
+                <NodeRef id="8" />
+            </Producer>
+            <Signal name="Warn_SCBSServiceReqFlg" offset="7" length="1"></Signal>
+            <Signal name="Warn_SensorBlkgMsg" offset="6" length="1"></Signal>
+            <Signal name="Warn_SCBSUnavailableFlg" offset="5" length="1"></Signal>
+            <Signal name="Warn_EBAPostInctMsg" offset="4" length="1"></Signal>
+            <Signal name="Warn_EBABrakeDecelReqEnbl" offset="3" length="1"></Signal>
+            <Signal name="Warn_EBABrakeDecelReq" offset="5" length="8" endianess="big"></Signal>
+            <Signal name="Warn_EBABrakePrechargeReq" offset="9" length="2"></Signal>
+            <Signal name="Warn_EBAHBASensReq" offset="22" length="2"></Signal>
+            <Signal name="Warn_Camera_high_temperature" offset="33" length="1"></Signal>
+            <Signal name="Warn_SCBS_Status" offset="8" length="1"></Signal>
+        </Message>
+    </Bus>
+</NetworkDefinition>
