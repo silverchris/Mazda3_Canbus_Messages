@@ -183,7 +183,7 @@
             <!-- Not sure I can test this. May be for hybrids? -->
             <Signal name="HvMtrGen1Aout_N_Actl" offset="0" length="16" endianess="big" />
             <Signal name="HvMtrGen2Aout_N_Actl" offset="16" length="16" endianess="big" />
-            <Signal name="BattTracSoc_Pc_Actl" offset="32" length="8"/>
+            <Signal name="BattTracSoc_Pc_Actl" offset="32" length="8" />
             <Signal name="BattTrac_I_Actl" offset="40" length="10" endianess="big"></Signal>
             <Signal name="BattTrac_U_Actl" offset="50" length="14" endianess="big"></Signal>
         </Message>
@@ -216,6 +216,61 @@
             <Signal name="cvSnsObjRngRate_center" offset="54" length="5" endianess="big"></Signal>
             <Signal name="cvSnsObjRngRate_right" offset="56" length="5"></Signal>
             <Signal name="EBAEngineBrakeReq" offset="7" length="1"></Signal>
+        </Message>
+        <Message id="0x21C" name="CCM_Information" length="7">
+             <!-- TODO: Test this -->
+            <Signal name="Warn_ACC_Status_Lamp" offset="3" length="3"></Signal>
+            <Signal name="Warn_LDW_Status_Lamp" offset="0" length="3"></Signal>
+            <Signal name="Warn_HBC_Status_Lamp" offset="13" length="3"></Signal>
+            <Signal name="Warn_DisplayColor" offset="12" length="1"></Signal>
+            <Signal name="Warn_FLASH_IND" offset="11" length="1"></Signal>
+            <Signal name="Warn_LDW_Status" offset="8" length="3"></Signal>
+            <Signal name="Warn_Leading_Vehicle_Display" offset="23" length="1"></Signal>
+            <Signal name="Warn_PopUp_Display_Request" offset="22" length="1"></Signal>
+            <Signal name="Warn_Distance_SW_Status" offset="18" length="3"></Signal>
+            <Signal name="Warn_DRSS_status" offset="29" length="3"></Signal>
+            <Signal name="Warn_DRSS_Distance" offset="16" length="2"></Signal>
+            <Signal name="Warn_CCM_Deactivated" offset="33" length="1"></Signal>
+            <Signal name="Warn_ACC_Failed" offset="34" length="2"></Signal>
+            <Signal name="Warn_PCS_Failed" offset="32" length="1"></Signal>
+            <Signal name="a_1" offset="6" length="2"></Signal>
+            <Signal name="Warn_DRSS_Failed" offset="47" length="1" />
+            <Signal name="a_3" offset="43" length="4"></Signal>
+            <Signal name="Warn_FSC_Status" offset="40" length="3"></Signal>
+            <Signal name="Warn_Radar_Blocked" offset="53" length="3"></Signal>
+            <Signal name="a_6" offset="52" length="1"></Signal>
+            <Signal name="a_7" offset="48" length="4"></Signal>
+        </Message>
+        <Message id="0x21B" name="CCM_Control" length="7">
+            <!-- Another tricky one to decode Missing at least two signals-->
+             <!-- TODO: Test this -->
+            <Signal name="DataMem_3" offset="18" length="3"></Signal>
+            <Signal name="DataMem_5" offset="36" length="1"></Signal>
+            <Signal name="DataMem_6" offset="35" length="1"></Signal>
+            <Signal name="DataMem_7" offset="34" length="1"></Signal>
+            <Signal name="DataMem_8" offset="33" length="1"></Signal>
+            <Signal name="DataMem_9" offset="32" length="1"></Signal>
+            <Signal name="DataMem_10" offset="47" length="1"></Signal>
+            <Signal name="DataMem_11" offset="44" length="3"></Signal>
+            <Signal name="DataMem_12" offset="53" length="1"></Signal>
+            <Signal name="DataMem_13" offset="52" length="1"></Signal>
+            <Signal name="DataMem_1" offset="2" length="6"></Signal>
+        </Message>
+        <Message id="0x211" name="DSCControl_Status" length="7">
+             <!-- TODO: Test this -->
+            <Signal name="ABS_Active" offset="42"></Signal>
+            <Signal name="BRK_Asst" offset="41"></Signal>
+            <Signal name="StabCTLBrk_Actv" offset="40"></Signal>
+            <Signal name="TracCtl_Actv" offset="54"></Signal>
+            <Signal name="5" offset="53"></Signal>
+            <Signal name="6" offset="52"></Signal>
+            <Signal name="7" offset="51"></Signal>
+            <Signal name="8" offset="50"></Signal>
+            <Signal name="9" offset="49"></Signal>
+            <Signal name="Warn_DrvAntiLckLamp_D_Rq" offset="6" length="2"></Signal>
+            <Signal name="cvdDrvAntiLckLamp_D_Rq" offset="5" length="1"></Signal>
+            <Signal name="12" offset="3" length="2"></Signal>
+            <Signal name="cvdBrkFluidLvl_D_Actl" offset="1" length="2"></Signal>
         </Message>
     </Bus>
 </NetworkDefinition>
