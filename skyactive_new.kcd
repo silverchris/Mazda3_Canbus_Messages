@@ -1,8 +1,4 @@
-<NetworkDefinition
-    xmlns="http://kayak.2codeornot2code.org/1.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="Definition.xsd"
-    xsi:schemaLocation="http://kayak.2codeornot2code.org/1.0 Definition.xsd">
+<NetworkDefinition xmlns="http://kayak.2codeornot2code.org/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Definition.xsd" xsi:schemaLocation="http://kayak.2codeornot2code.org/1.0 Definition.xsd">
     <Document name="Mazda SkyActiv CANbus" version="0.01" date="2016-12-11" />
     <Node id="1" name="Powertrain Control Module (PCM)" />
     <Node id="2" name="DSC HU/CM (ABS)" />
@@ -78,11 +74,79 @@
             <Signal name="Low_Speed_CMB_SCBS" offset="54" length="1" />
             <Signal name="CSDeniedByMonitor" offset="55" length="1" />
         </Message>
-        <Message id="0x215" name="Wheel Speed" interval="10">
+        <Message id="0x211" name="DSCControl_Status" length="7">
+             <!-- TODO: Test this -->
+            <Signal name="ABS_Active" offset="42" />
+            <Signal name="BRK_Asst" offset="41" />
+            <Signal name="StabCTLBrk_Actv" offset="40" />
+            <Signal name="TracCtl_Actv" offset="54" />
+            <Signal name="5" offset="53" />
+            <Signal name="6" offset="52" />
+            <Signal name="7" offset="51" />
+            <Signal name="8" offset="50" />
+            <Signal name="9" offset="49" />
+            <Signal name="Warn_DrvAntiLckLamp_D_Rq" offset="6" length="2" />
+            <Signal name="cvdDrvAntiLckLamp_D_Rq" offset="5" length="1" />
+            <Signal name="12" offset="3" length="2" />
+            <Signal name="cvdBrkFluidLvl_D_Actl" offset="1" length="2" />
+        </Message>
+    <Message id="0x215" name="Wheel Speed" interval="10">
             <Signal name="FrontLeft" offset="0" length="16" endianess="big" />
             <Signal name="FrontRight" offset="16" length="16" endianess="big" />
             <Signal name="RearLeft" offset="32" length="16" endianess="big" />
             <Signal name="RearRight" offset="48" length="16" endianess="big" />
+        </Message>
+        <Message id="0x21B" name="CCM_Control" length="7">
+            <!-- Another tricky one to decode Missing at least two signals-->
+             <!-- TODO: Test this -->
+            <Signal name="DataMem_3" offset="18" length="3" />
+            <Signal name="DataMem_5" offset="36" length="1" />
+            <Signal name="DataMem_6" offset="35" length="1" />
+            <Signal name="DataMem_7" offset="34" length="1" />
+            <Signal name="DataMem_8" offset="33" length="1" />
+            <Signal name="DataMem_9" offset="32" length="1" />
+            <Signal name="DataMem_10" offset="47" length="1" />
+            <Signal name="DataMem_11" offset="44" length="3" />
+            <Signal name="DataMem_12" offset="53" length="1" />
+            <Signal name="DataMem_13" offset="52" length="1" />
+            <Signal name="DataMem_1" offset="2" length="6" />
+        </Message>
+        <Message id="0x21C" name="CCM_Information" length="7">
+             <!-- TODO: Test this -->
+            <Signal name="Warn_ACC_Status_Lamp" offset="3" length="3" />
+            <Signal name="Warn_LDW_Status_Lamp" offset="0" length="3" />
+            <Signal name="Warn_HBC_Status_Lamp" offset="13" length="3" />
+            <Signal name="Warn_DisplayColor" offset="12" length="1" />
+            <Signal name="Warn_FLASH_IND" offset="11" length="1" />
+            <Signal name="Warn_LDW_Status" offset="8" length="3" />
+            <Signal name="Warn_Leading_Vehicle_Display" offset="23" length="1" />
+            <Signal name="Warn_PopUp_Display_Request" offset="22" length="1" />
+            <Signal name="Warn_Distance_SW_Status" offset="18" length="3" />
+            <Signal name="Warn_DRSS_status" offset="29" length="3" />
+            <Signal name="Warn_DRSS_Distance" offset="16" length="2" />
+            <Signal name="Warn_CCM_Deactivated" offset="33" length="1" />
+            <Signal name="Warn_ACC_Failed" offset="34" length="2" />
+            <Signal name="Warn_PCS_Failed" offset="32" length="1" />
+            <Signal name="a_1" offset="6" length="2" />
+            <Signal name="Warn_DRSS_Failed" offset="47" length="1" />
+            <Signal name="a_3" offset="43" length="4" />
+            <Signal name="Warn_FSC_Status" offset="40" length="3" />
+            <Signal name="Warn_Radar_Blocked" offset="53" length="3" />
+            <Signal name="a_6" offset="52" length="1" />
+            <Signal name="a_7" offset="48" length="4" />
+        </Message>
+        <Message id="0x21D" name="CitySafety" length="8">
+            <!-- TODO: Test this cvSnsObjRng_D_Actl_right feels wrong?-->
+            <Signal name="cvSnsObjRng_D_Actl_left" offset="0" length="6" />
+            <Signal name="cvSnsObjRng_D_Actl_center" offset="8" length="6" />
+            <Signal name="cvSnsObjRng_D_Actl_right" offset="18" length="4" />
+            <Signal name="amplitudeLeft" offset="24" length="8" />
+            <Signal name="amplitudeCenter" offset="32" length="8" />
+            <Signal name="amplitudeRight" offset="40" length="8" />
+            <Signal name="cvSnsObjRngRate_left" offset="50" length="5" />
+            <Signal name="cvSnsObjRngRate_center" offset="54" length="5" endianess="big" />
+            <Signal name="cvSnsObjRngRate_right" offset="56" length="5" />
+            <Signal name="EBAEngineBrakeReq" offset="7" length="1" />
         </Message>
         <Message id="0x228" name="transmission" interval="20" length="5">
             <Signal name="TransmChangeLeverPosition" offset="0" length="4">
@@ -116,15 +180,77 @@
             <Signal name="gearPos_D_Trg" offset="33" length="4" />
             <Signal name="gearDisplayMode" offset="32" length="1" />
         </Message>
-        <Message id="0x35F" name="TSR_Control" length="8">
+        <Message id="0x240" name="EPAS_Control" length="8">
+            <!-- TODO: this one is hard to decode -->
+            <Signal name="Warn_SteWhlComp_An_Est" offset="0" length="16" endianess="big" />
+            <Signal name="3" offset="21" length="3" />
+            <Signal name="4" offset="24" length="8" />
+            <Signal name="5" offset="33" length="2" />
+            <Signal name="6" offset="63" length="1" />
+            <Signal name="7" offset="48" length="8" />
+            <Signal name="8" offset="57" length="2" />
+            <Signal name="9" offset="40" length="7" />
+        </Message>
+        <Message id="0x249" name="HV_PowerMeter" length="8">
+            <Signal name="HvTmP_Tq_LimMx" offset="0" length="16" endianess="big" />
+            <Signal name="HvEngPcm_Tq_Actl" offset="16" length="16" endianess="big" />
+            <Signal name="HvTmPcm_Tq_Actl" offset="32" length="16" endianess="big" />
+            <Signal name="HvRgBrkP_Tq_Rq" offset="48" length="16" endianess="big" />
+        </Message>
+        <Message id="0x24A" name="" length="8">
+            <!-- Not sure I can test this. May be for hybrids? -->
+            <Signal name="HvMtrGen1Aout_N_Actl" offset="0" length="16" endianess="big" />
+            <Signal name="HvMtrGen2Aout_N_Actl" offset="16" length="16" endianess="big" />
+            <Signal name="BattTracSoc_Pc_Actl" offset="32" length="8" />
+            <Signal name="BattTrac_I_Actl" offset="40" length="10" endianess="big" />
+            <Signal name="BattTrac_U_Actl" offset="50" length="14" endianess="big" />
+        </Message>
+        <Message id="0x24B" name="HEV_HV_CNTRECORD2" length="7">
+            <!-- Not sure I can test this. May be for hybrids? -->
+            <Signal name="HV_ET" offset="0" length="16" endianess="big" />
+            <Signal name="HV_M1T" offset="16" length="16" endianess="big" />
+            <Signal name="HV_M2T" offset="32" length="16" endianess="big" />
+            <Signal name="HV_EP" offset="54" length="2" />
+            <Signal name="HV_EM" offset="52" length="2" />
+            <Signal name="HV_MP" offset="50" length="2" />
+            <Signal name="HV_MB" offset="48" length="2" />
+        </Message>
+        <Message id="0x25D" name="SCBS_Control" length="5">
             <!-- TODO: Test -->
-            <Notes>These may be swapped?</Notes>
-            <Signal name="TSR_Feature_Status" offset="26" length="2" />
-            <Signal name="TSR_Feature_Mode" offset="33" length="1" />
+            <Producer>
+                <NodeRef id="8" />
+            </Producer>
+            <Signal name="Warn_SCBSServiceReqFlg" offset="7" length="1" />
+            <Signal name="Warn_SensorBlkgMsg" offset="6" length="1" />
+            <Signal name="Warn_SCBSUnavailableFlg" offset="5" length="1" />
+            <Signal name="Warn_EBAPostInctMsg" offset="4" length="1" />
+            <Signal name="Warn_EBABrakeDecelReqEnbl" offset="3" length="1" />
+            <Signal name="Warn_EBABrakeDecelReq" offset="5" length="8" endianess="big" />
+            <Signal name="Warn_EBABrakePrechargeReq" offset="9" length="2" />
+            <Signal name="Warn_EBAHBASensReq" offset="22" length="2" />
+            <Signal name="Warn_Camera_high_temperature" offset="33" length="1" />
+            <Signal name="Warn_SCBS_Status" offset="8" length="1" />
+        </Message>
+        <Message id="0x274" name="KeyLessControl_Status" length="6">
+            <!-- TODO: Test -->
+            <Notes />
+            <Signal name="Sec_Ind_Req1" offset="7" />
+            <Signal name="Sec_Ind_Req2" offset="4" />
+            <Signal name="Buzzer_Cntrl" offset="0" length="4" />
+            <Signal name="Key_Green_Cntrl" offset="12" length="4" />
+            <Signal name="Lamp_Key_Red_Cntrl" offset="8" length="4" />
+            <Signal name="ESCL_Display" offset="17" length="4" />
+            <Signal name="BUZZ_for_ESCL" offset="25" length="4" />
+            <Signal name="Power_Not_Off" offset="24" length="1" />
+            <Signal name="Key_Battery_Low" offset="32" length="1" />
+            <Signal name="Key_Not_Found" offset="36" length="3" />
+            <Signal name="TransmitterNo" offset="46" length="2" />
+            <Signal name="DrLockStat_D_Actl" offset="44" length="2" />
+            <Signal name="System_Check" offset="41" length="1" />
         </Message>
         <Message id="0x340" name="RCM_Control_Status" length="4">
             <!-- TODO: Test -->
-            <Notes></Notes>
+            <Notes />
             <Signal name="Fuel_Cut_Off" offset="4" length="4" />
             <Signal name="Fuel_Cut_Status" offset="3" length="1" />
             <Signal name="Deply_Front" offset="1" length="1" />
@@ -136,141 +262,11 @@
             <Signal name="Buckle_Driver" offset="27" length="1" />
             <Signal name="Buckle_Passenger" offset="26" length="1" />
         </Message>
-        <Message id="0x274" name="KeyLessControl_Status" length="6">
+        <Message id="0x35F" name="TSR_Control" length="8">
             <!-- TODO: Test -->
-            <Notes></Notes>
-            <Signal name="Sec_Ind_Req1" offset="7"></Signal>
-            <Signal name="Sec_Ind_Req2" offset="4"></Signal>
-            <Signal name="Buzzer_Cntrl" offset="0" length="4"></Signal>
-            <Signal name="Key_Green_Cntrl" offset="12" length="4"></Signal>
-            <Signal name="Lamp_Key_Red_Cntrl" offset="8" length="4"></Signal>
-            <Signal name="ESCL_Display" offset="17" length="4"></Signal>
-            <Signal name="BUZZ_for_ESCL" offset="25" length="4"></Signal>
-            <Signal name="Power_Not_Off" offset="24" length="1"></Signal>
-            <Signal name="Key_Battery_Low" offset="32" length="1"></Signal>
-            <Signal name="Key_Not_Found" offset="36" length="3"></Signal>
-            <Signal name="TransmitterNo" offset="46" length="2"></Signal>
-            <Signal name="DrLockStat_D_Actl" offset="44" length="2"></Signal>
-            <Signal name="System_Check" offset="41" length="1"></Signal>
+            <Notes>These may be swapped?</Notes>
+            <Signal name="TSR_Feature_Status" offset="26" length="2" />
+            <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
-        <Message id="0x25D" name="SCBS_Control" length="5">
-            <!-- TODO: Test -->
-            <Producer>
-                <NodeRef id="8" />
-            </Producer>
-            <Signal name="Warn_SCBSServiceReqFlg" offset="7" length="1"></Signal>
-            <Signal name="Warn_SensorBlkgMsg" offset="6" length="1"></Signal>
-            <Signal name="Warn_SCBSUnavailableFlg" offset="5" length="1"></Signal>
-            <Signal name="Warn_EBAPostInctMsg" offset="4" length="1"></Signal>
-            <Signal name="Warn_EBABrakeDecelReqEnbl" offset="3" length="1"></Signal>
-            <Signal name="Warn_EBABrakeDecelReq" offset="5" length="8" endianess="big"></Signal>
-            <Signal name="Warn_EBABrakePrechargeReq" offset="9" length="2"></Signal>
-            <Signal name="Warn_EBAHBASensReq" offset="22" length="2"></Signal>
-            <Signal name="Warn_Camera_high_temperature" offset="33" length="1"></Signal>
-            <Signal name="Warn_SCBS_Status" offset="8" length="1"></Signal>
-        </Message>
-        <Message id="0x24B" name="HEV_HV_CNTRECORD2" length="7">
-            <!-- Not sure I can test this. May be for hybrids? -->
-            <Signal name="HV_ET" offset="0" length="16" endianess="big" />
-            <Signal name="HV_M1T" offset="16" length="16" endianess="big" />
-            <Signal name="HV_M2T" offset="32" length="16" endianess="big" />
-            <Signal name="HV_EP" offset="54" length="2"></Signal>
-            <Signal name="HV_EM" offset="52" length="2"></Signal>
-            <Signal name="HV_MP" offset="50" length="2"></Signal>
-            <Signal name="HV_MB" offset="48" length="2"></Signal>
-        </Message>
-        <Message id="0x24A" name="" length="8">
-            <!-- Not sure I can test this. May be for hybrids? -->
-            <Signal name="HvMtrGen1Aout_N_Actl" offset="0" length="16" endianess="big" />
-            <Signal name="HvMtrGen2Aout_N_Actl" offset="16" length="16" endianess="big" />
-            <Signal name="BattTracSoc_Pc_Actl" offset="32" length="8" />
-            <Signal name="BattTrac_I_Actl" offset="40" length="10" endianess="big"></Signal>
-            <Signal name="BattTrac_U_Actl" offset="50" length="14" endianess="big"></Signal>
-        </Message>
-        <Message id="0x249" name="HV_PowerMeter" length="8">
-            <Signal name="HvTmP_Tq_LimMx" offset="0" length="16" endianess="big" />
-            <Signal name="HvEngPcm_Tq_Actl" offset="16" length="16" endianess="big" />
-            <Signal name="HvTmPcm_Tq_Actl" offset="32" length="16" endianess="big" />
-            <Signal name="HvRgBrkP_Tq_Rq" offset="48" length="16" endianess="big" />
-        </Message>
-        <Message id="0x240" name="EPAS_Control" length="8">
-            <!-- TODO: this one is hard to decode -->
-            <Signal name="Warn_SteWhlComp_An_Est" offset="0" length="16" endianess="big" />
-            <Signal name="3" offset="21" length="3"></Signal>
-            <Signal name="4" offset="24" length="8"></Signal>
-            <Signal name="5" offset="33" length="2"></Signal>
-            <Signal name="6" offset="63" length="1"></Signal>
-            <Signal name="7" offset="48" length="8"></Signal>
-            <Signal name="8" offset="57" length="2"></Signal>
-            <Signal name="9" offset="40" length="7"></Signal>
-        </Message>
-        <Message id="0x21D" name="CitySafety" length="8">
-            <!-- TODO: Test this cvSnsObjRng_D_Actl_right feels wrong?-->
-            <Signal name="cvSnsObjRng_D_Actl_left" offset="0" length="6"></Signal>
-            <Signal name="cvSnsObjRng_D_Actl_center" offset="8" length="6"></Signal>
-            <Signal name="cvSnsObjRng_D_Actl_right" offset="18" length="4"></Signal>
-            <Signal name="amplitudeLeft" offset="24" length="8"></Signal>
-            <Signal name="amplitudeCenter" offset="32" length="8"></Signal>
-            <Signal name="amplitudeRight" offset="40" length="8"></Signal>
-            <Signal name="cvSnsObjRngRate_left" offset="50" length="5"></Signal>
-            <Signal name="cvSnsObjRngRate_center" offset="54" length="5" endianess="big"></Signal>
-            <Signal name="cvSnsObjRngRate_right" offset="56" length="5"></Signal>
-            <Signal name="EBAEngineBrakeReq" offset="7" length="1"></Signal>
-        </Message>
-        <Message id="0x21C" name="CCM_Information" length="7">
-             <!-- TODO: Test this -->
-            <Signal name="Warn_ACC_Status_Lamp" offset="3" length="3"></Signal>
-            <Signal name="Warn_LDW_Status_Lamp" offset="0" length="3"></Signal>
-            <Signal name="Warn_HBC_Status_Lamp" offset="13" length="3"></Signal>
-            <Signal name="Warn_DisplayColor" offset="12" length="1"></Signal>
-            <Signal name="Warn_FLASH_IND" offset="11" length="1"></Signal>
-            <Signal name="Warn_LDW_Status" offset="8" length="3"></Signal>
-            <Signal name="Warn_Leading_Vehicle_Display" offset="23" length="1"></Signal>
-            <Signal name="Warn_PopUp_Display_Request" offset="22" length="1"></Signal>
-            <Signal name="Warn_Distance_SW_Status" offset="18" length="3"></Signal>
-            <Signal name="Warn_DRSS_status" offset="29" length="3"></Signal>
-            <Signal name="Warn_DRSS_Distance" offset="16" length="2"></Signal>
-            <Signal name="Warn_CCM_Deactivated" offset="33" length="1"></Signal>
-            <Signal name="Warn_ACC_Failed" offset="34" length="2"></Signal>
-            <Signal name="Warn_PCS_Failed" offset="32" length="1"></Signal>
-            <Signal name="a_1" offset="6" length="2"></Signal>
-            <Signal name="Warn_DRSS_Failed" offset="47" length="1" />
-            <Signal name="a_3" offset="43" length="4"></Signal>
-            <Signal name="Warn_FSC_Status" offset="40" length="3"></Signal>
-            <Signal name="Warn_Radar_Blocked" offset="53" length="3"></Signal>
-            <Signal name="a_6" offset="52" length="1"></Signal>
-            <Signal name="a_7" offset="48" length="4"></Signal>
-        </Message>
-        <Message id="0x21B" name="CCM_Control" length="7">
-            <!-- Another tricky one to decode Missing at least two signals-->
-             <!-- TODO: Test this -->
-            <Signal name="DataMem_3" offset="18" length="3"></Signal>
-            <Signal name="DataMem_5" offset="36" length="1"></Signal>
-            <Signal name="DataMem_6" offset="35" length="1"></Signal>
-            <Signal name="DataMem_7" offset="34" length="1"></Signal>
-            <Signal name="DataMem_8" offset="33" length="1"></Signal>
-            <Signal name="DataMem_9" offset="32" length="1"></Signal>
-            <Signal name="DataMem_10" offset="47" length="1"></Signal>
-            <Signal name="DataMem_11" offset="44" length="3"></Signal>
-            <Signal name="DataMem_12" offset="53" length="1"></Signal>
-            <Signal name="DataMem_13" offset="52" length="1"></Signal>
-            <Signal name="DataMem_1" offset="2" length="6"></Signal>
-        </Message>
-        <Message id="0x211" name="DSCControl_Status" length="7">
-             <!-- TODO: Test this -->
-            <Signal name="ABS_Active" offset="42"></Signal>
-            <Signal name="BRK_Asst" offset="41"></Signal>
-            <Signal name="StabCTLBrk_Actv" offset="40"></Signal>
-            <Signal name="TracCtl_Actv" offset="54"></Signal>
-            <Signal name="5" offset="53"></Signal>
-            <Signal name="6" offset="52"></Signal>
-            <Signal name="7" offset="51"></Signal>
-            <Signal name="8" offset="50"></Signal>
-            <Signal name="9" offset="49"></Signal>
-            <Signal name="Warn_DrvAntiLckLamp_D_Rq" offset="6" length="2"></Signal>
-            <Signal name="cvdDrvAntiLckLamp_D_Rq" offset="5" length="1"></Signal>
-            <Signal name="12" offset="3" length="2"></Signal>
-            <Signal name="cvdBrkFluidLvl_D_Actl" offset="1" length="2"></Signal>
-        </Message>
-    </Bus>
+        </Bus>
 </NetworkDefinition>
