@@ -50,15 +50,15 @@
             <Signal name="Warn_ESS_Active" offset="61" length="3" />
         </Message>
         <Message id="0x09F" name="" interval="200" length="7">
-            <!-- These two look wrong by the code, but seem right with testing?
-                <Signal name="Dimming Inactive" offset="4" length="1">
-                <Notes> This is a guess based on behavior </Notes>
+            <Signal name="Parking_Brake" offset="4" length="2">
+                <Notes>Verified!</Notes>
             </Signal>
-            <Signal name="Parking_Brake" offset="3" length="1" /> -->
-            <Signal name="Parking_Brake" offset="4" length="2" />
-            <Signal name="rev_Lamp_Resp" offset="0" length="3" />
+            <Signal name="rev_Lamp_Resp" offset="0" length="3">
+                <Notes>Verified!</Notes>
+            </Signal>
             <Signal name="Panel_Brightness_Level" offset="8" length="8" />
             <Signal name="Ignition_Control_Status" offset="16" length="4">
+                <Notes>Verified!</Notes>
                 <LabelSet>
                     <Label name="N/A" value="0" />
                     <Label name="OFF" value="1" />
@@ -74,12 +74,33 @@
             <Signal name="Low_Speed_CMB_SCBS" offset="54" length="1" />
             <Signal name="CSDeniedByMonitor" offset="55" length="1" />
         </Message>
+        <Message id="0x20A" name="Unknown 0x20A" length="8">
+            <!-- This doesn't appear to be used by the CMU, but the VIP has a mapping for it?
+                Not sure it should be trusted, but might be good for a base if anything is to be figured out about it -->
+            <Signal name="1" offset="7" length="1" />
+            <Signal name="2" offset="6" length="1" />
+            <Signal name="3" offset="5" length="1" />
+            <Signal name="4" offset="4" length="1" />
+            <Signal name="5" offset="4" endianess="big" length="8" />
+            <Signal name="6" offset="11" length="1" />
+            <Signal name="7" offset="9" length="2" />
+            <Signal name="8" offset="15" endianess="big" length="4" />
+            <Signal name="9" offset="19" length="2" />
+            <Signal name="10" offset="41" length="7" />
+            <Signal name="11" offset="55" endianess="big" length="6" />
+        </Message>
         <Message id="0x211" name="DSCControl_Status" length="7">
              <!-- TODO: Test this -->
-            <Signal name="ABS_Active" offset="42" />
+            <Signal name="ABS_Active" offset="42">
+                <Notes>Verified!</Notes>
+            </Signal>
             <Signal name="BRK_Asst" offset="41" />
-            <Signal name="StabCTLBrk_Actv" offset="40" />
-            <Signal name="TracCtl_Actv" offset="54" />
+            <Signal name="StabCTLBrk_Actv" offset="40">
+                <Notes>Verified!</Notes>
+            </Signal>
+            <Signal name="TracCtl_Actv" offset="54">
+                <Notes>Verified!</Notes>
+            </Signal>
             <Signal name="5" offset="53" />
             <Signal name="6" offset="52" />
             <Signal name="7" offset="51" />
@@ -91,6 +112,7 @@
             <Signal name="cvdBrkFluidLvl_D_Actl" offset="1" length="2" />
         </Message>
     <Message id="0x215" name="Wheel Speed" interval="10">
+            <Notes>Verified!</Notes>
             <Signal name="FrontLeft" offset="0" length="16" endianess="big" />
             <Signal name="FrontRight" offset="16" length="16" endianess="big" />
             <Signal name="RearLeft" offset="32" length="16" endianess="big" />
@@ -115,7 +137,9 @@
              <!-- TODO: Test this -->
             <Signal name="Warn_ACC_Status_Lamp" offset="3" length="3" />
             <Signal name="Warn_LDW_Status_Lamp" offset="0" length="3" />
-            <Signal name="Warn_HBC_Status_Lamp" offset="13" length="3" />
+            <Signal name="Warn_HBC_Status_Lamp" offset="13" length="3">
+                <Notes>Verified! Lights up High Beam Control lamp on instrument panel/Indicates that HBC is active</Notes>
+            </Signal>
             <Signal name="Warn_DisplayColor" offset="12" length="1" />
             <Signal name="Warn_FLASH_IND" offset="11" length="1" />
             <Signal name="Warn_LDW_Status" offset="8" length="3" />
@@ -136,10 +160,10 @@
             <Signal name="a_7" offset="48" length="4" />
         </Message>
         <Message id="0x21D" name="CitySafety" length="8">
-            <!-- TODO: Test this cvSnsObjRng_D_Actl_right feels wrong?-->
+            <!-- TODO: Test this -->
             <Signal name="cvSnsObjRng_D_Actl_left" offset="0" length="6" />
             <Signal name="cvSnsObjRng_D_Actl_center" offset="8" length="6" />
-            <Signal name="cvSnsObjRng_D_Actl_right" offset="18" length="4" />
+            <Signal name="cvSnsObjRng_D_Actl_right" offset="18" length="6" />
             <Signal name="amplitudeLeft" offset="24" length="8" />
             <Signal name="amplitudeCenter" offset="32" length="8" />
             <Signal name="amplitudeRight" offset="40" length="8" />
@@ -150,7 +174,12 @@
         </Message>
         <Message id="0x228" name="transmission" interval="20" length="5">
             <Signal name="TransmChangeLeverPosition" offset="0" length="4">
+                <Notes>
+                    Verified!
+                    Corresponds to Automatic Transmission shift control position
+                </Notes>
                 <LabelSet>
+                    <Label name="Invalid" value="0" />
                     <Label name="Park" value="1" />
                     <Label name="Reverse" value="2" />
                     <Label name="Neutral" value="3" />
@@ -158,16 +187,7 @@
                 </LabelSet>
             </Signal>
             <Signal name="TransmDesiredGearPosition" offset="4" length="4">
-                <Value max="7" />
-                <LabelSet>
-                    <Label name="1st" value="1" />
-                    <Label name="2nd" value="2" />
-                    <Label name="3rd" value="3" />
-                    <Label name="4th" value="4" />
-                    <Label name="5th" value="5" />
-                    <Label name="6th" value="6" />
-                    <Label name="7th" value="7" />
-                </LabelSet>
+                <Notes>Verified! Corresponds to gear when in drive</Notes>
             </Signal>
             <Signal name="OD_Hold_Sport" offset="15" length="1">
                 <Notes> Active when in Manual shift mode</Notes>
@@ -182,7 +202,9 @@
         </Message>
         <Message id="0x240" name="EPAS_Control" length="8">
             <!-- TODO: this one is hard to decode -->
-            <Signal name="Warn_SteWhlComp_An_Est" offset="0" length="16" endianess="big" />
+            <Signal name="Warn_SteWhlComp_An_Est" offset="0" length="16" endianess="big">
+                <Value slope="0.00549324788" unit="deg" /> <!-- This should convert the value into degrees, with 180degrees being straight -->
+            </Signal>
             <Signal name="3" offset="21" length="3" />
             <Signal name="4" offset="24" length="8" />
             <Signal name="5" offset="33" length="2" />
@@ -192,6 +214,7 @@
             <Signal name="9" offset="40" length="7" />
         </Message>
         <Message id="0x249" name="HV_PowerMeter" length="8">
+            <!-- Not sure I can test this. May be for hybrids? -->
             <Signal name="HvTmP_Tq_LimMx" offset="0" length="16" endianess="big" />
             <Signal name="HvEngPcm_Tq_Actl" offset="16" length="16" endianess="big" />
             <Signal name="HvTmPcm_Tq_Actl" offset="32" length="16" endianess="big" />
@@ -259,8 +282,18 @@
             <Signal name="Airbag_Warning" offset="17" length="1" />
             <Signal name="PAD_Ind" offset="23" length="3" endianess="big" />
             <Signal name="OCS_Status" offset="28" length="2" />
-            <Signal name="Buckle_Driver" offset="27" length="1" />
-            <Signal name="Buckle_Passenger" offset="26" length="1" />
+            <Signal name="Buckle_Driver" offset="27" length="1">
+                <Notes>
+                    Verified!
+                    Corresponds to Driver seatbelt buckle status
+                </Notes>
+            </Signal>
+            <Signal name="Buckle_Passenger" offset="26" length="1">
+                <Notes>
+                    Verified!
+                    Corresponds to Passenger seatbelt buckle status
+                </Notes>
+            </Signal>
         </Message>
         <Message id="0x35F" name="TSR_Control" length="8">
             <!-- TODO: Test -->
