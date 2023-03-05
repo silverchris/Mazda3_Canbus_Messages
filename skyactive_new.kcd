@@ -20,6 +20,10 @@
     <Node id="18" name="Blind spot monitoring control module (BSML)" />
     <Node id="19" name="Rear body control module (RBCM)" />
     <Bus name="HS-CAN" baudrate="500000">
+        <Message id="0x079" name="Lateral_Acceleration" length="2">
+            <Signal name="LateralAcceleration_Qf" offset="6" length="2" />
+            <Signal name="LateralAcceleration" offset="2" endianess="big" length="13" />
+        </Message>
         <Message id="0x086" name="EPAS_Control 0x086" length="6">
             <Signal name="Warn_SteWhlComp_An_Est" offset="29" endianess="big" length="15">
                 <Notes>Seems to be another steering wheel angle? Less accurate than 0x240</Notes>
