@@ -88,6 +88,7 @@
             <Signal name="RegenBrkFailWarning" offset="42" length="1" />
             <Signal name="Warn_BattRgenStat_B_Actl" offset="41" length="1" />
             <Signal name="Warn_ATFalseStartWarning" offset="40" length="1" />
+            <Signal name="Unknown_0x0FD_14" offset="14" length="1" /> <!-- Not used by CMU? But decoded by VIP -->
         </Message>
         <Message id="0x130" name="EATC_SIS_Group" length="8">
             <Signal name="SISS_Status" offset="0" length="1" />
