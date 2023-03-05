@@ -49,6 +49,11 @@
             <Signal name="Warn_RLS_WiperReq_D_Actl" offset="53" length="2" />
             <Signal name="Warn_ESS_Active" offset="61" length="3" />
         </Message>
+        <Message id="0x09E" name="GCC_HEC_MultiSwitch_info" length="8">
+            <Signal name="SISSEngNotify" offset="40" length="8">
+                <Notes>INDICATED_FUEL_LEVEL?</Notes>
+            </Signal>
+        </Message>
         <Message id="0x09F" name="" interval="200" length="7">
             <Signal name="Parking_Brake" offset="4" length="2">
                 <Notes>Verified!</Notes>
