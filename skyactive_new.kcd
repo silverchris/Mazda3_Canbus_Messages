@@ -78,7 +78,6 @@
             <Signal name="1" offset="6" length="2" />
             <Signal name="2" offset="31" endianess="big" length="4" />
             <Signal name="3" offset="9" endianess="big" length="8" />
-            <Signal name="3" offset="9" endianess="big" length="8" />
         </Message>
         <Message id="0x202" name="EngineVehicleThrottle" length="7">
             <Signal name="veh_V_ActlEng" offset="16" endianess="big" length="16">
@@ -320,6 +319,9 @@
             <Notes>These may be swapped?</Notes>
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
+        </Message>
+        <Message id="0x130" name="" length="8">
+
         </Message>
         </Bus>
 </NetworkDefinition>
