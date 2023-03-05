@@ -388,6 +388,13 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4FD" name="" length="8">
+            <Notes>Decoded but I can't tell what it's used for</Notes>
+            <Signal name="1" offset="0" length="8" />
+            <Signal name="2" offset="8" endianess="big" length="16" />
+            <Signal name="3" offset="24" length="8" />
+            <Signal name="4" offset="32" endianess="big" length="32" />
+        </Message>
         <Message id="0x4FE" name="ODR" length="8">
             <Signal name="ODR_Data1" offset="0" endianess="big" length="16" />
             <Signal name="ODR_Data2" offset="16" endianess="big" length="16" />
