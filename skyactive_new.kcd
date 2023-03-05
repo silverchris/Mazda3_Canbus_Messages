@@ -388,6 +388,24 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4FA" name="EATC_ENG_INF_GROUP" length="8">
+            <Signal name="DR_IntakeAirTemp" offset="32" length="8" />
+            <Signal name="SdsSmothStat_D_Rq_2" offset="5" length="3" />
+            <Signal name="SdsActvStat_D_Rq_2" offset="2" length="3" />
+            <Signal name="Sds_TotNG_Par_D_Rq_2" offset="21" length="3" />
+            <Signal name="Sds_TotSD_Point_D_Actl_2" offset="8" length="8" />
+            <Signal name="OIL_DETERIORATE_LEVEL" offset="41" length="4" />
+            <Signal name="IDM_SD_CalcInfo_Category" offset="53" length="3" />
+            <Signal name="IDM_SD_CalcInfo_Value" offset="51" endianess="big" length="7" />
+            <Signal name="OilLevelStatusMonitor" offset="58" length="4" />
+            <Signal name="OilLevelSensWarn_B_Rq" offset="57" length="1" />
+            <Signal name="DR_Slope" offset="24" length="6" />
+            <Signal name="Unknown_40" offset="40" length="1" />
+            <Signal name="Engine Load" offset="19" endianess="big" length="7" />
+            <Signal name="Fault Status" offset="47" length="1" />
+            <Signal name="Neutral SW" offset="46" length="1" />
+            <Signal name="Clutch SW" offset="45" length="1" />
+        </Message>
         <Message id="0x4FB" name="" length="8">
             <Notes>Decoded but I can't tell what it's used for. Identical to 0x4FD</Notes>
             <Signal name="1" offset="0" length="8" />
