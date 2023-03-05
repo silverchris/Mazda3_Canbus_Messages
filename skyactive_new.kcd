@@ -74,6 +74,12 @@
             <Signal name="Low_Speed_CMB_SCBS" offset="54" length="1" />
             <Signal name="CSDeniedByMonitor" offset="55" length="1" />
         </Message>
+        <Message id="0x165" name="" length="6">
+            <Signal name="1" offset="6" length="2" />
+            <Signal name="2" offset="31" endianess="big" length="4" />
+            <Signal name="3" offset="9" endianess="big" length="8" />
+            <Signal name="3" offset="9" endianess="big" length="8" />
+        </Message>
         <Message id="0x202" name="EngineVehicleThrottle" length="7">
             <Signal name="veh_V_ActlEng" offset="16" endianess="big" length="16">
                 <Notes>Speed?</Notes>
