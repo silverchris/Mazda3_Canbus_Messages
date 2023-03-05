@@ -74,6 +74,29 @@
             <Signal name="Low_Speed_CMB_SCBS" offset="54" length="1" />
             <Signal name="CSDeniedByMonitor" offset="55" length="1" />
         </Message>
+        <Message id="0x130" name="EATC_SIS_Group" length="8">
+            <Signal name="SISS_Status" offset="0" length="1" />
+            <Signal name="SISS_AlarmBuzzer" offset="13" length="3" />
+            <Signal name="SISS_WarningLamp_G" offset="10" length="3" />
+            <Signal name="SISS_WarningLamp_R" offset="14" length="3" endianess="big" />
+            <Signal name="SlaCtl_B_Rq" offset="22" length="1" />
+            <Signal name="iStp_Deny_Batt_B_Actl" offset="21" length="1" />
+            <Signal name="iStpReady_Rq" offset="20" length="1" />
+            <Signal name="SISS_Mode_for_SKE" offset="19" length="1" />
+            <Signal name="SKE_Control" offset="17" length="2" />
+            <Signal name="SISS_IRCutReq" offset="16" length="1" />
+            <Signal name="SISS_EngineState" offset="28" length="4">
+                <Value max="10" />
+            </Signal>
+            <Signal name="iStp_Deny_DPF_B_Actl" offset="38" length="1" />
+            <Signal name="iStp_Deny_Nrange_B_Actl" offset="37" length="1" />
+            <Signal name="iStp_Deny_AC_B_Actl" offset="36" length="1" />
+            <Signal name="iStp_KeySta_B_Actl" offset="35" length="1" />
+            <Signal name="iStp_DenyPwStr_B_Actl" offset="34" length="1" />
+            <Signal name="iStp_DenyBrk_B_Actl" offset="33" length="1" />
+            <Signal name="PTiStp_Rdy_B_Actl" offset="32" length="1" />
+            <Signal name="Clutch_Stroke" offset="56" length="8" />
+        </Message>
         <Message id="0x165" name="" length="6">
             <Signal name="1" offset="6" length="2" />
             <Signal name="2" offset="31" endianess="big" length="4" />
@@ -319,9 +342,6 @@
             <Notes>These may be swapped?</Notes>
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
-        </Message>
-        <Message id="0x130" name="" length="8">
-
         </Message>
         </Bus>
 </NetworkDefinition>
