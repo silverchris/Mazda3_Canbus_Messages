@@ -31,9 +31,6 @@
             <Signal name="LateralAcceleration_Qf" offset="6" length="2" />
             <Signal name="LateralAcceleration" offset="2" endianess="big" length="13" />
         </Message>
-        <Message id="0x07E" name="" length="8">
-            <Notes>Exists but I can't find use</Notes>
-        </Message>
         <Message id="0x086" name="EPAS_Control 0x086" length="6">
             <Signal name="Warn_SteWhlComp_An_Est" offset="29" endianess="big" length="15">
                 <Notes>Seems to be another steering wheel angle? Less accurate than 0x240</Notes>
@@ -390,6 +387,12 @@
             <Notes>These may be swapped?</Notes>
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
+        </Message>
+        <Message id="0x7E9" name="" length="8">
+            <Notes>Defined but not used</Notes>
+        </Message>
+        <Message id="0x7EA" name="" length="8">
+            <Notes>Exists but I can't find use</Notes>
         </Message>
         </Bus>
 </NetworkDefinition>
