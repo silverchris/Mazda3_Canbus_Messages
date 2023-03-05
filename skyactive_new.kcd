@@ -74,6 +74,21 @@
             <Signal name="Low_Speed_CMB_SCBS" offset="54" length="1" />
             <Signal name="CSDeniedByMonitor" offset="55" length="1" />
         </Message>
+        <Message id="0x0FD" name="PCM_Warning_Status" length="7">
+            <Signal name="Warn_BoostPressure" offset="48" length="8" />
+            <Signal name="Warn_ShiftIndicatorLight" offset="3" length="2" />
+            <Signal name="Warn_SilGearPos_D_Dsply" offset="11" length="3" />
+            <Signal name="Warn_GlobalConfgWarn_B_Rq" offset="10" length="1" />
+            <Signal name="Warn_OilPSolWarn_B_Rq" offset="8" length="1" />
+            <Signal name="Warn_Crank_wait" offset="24" length="8" />
+            <Signal name="Warn_CrankingTime" offset="33" length="5" />
+            <Signal name="Warn_ BrakeSw_Fail_Warning" offset="45" length="1" />
+            <Signal name="Warn_SmtAclInh_B_Actl" offset="44" length="1" />
+            <Signal name="Warn_BmsWarn_B_Rq" offset="43" length="1" />
+            <Signal name="RegenBrkFailWarning" offset="42" length="1" />
+            <Signal name="Warn_BattRgenStat_B_Actl" offset="41" length="1" />
+            <Signal name="Warn_ATFalseStartWarning" offset="40" length="1" />
+        </Message>
         <Message id="0x130" name="EATC_SIS_Group" length="8">
             <Signal name="SISS_Status" offset="0" length="1" />
             <Signal name="SISS_AlarmBuzzer" offset="13" length="3" />
