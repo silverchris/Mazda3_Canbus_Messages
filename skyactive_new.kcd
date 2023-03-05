@@ -49,6 +49,9 @@
             <Signal name="Warn_RLS_WiperReq_D_Actl" offset="53" length="2" />
             <Signal name="Warn_ESS_Active" offset="61" length="3" />
         </Message>
+        <Message id="0x09B" name="Unknown 0x09B" length="2">
+            <Notes>Defined by not used in VIM</Notes>
+        </Message>
         <Message id="0x09E" name="GCC_HEC_MultiSwitch_info" length="8">
             <Signal name="SISSEngNotify" offset="40" length="8">
                 <Notes>INDICATED_FUEL_LEVEL?</Notes>
