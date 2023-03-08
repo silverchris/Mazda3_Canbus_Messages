@@ -388,6 +388,17 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4E0" name="" length="4">
+            <Signal name="HUD_TltLvl_Rq_Mem" offset="3" length="5" />
+            <Signal name="HUD_IntnsCnt_D_Rq_Mem" offset="5" endianess="big" length="5" />
+            <Signal name="HUD_AutoIntCon_OffRq_Mem" offset="13" length="1" />
+            <Signal name="HUD_ManInt_CntLvl_Mem" offset="11" endianess="big" length="6" />
+            <Signal name="HUD_RotLvl_Rq_Mem" offset="20" length="3" />
+            <Signal name="Turn_Ind_OnOff_Mem" offset="18" length="2" />
+            <Signal name="Nav_GPD_Timg_Mem" offset="16" length="2" />
+            <Signal name="TA_OnOff_Mem" offset="30" length="2" />
+            <Signal name="Gsi_OnOff_Mem" offset="28" length="2" />
+        </Message>
         <Message id="0x4F0" name="EngineConf_Fuel" length="6">
             <Signal name="fuelType_Delivery" offset="12" length="4" />
         </Message>
