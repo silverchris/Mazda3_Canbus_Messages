@@ -388,6 +388,24 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4DE" name="HEV_WARNING_CONTROL" length="6">
+            <!-- More EV Stuff? -->
+            <Signal name="Warn_DR_EVM_MSG" offset="4" length="4" />
+            <Signal name="Warn_DR_PRQM" offset="3" length="1" />
+            <Signal name="Warn_DR_CAU" offset="2" length="1" />
+            <Signal name="Warn_DR_HVOT" offset="1" length="1" />
+            <Signal name="Warn_DR_MBLO" offset="0" length="1" />
+            <Signal name="Warn_DR_NDBW" offset="15" length="1" />
+            <Signal name="Warn_DR_SOC_MON" offset="12" length="3" />
+            <Signal name="Warn_DR_CH AW" offset="11" length="1" />
+            <Signal name="Warn_DR_MBLW" offset="10" length="1" />
+            <Signal name="Warn_DR_B_WPOS" offset="8" length="1" />
+            <Signal name="Warn_DR_B_BRKW" offset="22" length="2" />
+            <Signal name="Warn_DR_B_ABS" offset="19" length="3" />
+            <Signal name="Warn_DR_B_EBW" offset="16" length="3" />
+            <Signal name="Warn_DR_B_BUZZER" offset="24" length="4" />
+            <Signal name="Warn_DR_SLP_WL" offset="29" length="3" />
+        </Message>
         <Message id="0x4E0" name="" length="4">
             <Signal name="HUD_TltLvl_Rq_Mem" offset="3" length="5" />
             <Signal name="HUD_IntnsCnt_D_Rq_Mem" offset="5" endianess="big" length="5" />
