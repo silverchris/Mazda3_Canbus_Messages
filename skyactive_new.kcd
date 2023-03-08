@@ -388,6 +388,9 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4F0" name="EngineConf_Fuel" length="6">
+            <Signal name="fuelType_Delivery" offset="12" length="4" />
+        </Message>
         <Message id="0x4F3" name="HEC_DispControl_Group" interval="100">
             <Signal name="type_16" offset="32" length="16" endianess="big" />
             <Signal name="type_24" offset="48" length="3" />
