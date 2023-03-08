@@ -388,6 +388,72 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4F3" name="HEC_DispControl_Group" interval="100">
+            <Signal name="type_16" offset="32" length="16" endianess="big" />
+            <Signal name="type_24" offset="48" length="3" />
+            <Signal name="type_13" offset="26" length="1" />
+            <Signal name="type_12" offset="27" length="5" />
+            <Signal name="type_11" offset="16" length="1" />
+            <Signal name="type_10" offset="17" length="1" />
+            <Signal name="type_9" offset="18" length="2">
+                <Notes>MID On/Off Display FOW Indicators</Notes>
+            </Signal>
+            <Signal name="type_8" offset="20" length="1">
+                <Notes>Multi Display MRCC B status with value = 1</Notes>
+            </Signal>
+            <Signal name="type_7" offset="21" length="2">
+                <Notes>Multi Display MRCC D status with Value = 1</Notes>
+            </Signal>
+            <Signal name="type_6" offset="23" length="1">
+                <Notes>MultiDisplay LDW B status with Value = 1</Notes>
+            </Signal>
+            <Signal name="type_5" offset="8" length="2">
+                <Notes>MultiDisplay status with Value = 1</Notes>
+            </Signal>
+            <Signal name="type_4" offset="10" length="1">
+                <Notes>MultiDisplay status with Value = 1</Notes>
+            </Signal>
+            <Signal name="type_14" offset="25" length="1" />
+            <Signal name="AVGFUELUNITCNFG_D_INIT" offset="14" length="2" />
+            <Signal name="type_2" offset="0" length="1" />
+            <Signal name="type_18" offset="52" length="1">
+                <Notes>Multi Display DRS B status with Value = 1 ??</Notes>
+            </Signal>
+            <Signal name="Drs_D_Init" offset="53" length="2">
+                <Notes>Type = 17</Notes>
+            </Signal>
+            <Signal name="type_23" offset="55" length="1" />
+            <Signal name="HUD_ACTIVE_B" offset="51" length="1" />
+            <Signal name="MULTIDISPLD_HUD_TYPE" offset="59" length="2" />
+            <Signal name="MULTIDISPLD_IELOOPCHARGEWG" offset="58" length="1" />
+            <Signal name="Unknown_2" offset="1" length="2" />
+            <Signal name="Unknown_4" offset="3" length="5" />
+            <Signal name="Unknown_11" offset="11" length="2" />
+            <Signal name="Unknown_61" offset="61" length="3" />
+        </Message>
+        <Message id="0x4F7" name="" length="6">
+            <Signal name="1" offset="7" length="1" />
+            <Signal name="Warn_MntSwtch_B_Actl" offset="6" length="1" />
+            <Signal name="Warn_EngCInt_Wrn_D_Rq" offset="4" length="2" />
+            <Signal name="AirAmb_Wrn_B_Rq" offset="3" length="1" />
+            <Signal name="Refill_Wrn_B_Rq" offset="2" length="1" />
+            <Signal name="GCC_WshrLvl_Cnfg" offset="1" length="1" />
+            <Signal name="TPMSCtlHec_D_Rq" offset="7" endianess="big" length="3" />
+            <Signal name="TELLTALE_4X4_AUTO_copy" offset="10" length="4" />
+            <Signal name="9" offset="14" endianess="big" length="4" />
+            <Signal name="10" offset="18" endianess="big" length="8" />
+            <Signal name="11" offset="28" length="2" />
+
+            <Signal name="EPB_RedTelltale_copy" offset="26" length="2" />
+            <Signal name="EPB_DisplayRequest3_copy" offset="25" length="1" />
+            <Signal name="DHS_RILReq_copy" offset="31" endianess="big" length="2" />
+            <Signal name="EvpWrn_B_Rq_copy" offset="38" length="1" />
+            <Signal name="EvpBrkWrn_B_Rq_copy" offset="37" length="1" />
+            <Signal name="Runflattire_Wrn_B_Rq" offset="36" length="1" />
+            <Signal name="ViewSystem_Status" offset="33" length="3" />
+            <Signal name="AccepttViewChange" offset="39" endianess="big" length="3" />
+            <Signal name="Camera_View_Status" offset="42" length="4" />
+        </Message>
         <Message id="0x4FA" name="EATC_ENG_INF_GROUP" length="8">
             <Signal name="DR_IntakeAirTemp" offset="32" length="8" />
             <Signal name="SdsSmothStat_D_Rq_2" offset="5" length="3" />
