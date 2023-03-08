@@ -388,6 +388,13 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4DC" name="IDM_DispData3" length="8">
+            <Signal name="SvdFuelRate_D_Actl" offset="0" endianess="big" length="16" />
+            <Signal name="SvdFuelByIEL_D_Actl" offset="16" endianess="big" length="16" />
+            <Signal name="RgnGrtPwr_IEL_D_Actl" offset="32" endianess="big" length="16" />
+            <Signal name="PwrCons_IEL_D_Actl" offset="48" endianess="big" length="16" />
+        </Message>
+    
         <Message id="0x4DE" name="HEV_WARNING_CONTROL" length="6">
             <!-- More EV Stuff? -->
             <Signal name="Warn_DR_EVM_MSG" offset="4" length="4" />
@@ -533,12 +540,5 @@
         <Message id="0x7EA" name="" length="8">
             <Notes>Exists but I can't find use</Notes>
         </Message>
-        <Message id="0x4DC" name="IDM_DispData3" length="8">
-            <Signal name="SvdFuelRate_D_Actl" offset="0" endianess="big" length="16"></Signal>
-            <Signal name="SvdFuelByIEL_D_Actl" offset="16" endianess="big" length="16"></Signal>
-            <Signal name="RgnGrtPwr_IEL_D_Actl" offset="32" endianess="big" length="16"></Signal>
-            <Signal name="PwrCons_IEL_D_Actl" offset="48" endianess="big" length="16"></Signal>
-        </Message>
-    
         </Bus>
 </NetworkDefinition>
