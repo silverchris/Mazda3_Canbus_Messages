@@ -388,6 +388,11 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4DB" name="IDM_DispData2" length="4">
+            <Signal name="RgnPwr_Lvl_D_Actl" offset="4" length="4" />
+            <Signal name="CpctCrg_Lvl_D_Actl" offset="0" length="4" />
+            <Signal name="CapToElc_B_Actl" offset="27" length="1" />
+        </Message>
         <Message id="0x4DC" name="IDM_DispData3" length="8">
             <Signal name="SvdFuelRate_D_Actl" offset="0" endianess="big" length="16" />
             <Signal name="SvdFuelByIEL_D_Actl" offset="16" endianess="big" length="16" />
