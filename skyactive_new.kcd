@@ -388,6 +388,18 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4DA" name="IDM_DispData1" length="8">
+            <Signal name="IDM_SD_AccelEvaluation" offset="0" length="8" />
+            <Signal name="IDM_SD_BrakeEvaluation" offset="8" length="8" />
+            <Signal name="IDM_SD_SteerEvaluation" offset="16" length="8" />
+            <Signal name="IDM_SD_Calc_Kibikibi_Num" offset="30" length="2" />
+            <Signal name="IDM_SD_Calc_Cluch_Point" offset="24" length="6" />
+            <Signal name="IDM_SD_ClutchEvaluation" offset="32" length="8" />
+            <Signal name="IDM_SD_Calc_Kibikibi_Point" offset="42" endianess="big" length="8" />
+            <Signal name="IDM_SD_Calc_Smooth_Point" offset="50" endianess="big" length="9" />
+            <Signal name="IDM_SD_Calc_Smooth_Num" offset="59" length="2" />
+            <Signal name="IDM_SD_Calc_Cluch_Num" offset="58" length="1" />
+        </Message>
         <Message id="0x4DB" name="IDM_DispData2" length="4">
             <Signal name="RgnPwr_Lvl_D_Actl" offset="4" length="4" />
             <Signal name="CpctCrg_Lvl_D_Actl" offset="0" length="4" />
@@ -399,7 +411,6 @@
             <Signal name="RgnGrtPwr_IEL_D_Actl" offset="32" endianess="big" length="16" />
             <Signal name="PwrCons_IEL_D_Actl" offset="48" endianess="big" length="16" />
         </Message>
-    
         <Message id="0x4DE" name="HEV_WARNING_CONTROL" length="6">
             <!-- More EV Stuff? -->
             <Signal name="Warn_DR_EVM_MSG" offset="4" length="4" />
