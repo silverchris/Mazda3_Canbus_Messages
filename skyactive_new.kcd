@@ -388,6 +388,25 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4D2" name="" length="8">
+            <Signal name="DR_StaticMonA" offset="4" length="4" />
+            <Signal name="DR_StaticMonB" offset="0" length="4" />
+            <Signal name="DR_StaticMonC" offset="12" length="4" />
+            <Signal name="DR_StaticMonD" offset="8" length="4" />
+            <Signal name="DR_StaticMonE" offset="20" length="4" />
+            <Signal name="DR_StaticMonF" offset="16" length="4" />
+            <Signal name="DR_StaticMonG" offset="28" length="4" />
+            <Signal name="DR_StaticMonH" offset="24" length="4" />
+            <Signal name="DR_StaticMonJ" offset="36" length="4" />
+            <Signal name="DR_StaticMonK" offset="32" length="4" />
+            <Signal name="DR_StaticMonL" offset="44" length="4" />
+            <Signal name="DR_StaticMonM" offset="40" length="4" />
+            <Signal name="DR_StaticMonN" offset="52" length="4" />
+            <Signal name="DR_StaticMonP" offset="48" length="4" />
+            <Signal name="DR_StaticMonR" offset="60" length="4" />
+            <Signal name="DR_StaticMonS" offset="56" length="4" />
+
+        </Message>
         <Message id="0x4D3" name="ECM_Status" length="8">
             <Signal name="DR_StaticMonT" offset="4" length="4" />
             <Signal name="DR_StaticMonV" offset="0" length="4" />
