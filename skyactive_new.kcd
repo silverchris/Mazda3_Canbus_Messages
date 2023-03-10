@@ -388,6 +388,16 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4D4" name="DR_OpeAsses" length="8">
+            <Signal name="DR_OpeAsses_Accel_Soft" offset="0" length="8" />
+            <Signal name="DR_OpeAsses_Accel_Swing" offset="8" length="8" />
+            <Signal name="DR_OpeAsses_Brk_Soft" offset="16" length="8" />
+            <Signal name="DR_OpeAsses_Brk_Swing" offset="24" length="8" />
+            <Signal name="DR_OpeAsses_Hndl_Soft" offset="32" length="8" />
+            <Signal name="DR_OpeAsses_Hndl_Swing" offset="40" length="8" />
+            <Signal name="DR_Lngdnl_Flap_Count" offset="48" length="8" />
+            <Signal name="DR_Lateral_Flap_Count" offset="56" length="8" />
+        </Message>
         <Message id="0x4D5" name="" length="8">
             <Signal name="IDMMntr_A" offset="0" endianess="big" length="16" />
             <Signal name="IDMMntr_B" offset="16" endianess="big" length="16" />
