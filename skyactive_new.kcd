@@ -388,6 +388,12 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4D9" name="IDM_DispData0" length="8">
+            <Signal name="IDM_SD_Evl_Num" offset="56" length="5" />
+            <Signal name="2" offset="42" endianess="big" length="16">
+                <!-- May not actually be valid. Found in code not referenced by anything -->
+            </Signal>
+        </Message>
         <Message id="0x4DA" name="IDM_DispData1" length="8">
             <Signal name="IDM_SD_AccelEvaluation" offset="0" length="8" />
             <Signal name="IDM_SD_BrakeEvaluation" offset="8" length="8" />
