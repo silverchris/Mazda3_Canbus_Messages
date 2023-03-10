@@ -388,6 +388,29 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4D7" name="" length="8">
+            <Signal name="BATTANLYSDATA11GROUP" offset="63" />
+            <Signal name="BATTANLYSDATA12GROUP" offset="62" />
+            <Signal name="BATTANLYSDATA13GROUP" offset="61" />
+            <Signal name="BATTANLYSDATA14GROUP" offset="60" />
+            <Signal name="BATTANLYSDATA15GROUP" offset="59" />
+            <Signal name="BATTANLYSDATA16GROUP" offset="58" />
+            <Signal name="BATTANLYSDATA17GROUP" offset="57" />
+            <Signal name="DR_StaticMonAA" offset="4" length="4" />
+            <Signal name="DR_StaticMonAB" offset="0" length="4" />
+            <Signal name="DR_StaticMonBA" offset="12" length="4" />
+            <Signal name="DR_StaticMonBB" offset="8" length="4" />
+            <Signal name="DR_StaticMonCA" offset="20" length="4" />
+            <Signal name="DR_StaticMonCB" offset="16" length="4" />
+            <Signal name="DR_StaticMonDA" offset="28" length="4" />
+            <Signal name="DR_StaticMonDB" offset="24" length="4" />
+            <Signal name="DR_StaticMonEA" offset="36" length="4" />
+            <Signal name="DR_StaticMonEB" offset="32" length="4" />
+            <Signal name="DR_StaticMonFA" offset="44" length="4" />
+            <Signal name="DR_StaticMonFB" offset="40" length="4" />
+            <Signal name="DR_StaticMonGA" offset="52" length="4" />
+            <Signal name="DR_StaticMoGB" offset="48" length="4" />
+        </Message>
         <Message id="0x4D8" name="" length="8">
             <!-- Might be another EV Thing -->
             <Signal name="DR_StaticMonHA" offset="4" length="4" />
