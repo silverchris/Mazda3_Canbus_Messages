@@ -388,6 +388,15 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4D8" name="" length="8">
+            <!-- Might be another EV Thing -->
+            <Signal name="DR_StaticMonHA" offset="4" length="4" />
+            <Signal name="DR_StaticMonHB" offset="0" length="4" />
+            <Signal name="DR_StaticMonJA" offset="12" length="4" />
+            <Signal name="DR_StaticMonJB" offset="8" length="4" />
+            <Signal name="BATTANLYSDATA18GROUP" offset="63" />
+            <Signal name="BATTANLYSDATA19GROUP" offset="62" />
+        </Message>
         <Message id="0x4D9" name="IDM_DispData0" length="8">
             <Signal name="IDM_SD_Evl_Num" offset="56" length="5" />
             <Signal name="2" offset="42" endianess="big" length="16">
