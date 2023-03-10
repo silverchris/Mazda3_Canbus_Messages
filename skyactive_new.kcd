@@ -388,6 +388,12 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4D5" name="" length="8">
+            <Signal name="IDMMntr_A" offset="0" endianess="big" length="16" />
+            <Signal name="IDMMntr_B" offset="16" endianess="big" length="16" />
+            <Signal name="IDMMntr_C" offset="32" endianess="big" length="16" />
+            <Signal name="IDMMntr_D" offset="48" endianess="big" length="16" />
+        </Message>
         <Message id="0x4D6" name="" length="8">
             <Signal name="IDMMntr_E" offset="0" endianess="big" length="16" />
             <Signal name="IDMMntr_F" offset="16" endianess="big" length="16" />
