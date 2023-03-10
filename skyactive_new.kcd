@@ -388,6 +388,17 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4D3" name="ECM_Status" length="8">
+            <Signal name="DR_StaticMonT" offset="4" length="4" />
+            <Signal name="DR_StaticMonV" offset="0" length="4" />
+            <Signal name="DR_StaticMonW" offset="12" length="4" />
+            <Signal name="DR_StaticMonX" offset="8" length="4" />
+            <Signal name="BattAnlysData_2.DR_SOC" offset="16" length="8" />
+            <Signal name="DR_BS_Batt_I_QD" offset="24" endianess="big" length="16" />
+            <Signal name="DR_AC_ContSta tus" offset="44" length="1" />
+            <Signal name="DR_AC_PrsSignal" offset="45" endianess="little" length="8" />
+            <Signal name="EventNumber" offset="53" endianess="little" length="8" />
+        </Message>
         <Message id="0x4D4" name="DR_OpeAsses" length="8">
             <Signal name="DR_OpeAsses_Accel_Soft" offset="0" length="8" />
             <Signal name="DR_OpeAsses_Accel_Swing" offset="8" length="8" />
