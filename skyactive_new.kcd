@@ -388,6 +388,18 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x415" name="DSC_CONTROL_PID/TPMS" length="7">
+            <Signal name="Warn_TPMSWarnBuzzer_B_Rq" offset="27" />
+            <Signal name="Warn_TPMSDis_D_Rq" offset="7" endianess="big" length="2" />
+            <Signal name="Warn_TPMSCtlLamp_D_Rq" offset="25" length="2" />
+            <Signal name="Warn_TPMSAnsBack_B_Rq" offset="24" length="1" />
+            <Signal name="Warn_SCHazard_D_Rq" offset="46" length="2" />
+            <Signal name="Warn_StopLamp_D_RqArb" offset="54" length="2" />
+            <Signal name="Warn_DrvAntiLckLamp_D_Rq" offset="6" length="2" />
+            <Signal name="cvdDrvAntiLckLamp_D_Rq" offset="5" length="1" />
+            <Signal name="3" offset="3" length="2" />
+            <Signal name="cvdBrkFluidLvl_D_Actl" offset="1" length="2" />
+        </Message>
         <Message id="0x420" name="PCM_Warning_Status" length="8">
             <Signal name="EngClnt_Te_Actl" offset="0" length="8" />
             <Signal name="OdoCount" offset="8" length="8" />
