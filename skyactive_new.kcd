@@ -388,6 +388,11 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x47B" name="RVM_Status" length="1">
+            <Signal name="Warn_RVM_state" offset="4" length="4" />
+            <Signal name="Warn_RVM_EME" offset="3" length="1" />
+            <Signal name="Warn_RVM_BuzzerRequest" offset="2" length="1" />
+        </Message>
         <Message id="0x481" name="SSU_CUSTOMIZE_STATUS1_Response" length="3">
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
