@@ -388,6 +388,20 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x42E" name="VWM_POWERTRAINDATA_GRP" length="8">
+            <Signal name="EngClnt_Te_Actl" offset="0" length="8" />
+            <Signal name="OdoCount_2" offset="8" length="8" />
+            <Signal name="FuelPulse_2" offset="16" length="8" />
+            <Signal name="4" offset="24" length="6" />
+            <Signal name="ECMMILRequest_2" offset="38" length="2" />
+            <Signal name="6" offset="34" length="1" />
+            <!-- BatteryChargingTelltale2 -->
+            <Signal name="7" offset="33" length="1" />
+            <Signal name="FUEL_CAP_OFF_TELTAL_2" offset="47" length="1" />
+            <Signal name="OilPressureWarning_2" offset="44" length="1" />
+            <Signal name="10" offset="43" length="1" />
+            <Signal name="Oil_deteriorate_warning" offset="42" length="1" />
+        </Message>
         <Message id="0x436" name="EATC_SIS_Group2" length="4">
             <Signal name="SDS_Sd_Stage_D_Actl" offset="28" length="3" />
             <Signal name="HvacEngStopDis_B_Rq" offset="4" />
