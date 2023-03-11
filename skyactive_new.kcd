@@ -388,12 +388,18 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x494" name="CAM_VIEW_Customised_Group_Response" length="3">
+            <Signal name="contents" offset="2" length="2" />
+            <Signal name="ParkingSensorInd" offset="0" length="2" />
+            <Signal name="IG_ON_AutoDisplay" offset="14" length="2" />
+            <Signal name="GuideLineDisplay" offset="12" length="2" />
+            <Signal name="FrontViewDispaly" offset="15" endianess="big" length="2" />
+        </Message>
         <Message id="0x495" name="CAM_VIEW_Customised_Group" length="3">
             <Signal name="ParkingSensorInd" offset="0" length="2" />
             <Signal name="IG_ON_AutoDisplay" offset="14" length="2" />
             <Signal name="GuideLineDisplay" offset="12" length="2" />
             <Signal name="FrontViewDispaly" offset="15" endianess="big" length="2" />
-
         </Message>
         <Message id="0x498" name="CCM_CUSTOMIZE_RESPONSE" length="3">
             <Signal name="contents" offset="2" length="2" />
