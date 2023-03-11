@@ -388,6 +388,27 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x420" name="PCM_Warning_Status" length="8">
+            <Signal name="EngClnt_Te_Actl" offset="0" length="8" />
+            <Signal name="OdoCount" offset="8" length="8" />
+            <Signal name="FuelPulse" offset="16" length="8" />
+            <Signal name="AirAmb_P_Actl" offset="24" length="6" />
+            <Signal name="cvdECMMILRequest" offset="38" length="2" />
+            <Signal name="DieselGlowplugTelltale" offset="34" length="1" />
+            <Signal name="BatteryChargingTelltale" offset="33" length="1" />
+            <Signal name="cvdFuelCap" offset="47" length="1" />
+            <Signal name="cvdOilPressureWarning" offset="44" length="1" />
+            <Signal name="FuelFilterWarning" offset="43" length="1" />
+            <Signal name="Oil_deteriorate_warning" offset="42" length="1" />
+            <Signal name="OilDtrWrn_Init_B_Eco" offset="41" length="1" />
+            <Signal name="DPFTelltale" offset="40" length="1" />
+            <Signal name="SedimentWarning" offset="51" length="1" />
+            <Signal name="OilDtrWrn_Stat_B_Actl" offset="50" length="1" />
+            <Signal name="OilLevelWarning" offset="36" length="2" />
+            <Signal name="ElecThrotCnt_Warning" offset="30" length="2" />
+            <Signal name="AfterRunCool_Actl" offset="35" length="1" />
+            <Signal name="ColdStrtDisable_Telltale" offset="32" length="1" />
+        </Message>
         <Message id="0x425" name="AFS_Info_Status" length="2">
             <Signal name="Warn_AFS_Warning_Status" offset="5" length="3" />
             <Signal name="Warn_LVL_Warning_Status" offset="2" length="3" />
