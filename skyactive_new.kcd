@@ -388,6 +388,17 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x436" name="EATC_SIS_Group2" length="4">
+            <Signal name="SDS_Sd_Stage_D_Actl" offset="28" length="3" />
+            <Signal name="HvacEngStopDis_B_Rq" offset="4" />
+            <Signal name="HvacEngStopDis_B_Falt" offset="3" />
+            <Signal name="HvacAirCond_B_Rq" offset="2" />
+            <Signal name="HvacHeaterCal_D_Rq" offset="0" length="2" />
+            <Signal name="HvacHeaterCal_B_Falt" offset="15" />
+            <Signal name="BlowerSpeed" offset="11" length="4" />
+            <Signal name="HvacHeatStats_D_Actl" offset="14" endianess="big" length="3" />
+            <Signal name="HvacCtrlMode_D_Rq1" offset="21" length="2" />
+        </Message>
         <Message id="0x43B" name="" length="1">
             <Signal name="1" offset="6" length="2" />
         </Message>
