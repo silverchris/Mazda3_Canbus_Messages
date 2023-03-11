@@ -388,6 +388,16 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x487" name="FSC_Customised_Group2_Response" length="3">
+            <Signal name="contents" offset="2" length="2" />
+            <Signal name="status" offset="0" length="2" />
+            <Signal name="cstmzStat_HBC_OnOff" offset="22" length="2" />
+            <Signal name="cstmzStat_HBC_Sens" offset="17" length="3" />
+        </Message>
+        <Message id="0x488" name="FSC_Customised_Group2" length="3">
+            <Signal name="cstmzStat_HBC_OnOff" offset="22" length="2" />
+            <Signal name="cstmzStat_HBC_Sens" offset="17" length="3" />
+        </Message>
         <Message id="0x48A" name="RBCM_CustomizedStatus_Response" length="6">
             <!-- see if this is wrong, and actually contains CSTMZSTAT_AUTOLGHT_SENS at 56? -->
             <Signal name="contents" offset="2" length="2" />
