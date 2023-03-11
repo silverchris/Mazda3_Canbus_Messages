@@ -388,6 +388,14 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x43E" name="GatewayInformation1" length="8">
+            <Signal name="1" offset="34" length="1" />
+            <Signal name="2" offset="35" length="1" />
+            <Signal name="3" offset="36" length="1" />
+            <Signal name="4" offset="37" length="1" />
+            <Signal name="5" offset="47" endianess="big" length="8" />
+            <Signal name="6" offset="55" endianess="big" length="3" />
+        </Message>
         <Message id="0x445" name="ParkingSensorInfo_Status" length="3">
             <Signal name="1" offset="7" length="1" />
             <Signal name="2" offset="6" length="1" />
