@@ -388,6 +388,12 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x425" name="AFS_Info_Status" length="2">
+            <Signal name="Warn_AFS_Warning_Status" offset="5" length="3" />
+            <Signal name="Warn_LVL_Warning_Status" offset="2" length="3" />
+            <Signal name="Warn_AFS_LVL_Configuration" offset="0" length="2" />
+            <Signal name="Warn_ADB_Warning_Status" offset="13" length="3" />
+        </Message>
         <Message id="0x42E" name="VWM_POWERTRAINDATA_GRP" length="8">
             <Signal name="EngClnt_Te_Actl" offset="0" length="8" />
             <Signal name="OdoCount_2" offset="8" length="8" />
