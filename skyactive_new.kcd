@@ -388,6 +388,21 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x477" name="" length="4">
+            <Signal name="Warn_BSM_BuzzerRequest" offset="1" length="1" />
+            <Signal name="Warn_BSM_OffIndicator" offset="0" length="1" />
+            <Signal name="Warn_BSM_Warn_R" offset="14" length="2" />
+            <Signal name="Warn_BSM_Warn_L" offset="12" length="2" />
+            <Signal name="Warn_BSM_Status" offset="8" length="2" />
+            <Signal name="Warn_RCTA_Warn_Status_R" offset="23" length="1" />
+            <Signal name="Warn_RCTA_Warn_Indicator_R" offset="22" length="1" />
+            <Signal name="Warn_RCTA_Warn_Status_L" offset="21" length="1" />
+            <Signal name="Warn_RCTA_Warn_Indicator_L" offset="20" length="1" />
+            <Signal name="Warn_RCTA_BuzzerRequest" offset="19" length="1" />
+            <Signal name="Warn_RCTA_OffIndicator" offset="18" length="1" />
+            <Signal name="Warn_RCTA_Status" offset="16" length="2" />
+            <Signal name="Warn_BSM_Ext_Status_info" offset="24" length="8" />
+        </Message>
         <Message id="0x47B" name="RVM_Status" length="1">
             <Signal name="Warn_RVM_state" offset="4" length="4" />
             <Signal name="Warn_RVM_EME" offset="3" length="1" />
