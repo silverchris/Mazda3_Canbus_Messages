@@ -388,6 +388,12 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x499" name="" length="3">
+            <Signal name="cstmzStat_PCS_OnOff" offset="14" length="2" />
+            <Signal name="cstmzStat_PCS_Warning_Thres" offset="12" length="2" />
+            <Signal name="cstmzStat_DRSS_OnOff" offset="10" length="2" />
+            <Signal name="cstmzStat_DRSS_Warning_Thres" offset="14" endianess="big" length="4" />
+        </Message>
         <Message id="0x49B" name="" length="7">
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
