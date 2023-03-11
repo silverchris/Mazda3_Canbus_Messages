@@ -388,6 +388,12 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x4D0" name="" length="8">
+            <Signal name="IDMMntr_AT1" offset="0" endianess="big" length="16" />
+            <Signal name="IDMMntr_AT2" offset="16" endianess="big" length="16" />
+            <Signal name="IDMMntr_AT3" offset="32" endianess="big" length="16" />
+            <Signal name="IDMMntr_AT4" offset="48" endianess="big" length="16" />
+        </Message>
         <Message id="0x4D1" name="BatteryAnalysis_TRG" length="8">
             <!-- Couldn't find names -->
             <Signal name="1" offset="0" endianess="big" length="16" />
