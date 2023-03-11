@@ -388,6 +388,31 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x49C" name="" length="8">
+            <!-- this might have some multiplexing that I don't fully understand -->
+            <Signal name="CSTMZSTAT_STBELTRMDR_BZ_VOL" offset="14" length="2" />
+            <Signal name="CSTMZSTAT_LGHTRNDR_BZ_VOL" offset="12" length="2" />
+            <Signal name="CSTMZSTAT_LDWBZ_SOUND" offset="10" length="2" />
+            <Signal name="CSTMZSTAT_TURN_BZ_VOL" offset="8" length="2" />
+            <Signal name="CSTMZSTAT_SBS_BZ_VOL" offset="22" length="2" />
+            <Signal name="CSTMZSTAT_RVM_BZ_VOL" offset="20" length="2" />
+            <Signal name="CSTMZSTAT_LDW_BZ_VOL" offset="18" length="2" />
+            <Signal name="CSTMZSTAT_BSM_BZ_VOL" offset="16" length="2" />
+            <Signal name="CSTMZSTAT_IND_CLR_ONOFF" offset="30" length="2" />
+            <Signal name="CSTMZSTAT_TRIP_RST_MDE" offset="26" length="2" />
+            <Signal name="CSTMZSTAT_TURN_IND_ONOFF" offset="24" length="2" />
+            <Signal name="CSTMZSTAT_IDM_MAX_STAGE" offset="38" length="2" />
+            <Signal name="13" offset="36" length="2" />
+            <Signal name="14" offset="49" length="7" />
+            <Signal name="flag" offset="59" length="3" />
+            <Signal name="HECCustStat1_0xE" offset="34" length="2" />
+            <Signal name="HECCustStat1_0xF" offset="32" length="2" />
+            <Signal name="HECCustStat1_0x10" offset="46" length="2" />
+            <Signal name="HECCustStat1_0x11" offset="44" length="2" />
+            <!-- This space intentionally left blank Duplicate of 15? -->
+            <Signal name="HECCustStat1_0x12" offset="40" length="2" />
+            <Signal name="HECCustStat1_0x15" offset="28" length="2" />
+        </Message>
         <Message id="0x4CA" name="" length="8">
             <!-- Defined by not used? -->
         </Message>
