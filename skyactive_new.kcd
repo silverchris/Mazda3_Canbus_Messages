@@ -388,7 +388,7 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
-        <Message id="0x477" name="" length="4">
+        <Message id="0x477" name="BSM_Control" length="4">
             <Signal name="Warn_BSM_BuzzerRequest" offset="1" length="1" />
             <Signal name="Warn_BSM_OffIndicator" offset="0" length="1" />
             <Signal name="Warn_BSM_Warn_R" offset="14" length="2" />
