@@ -388,6 +388,11 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x492" name="CSTMZSTAT_BSM" length="2">
+            <Signal name="CSTMZSTAT_BSMIND_BRGHTNS" offset="14" length="2" />
+            <Signal name="CSTMZSTAT_BSMSPTZONE_RNGE" offset="12" length="2" />
+            <Signal name="CSTMZSTAT_BSMCNTPTN_MDE" offset="10" length="2" />
+        </Message>
         <Message id="0x494" name="CAM_VIEW_Customised_Group_Response" length="3">
             <Signal name="contents" offset="2" length="2" />
             <Signal name="ParkingSensorInd" offset="0" length="2" />
