@@ -388,6 +388,28 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x484" name="FSC_Customised_Group1_Response" length="4">
+            <Signal name="contents" offset="2" length="2" />
+            <Signal name="status" offset="0" length="2" />
+            <Signal name="cstmzStat_LdwJudge_Thres" offset="13" length="3" />
+            <Signal name="cstmzStat_LdwCancel_Sens" offset="10" length="3" />
+            <Signal name="cstmzStat_LdwVibration_OnOff" offset="20" length="2" />
+            <Signal name="cstmzRsp_LkaBzVolume" offset="29" length="2" />
+            <Signal name="cstmzRsp_LdwLka_Mode" offset="17" length="3" />
+            <Signal name="cstmzRsp_Lka_Alart" offset="23" endianess="big" length="2" />
+            <Signal name="AEB_OnOff" offset="27" length="2" />
+            <Signal name="AEB_Sens" offset="24" length="3" />
+        </Message>
+        <Message id="0x485" name="FSC_Customised_Group1" length="4">
+            <Signal name="cstmzStat_LdwJudge_Thres" offset="13" length="3" />
+            <Signal name="cstmzStat_LdwCancel_Sens" offset="10" length="3" />
+            <Signal name="cstmzStat_LdwVibration_OnOff" offset="20" length="2" />
+            <Signal name="cstmzRsp_LkaBzVolume" offset="29" length="2" />
+            <Signal name="cstmzRsp_LdwLka_Mode" offset="17" length="3" />
+            <Signal name="cstmzRsp_Lka_Alart" offset="23" endianess="big" length="2" />
+            <Signal name="AEB_OnOff" offset="27" length="2" />
+            <Signal name="AEB_Sens" offset="24" length="3" />
+        </Message>
         <Message id="0x487" name="FSC_Customised_Group2_Response" length="3">
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
