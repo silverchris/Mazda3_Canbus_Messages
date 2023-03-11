@@ -388,6 +388,40 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x48A" name="RBCM_CustomizedStatus_Response" length="6">
+            <!-- see if this is wrong, and actually contains CSTMZSTAT_AUTOLGHT_SENS at 56? -->
+            <Signal name="contents" offset="2" length="2" />
+            <Signal name="status" offset="0" length="2" />
+            <Signal name="CSTMZSTAT_ATDRLCK_MDE" offset="12" length="4" />
+            <Signal name="CSTMZSTAT_RMLMPOFFDRCLOSE_T" offset="9" length="3" />
+            <Signal name="CSTMZSTAT_RMLMPOFFDROPN_T" offset="15" endianess="big" length="2" />
+            <Signal name="CSTMZSTAT_ATLTOFF_T" offset="20" length="3" />
+            <Signal name="CSTMZSTAT_SMTTRN_ONOFF" offset="18" length="2" />
+            <Signal name="CSTMZSTAT_ATWPR_ONOFF" offset="16" length="2" />
+            <Signal name="CSTMZSTAT_AUTOLGHT_SENS_1" offset="29" length="3" />
+            <Signal name="CSTMZSTAT_DRL_ONOFF" offset="27" length="2" />
+            <Signal name="CSTMZSTAT_ATDRLCK_MDE_MT" offset="29" endianess="big" length="4" />
+            <Signal name="11" offset="36" length="3" />
+            <Signal name="12" offset="34" length="2" />
+            <Signal name="13" offset="38" endianess="big" length="4" />
+            <Signal name="14" offset="43" length="3" />
+        </Message>
+        <Message id="0x48B" name="RBCM_CustomizedStatus" length="8">
+            <Signal name="CSTMZSTAT_ATDRLCK_MDE" offset="12" length="4" />
+            <Signal name="CSTMZSTAT_RMLMPOFFDRCLOSE_T" offset="9" length="3" />
+            <Signal name="CSTMZSTAT_RMLMPOFFDROPN_T" offset="15" endianess="big" length="2" />
+            <Signal name="CSTMZSTAT_ATLTOFF_T" offset="20" length="3" />
+            <Signal name="CSTMZSTAT_SMTTRN_ONOFF" offset="18" length="2" />
+            <Signal name="CSTMZSTAT_ATWPR_ONOFF" offset="16" length="2" />
+            <Signal name="CSTMZSTAT_AUTOLGHT_SENS_1" offset="29" length="3" />
+            <Signal name="CSTMZSTAT_DRL_ONOFF" offset="27" length="2" />
+            <Signal name="CSTMZSTAT_ATDRLCK_MDE_MT" offset="29" endianess="big" length="4" />
+            <Signal name="CSTMZSTAT_AUTOLGHT_SENS" offset="56" length="4" />
+            <Signal name="11" offset="36" length="3" />
+            <Signal name="12" offset="34" length="2" />
+            <Signal name="13" offset="38" endianess="big" length="4" />
+            <Signal name="14" offset="43" length="3" />
+        </Message>
         <Message id="0x48D" name="PSM_CUSTOMIZE_STATUS_Response" length="2">
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
