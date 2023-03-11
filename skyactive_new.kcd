@@ -388,6 +388,18 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x48D" name="PSM_CUSTOMIZE_STATUS_Response" length="2">
+            <Signal name="contents" offset="2" length="2" />
+            <Signal name="status" offset="0" length="2" />
+            <Signal name="frontBzVol" offset="13" length="3" />
+            <Signal name="rearBzVol" offset="10" length="3" />
+            <Signal name="drvAlt_onOff" offset="8" length="2" />
+        </Message>
+        <Message id="0x48E" name="PSM_CUSTOMIZE_STATUS" length="2">
+            <Signal name="frontBzVol" offset="13" length="3" />
+            <Signal name="rearBzVol" offset="10" length="3" />
+            <Signal name="drvAlt_onOff" offset="8" length="2" />
+        </Message>
         <Message id="0x491" name="CSTMZSTAT_BSM_Response" length="2">
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
