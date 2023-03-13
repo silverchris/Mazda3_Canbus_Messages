@@ -388,6 +388,123 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x40A" name="Car Data/CCC" length="8">
+            <!-- This is unfinished and untested -->
+            <Multiplex name="Data_InfoMux" offset="0" length="16" endianess="big">
+                <MuxGroup count="48896"> <!-- 0xBF00 -->
+                    <Signal name="runningStatus_Diag" offset="16" endianess="big" length="16" />
+                    <Signal name="ig_OnTimer" offset="32" endianess="big" length="16" />
+                    <Signal name="state_Of_Charge" offset="48" length="8" />
+                </MuxGroup>
+                <MuxGroup count="48897">
+                    <Signal name="Destination" offset="20" length="4" />
+                    <Signal name="Drive Type" offset="16" length="4" />
+                </MuxGroup>
+                <MuxGroup count="48898">
+                    <Signal name="ABS DSC Types" offset="20" length="4" />
+                </MuxGroup>
+                <MuxGroup count="48899">
+                    <Signal name="Light Types" offset="20" length="4" />
+                </MuxGroup>
+                <MuxGroup count="48900">
+                    <Signal name="EPAS Types" offset="20" length="4">
+                    </Signal>
+                </MuxGroup>
+                <MuxGroup count="48901">
+                    <Signal name="PCS MRCC Types" offset="20" length="4" />
+                </MuxGroup>
+                <MuxGroup count="48902">
+                    <Signal name="FSC Types" offset="20" length="4" />
+                    <Signal name="RVM Types" offset="44" length="4" />
+                </MuxGroup>
+                <!-- <MuxGroup count="48903">
+                    
+                    <Notes>"ACU Configuration = 0x%x, BSM Types = 0x%x, BSM Configuration = 0x %x"</Notes>
+                </MuxGroup> -->
+                <MuxGroup count="48904">
+                    <Signal name="Heater Types" offset="16" length="4" />
+                    <Signal name="PTC Heater Types" offset="20" length="4" />
+                    <Signal name="AC Compressor Types" offset="28" length="4" />
+                </MuxGroup>
+                <MuxGroup count="48905">
+                    <Signal name="ASC Types" offset="20" length="4">
+                    </Signal>
+                    <Signal name="ICA Types" offset="44" length="4">
+                    </Signal>
+                </MuxGroup>
+                <MuxGroup count="48912">
+                    <Signal name="Regen Types" offset="20" length="4" />
+                    <Signal name="AMP Types" offset="44" length="4">
+                        <!-- Think there is an error in the CMU, where it duplicates Regen Types for both values, amp type doesn't seem to get consumed by CMU -->
+                    </Signal>
+                </MuxGroup>
+                <MuxGroup count="48913">
+                    <Signal name="CMU Types" offset="20" length="4" />
+                    <Signal name="topView" offset="19" length="1" />
+                    <Signal name="RearWideView" offset="18" />
+                    <Signal name="destination_1" offset="17" />
+                    <Signal name="driveChart_Display" offset="31" />
+                    <Signal name="driveChart_DataTrans" offset="30" />
+                    <Signal name="myDoctor_Display" offset="29" />
+                    <Signal name="driverIdentification" offset="28" />
+                    <Signal name="stDis_IDM_Req" offset="27" />
+                    <Signal name="endDis_IDM_Req" offset="26" />
+                    <Signal name="Car_Play" offset="25" />
+                    <Signal name="Android_Auto" offset="24" />
+                    <Signal name="Unused" offset="38" length="2" />
+                    <Signal name="Mic_Type" offset="36" length="2" />
+                    <Signal name="hiCamera" offset="35" />
+                    <Signal name="DSP_mic" offset="34" />
+                    <Signal name="vehiclePic" offset="32" length="2" />
+                    <Signal name="Siri" offset="46" length="1" />
+                </MuxGroup>
+                <!-- <MuxGroup count="49152">
+                    <Signal name="global Real Time" offset="16" length="32" endianess="big">
+                        <Consumer>
+                            <NodeRef id="7" />
+                        </Consumer>
+                    </Signal>
+                    <Notes>Should also have pwMdeExtern_D_Actl and mecu_supply_ voltage</Notes>
+                </MuxGroup>
+                <MuxGroup count="49153">
+                    <Notes>"Value of total_Distance = 0x%x,out_car_temperature = 0x%x"</Notes>
+                </MuxGroup> -->
+                <MuxGroup count="49408">
+                    <Signal name="VIN1" offset="16" length="8" />
+                    <Signal name="VIN2" offset="24" length="8" />
+                    <Signal name="VIN3" offset="32" length="8" />
+                    <Signal name="VIN4" offset="40" length="8" />
+                    <Signal name="VIN5" offset="48" length="8" />
+                    <Signal name="VIN6" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="49409">
+                    <Signal name="VIN7" offset="16" length="8" />
+                    <Signal name="VIN8" offset="24" length="8" />
+                    <Signal name="VIN9" offset="32" length="8" />
+                    <Signal name="VIN10" offset="40" length="8" />
+                    <Signal name="VIN11" offset="48" length="8" />
+                    <Signal name="VIN12" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="49410">
+                    <Signal name="VIN13" offset="16" length="8" />
+                    <Signal name="VIN14" offset="24" length="8" />
+                    <Signal name="VIN15" offset="32" length="8" />
+                    <Signal name="VIN16" offset="40" length="8" />
+                    <Signal name="VIN17" offset="48" length="8" />
+                </MuxGroup>
+                <!-- <MuxGroup count="49411">
+                    <Signal name="Brand" offset="19" length="5" />
+                    <Signal name="Engine Fuel Capability" offset="24" length="8" />
+                    <Signal name="Vehicle Type" offset="33" length="8" endianess="big" />
+                    <Signal name="Body Style" offset="41" length="8" endianess="big" />
+                    <Signal name="Gearbox Type" offset="49" length="4" endianess="big" />
+                    <Signal name="Steering  Wheel Location" offset="53" length="1" endianess="big" />
+                </MuxGroup> -->
+                <!-- <MuxGroup count="49412">
+                    <Signal name="Tire Circumference" offset="32" length="16" endianess="big" />
+                </MuxGroup> -->
+            </Multiplex>
+        </Message>
         <Message id="0x415" name="DSC_CONTROL_PID/TPMS" length="7">
             <Signal name="Warn_TPMSWarnBuzzer_B_Rq" offset="27" />
             <Signal name="Warn_TPMSDis_D_Rq" offset="7" endianess="big" length="2" />
