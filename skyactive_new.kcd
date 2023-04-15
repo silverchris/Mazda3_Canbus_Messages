@@ -554,7 +554,7 @@
             <Signal name="3" offset="3" length="2" />
             <Signal name="cvdBrkFluidLvl_D_Actl" offset="1" length="2" />
         </Message>
-        <Message id="0x420" name="PCM_Warning_Status" length="8">
+        <Message id="0x420" name="0x420_PCM_Warning_Status" length="8">
             <Signal name="EngClnt_Te_Actl" offset="0" length="8" />
             <Signal name="OdoCount" offset="8" length="8" />
             <Signal name="FuelPulse" offset="16" length="8" />
