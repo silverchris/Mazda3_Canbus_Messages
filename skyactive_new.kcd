@@ -388,6 +388,43 @@
             <Signal name="TSR_Feature_Status" offset="26" length="2" />
             <Signal name="TSR_Feature_Mode" offset="33" length="1" />
         </Message>
+        <Message id="0x3D0" name="HUD_0" length="8">
+            <Producer>
+                <NodeRef id="11" />
+            </Producer>
+            <Signal name="0" offset="6" endianess="big" length="6" />
+            <Signal name="1" offset="2" length="6" />
+            <Signal name="2" offset="12" endianess="big" length="6" />
+            <Signal name="3" offset="30" endianess="big" length="6" />
+            <Signal name="4" offset="16" length="6" />
+            <Signal name="5" offset="26" length="6" />
+            <Signal name="6" offset="36" endianess="big" length="6" />
+            <Signal name="7" offset="40" length="6" />
+            <Signal name="8" offset="48" length="8" />
+            <Signal name="9" offset="57" length="5" />
+            <Signal name="10" offset="62" length="1" />
+            <Signal name="11" offset="63" length="1" />
+        </Message>
+        <Message id="0x3D1" name="HUD_1" length="8">
+            <Producer><NodeRef id="11" /></Producer>
+            <Signal name="HUD_ICON" offset="2" length="6" />
+            <Signal name="HUD_DISTANCE" offset="6" length="15" endianess="big" />
+            <Signal name="HUD_1_16" offset="16" length="3" />
+            <Signal name="HUD_1_36" offset="36" length="2" />
+            <Signal name="HUD_1_54" offset="54" endianess="big" length="7" />
+            <Signal name="HUD_1_26" offset="24" endianess="big" length="10" />
+            <Signal name="HUD_1_b36" offset="37" endianess="big" length="17" />
+            <Signal name="HUD_1_56" offset="56" length="3" />
+        </Message>
+        <Message id="0x3D2" name="HUD_2" length="8">
+            <Producer><NodeRef id="11" /></Producer>
+            <Signal name="HUD2_SEQ" offset="5" length="4" endianess="big" />
+            <Signal name="HUD_2_3" offset="3" length="5" />
+            <Signal name="HUD2_MSG" offset="11" length="4" />
+            <Signal name="HUD_CHR_3" offset="45" length="16" endianess="big" />
+            <Signal name="HUD_CHR_2" offset="29" length="16" endianess="big" />
+            <Signal name="HUD_CHR_1" offset="13" length="16" endianess="big" />
+        </Message>
         <Message id="0x40A" name="Car Data/CCC" length="8">
             <!-- This is unfinished and untested -->
             <Multiplex name="Data_InfoMux" offset="0" length="16" endianess="big">
