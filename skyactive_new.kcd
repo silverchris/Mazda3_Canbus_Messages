@@ -20,7 +20,7 @@
     <Node id="18" name="Blind spot monitoring control module (BSML)" />
     <Node id="19" name="Rear body control module (RBCM)" />
     <Bus name="HS-CAN" baudrate="500000">
-        <Message id="0x078" name="" length="6">
+        <Message id="0x078" name="Unknown_0x078" length="6">
             <Signal name="Yaw" offset="15" endianess="big" length="12" />
             <Signal name="LongitudinalAcceleration_Qf" offset="6" length="2" />
             <Signal name="LongitudinalAcceleration" offset="2" endianess="big" length="13" />
@@ -37,7 +37,7 @@
                 <Value slope="0.01098632812" /> <!-- This should convert the value into degrees, with 180degrees being straight -->
             </Signal>
         </Message>
-        <Message id="0x08A" name="" length="8">
+        <Message id="0x08A" name="Unknown_0x08A" length="8">
             <Notes>I think there is more to this</Notes>
             <Signal name="ChargeWarning_B_Rq_B_Rq" offset="56" />
         </Message>
@@ -78,7 +78,7 @@
                 <Notes>INDICATED_FUEL_LEVEL?</Notes>
             </Signal>
         </Message>
-        <Message id="0x09F" name="" interval="200" length="7">
+        <Message id="0x09F" name="Unknown_0x09F" interval="200" length="7">
             <Signal name="Parking_Brake" offset="4" length="2">
                 <Notes>Verified!</Notes>
             </Signal>
@@ -142,7 +142,7 @@
             <Signal name="PTiStp_Rdy_B_Actl" offset="32" length="1" />
             <Signal name="Clutch_Stroke" offset="56" length="8" />
         </Message>
-        <Message id="0x165" name="" length="6">
+        <Message id="0x165" name="Unknown_0x165" length="6">
             <Signal name="1" offset="6" length="2" />
             <Signal name="2" offset="31" endianess="big" length="4" />
             <Signal name="3" offset="9" endianess="big" length="8" />
@@ -307,7 +307,7 @@
             <Signal name="HvTmPcm_Tq_Actl" offset="32" length="16" endianess="big" />
             <Signal name="HvRgBrkP_Tq_Rq" offset="48" length="16" endianess="big" />
         </Message>
-        <Message id="0x24A" name="" length="8">
+        <Message id="0x24A" name="Unknown_0x24A" length="8">
             <!-- Not sure I can test this. May be for hybrids? -->
             <Signal name="HvMtrGen1Aout_N_Actl" offset="0" length="16" endianess="big" />
             <Signal name="HvMtrGen2Aout_N_Actl" offset="16" length="16" endianess="big" />
@@ -606,7 +606,7 @@
             <Signal name="HvacHeatStats_D_Actl" offset="14" endianess="big" length="3" />
             <Signal name="HvacCtrlMode_D_Rq1" offset="21" length="2" />
         </Message>
-        <Message id="0x43B" name="" length="1">
+        <Message id="0x43B" name="Unknown_0x43B" length="1">
             <Signal name="1" offset="6" length="2" />
         </Message>
         <Message id="0x43E" name="GatewayInformation1" length="8">
@@ -649,7 +649,7 @@
             <Signal name="Warn_RVM_EME" offset="3" length="1" />
             <Signal name="Warn_RVM_BuzzerRequest" offset="2" length="1" />
         </Message>
-        <Message id="0x480" name="0x480_Unknown" length="8">
+        <Message id="0x480" name="Unknown_0x480" length="8">
             <Producer><NodeRef id="11" /></Producer>
             <Signal name="0" offset="4" length="4" />
             <Signal name="1" offset="14" length="3" endianess="big" />
@@ -788,7 +788,7 @@
             <Signal name="cstmzStat_DRSS_OnOff" offset="10" length="2" />
             <Signal name="cstmzStat_DRSS_Warning_Thres" offset="14" endianess="big" length="4" />
         </Message>
-        <Message id="0x49B" name="" length="7">
+        <Message id="0x49B" name="Unknown_0x49B" length="7">
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
             <Signal name="Afs_OnOff" offset="36" length="2" />
@@ -814,7 +814,7 @@
             <Signal name="idm_max_stage" offset="38" length="2" />
 
         </Message>
-        <Message id="0x49C" name="" length="8">
+        <Message id="0x49C" name="Unknown_0x49C" length="8">
             <!-- this might have some multiplexing that I don't fully understand -->
             <Signal name="CSTMZSTAT_STBELTRMDR_BZ_VOL" offset="14" length="2" />
             <Signal name="CSTMZSTAT_LGHTRNDR_BZ_VOL" offset="12" length="2" />
@@ -839,10 +839,10 @@
             <Signal name="HECCustStat1_0x12" offset="40" length="2" />
             <Signal name="HECCustStat1_0x15" offset="28" length="2" />
         </Message>
-        <Message id="0x4CA" name="" length="8">
+        <Message id="0x4CA" name="Unknown_0x4CA" length="8">
             <!-- Defined by not used? -->
         </Message>
-        <Message id="0x4D0" name="" length="8">
+        <Message id="0x4D0" name="Unknown_0x4D0" length="8">
             <Signal name="IDMMntr_AT1" offset="0" endianess="big" length="16" />
             <Signal name="IDMMntr_AT2" offset="16" endianess="big" length="16" />
             <Signal name="IDMMntr_AT3" offset="32" endianess="big" length="16" />
@@ -861,7 +861,7 @@
             <Signal name="9" offset="62" length="1" />
             <Signal name="10" offset="61" length="1" />
         </Message>
-        <Message id="0x4D2" name="" length="8">
+        <Message id="0x4D2" name="Unknown_0x4D2" length="8">
             <Signal name="DR_StaticMonA" offset="4" length="4" />
             <Signal name="DR_StaticMonB" offset="0" length="4" />
             <Signal name="DR_StaticMonC" offset="12" length="4" />
@@ -901,19 +901,19 @@
             <Signal name="DR_Lngdnl_Flap_Count" offset="48" length="8" />
             <Signal name="DR_Lateral_Flap_Count" offset="56" length="8" />
         </Message>
-        <Message id="0x4D5" name="" length="8">
+        <Message id="0x4D5" name="Unknown_0x4D5" length="8">
             <Signal name="IDMMntr_A" offset="0" endianess="big" length="16" />
             <Signal name="IDMMntr_B" offset="16" endianess="big" length="16" />
             <Signal name="IDMMntr_C" offset="32" endianess="big" length="16" />
             <Signal name="IDMMntr_D" offset="48" endianess="big" length="16" />
         </Message>
-        <Message id="0x4D6" name="" length="8">
+        <Message id="0x4D6" name="Unknown_0x4D6" length="8">
             <Signal name="IDMMntr_E" offset="0" endianess="big" length="16" />
             <Signal name="IDMMntr_F" offset="16" endianess="big" length="16" />
             <Signal name="IDMMntr_G" offset="32" endianess="big" length="16" />
             <Signal name="IDMMntr_H" offset="48" endianess="big" length="16" />
         </Message>
-        <Message id="0x4D7" name="" length="8">
+        <Message id="0x4D7" name="Unknown_0x4D7" length="8">
             <Signal name="BATTANLYSDATA11GROUP" offset="63" />
             <Signal name="BATTANLYSDATA12GROUP" offset="62" />
             <Signal name="BATTANLYSDATA13GROUP" offset="61" />
@@ -936,7 +936,7 @@
             <Signal name="DR_StaticMonGA" offset="52" length="4" />
             <Signal name="DR_StaticMoGB" offset="48" length="4" />
         </Message>
-        <Message id="0x4D8" name="" length="8">
+        <Message id="0x4D8" name="Unknown_0x4D8" length="8">
             <!-- Might be another EV Thing -->
             <Signal name="DR_StaticMonHA" offset="4" length="4" />
             <Signal name="DR_StaticMonHB" offset="0" length="4" />
@@ -992,7 +992,7 @@
             <Signal name="Warn_DR_B_BUZZER" offset="24" length="4" />
             <Signal name="Warn_DR_SLP_WL" offset="29" length="3" />
         </Message>
-        <Message id="0x4E0" name="" length="4">
+        <Message id="0x4E0" name="Unknown_0x4E0" length="4">
             <Signal name="HUD_TltLvl_Rq_Mem" offset="3" length="5" />
             <Signal name="HUD_IntnsCnt_D_Rq_Mem" offset="5" endianess="big" length="5" />
             <Signal name="HUD_AutoIntCon_OffRq_Mem" offset="13" length="1" />
@@ -1049,7 +1049,7 @@
             <Signal name="Unknown_11" offset="11" length="2" />
             <Signal name="Unknown_61" offset="61" length="3" />
         </Message>
-        <Message id="0x4F7" name="" length="6">
+        <Message id="0x4F7" name="Unknown_0x4F7" length="6">
             <Signal name="1" offset="7" length="1" />
             <Signal name="Warn_MntSwtch_B_Actl" offset="6" length="1" />
             <Signal name="Warn_EngCInt_Wrn_D_Rq" offset="4" length="2" />
@@ -1090,14 +1090,14 @@
             <Signal name="Neutral SW" offset="46" length="1" />
             <Signal name="Clutch SW" offset="45" length="1" />
         </Message>
-        <Message id="0x4FB" name="" length="8">
+        <Message id="0x4FB" name="Unknown_0x4FB" length="8">
             <Notes>Decoded but I can't tell what it's used for. Identical to 0x4FD</Notes>
             <Signal name="1" offset="0" length="8" />
             <Signal name="2" offset="8" endianess="big" length="16" />
             <Signal name="3" offset="24" length="8" />
             <Signal name="4" offset="32" endianess="big" length="32" />
         </Message>
-        <Message id="0x4FD" name="" length="8">
+        <Message id="0x4FD" name="Unknown_0x4FD" length="8">
             <Notes>Decoded but I can't tell what it's used for Identical to 0x4FB</Notes>
             <Signal name="1" offset="0" length="8" />
             <Signal name="2" offset="8" endianess="big" length="16" />
@@ -1110,13 +1110,13 @@
             <Signal name="ODR_Data3" offset="32" endianess="big" length="16" />
             <Signal name="ODR_Data4" offset="48" endianess="big" length="16" />
         </Message>
-        <Message id="0x7E8" name="" length="8">
+        <Message id="0x7E8" name="Unknown_0x7E8" length="8">
             <Notes>Defined but not used</Notes>
         </Message>
-        <Message id="0x7E9" name="" length="8">
+        <Message id="0x7E9" name="Unknown_0x7E9" length="8">
             <Notes>Defined but not used</Notes>
         </Message>
-        <Message id="0x7EA" name="" length="8">
+        <Message id="0x7EA" name="Unknown_0x7EA" length="8">
             <Notes>Exists but I can't find use</Notes>
         </Message>
         </Bus>
