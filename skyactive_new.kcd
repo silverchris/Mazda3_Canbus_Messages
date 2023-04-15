@@ -816,6 +816,15 @@
             <Signal name="CSTMZSTAT_BSMSPTZONE_RNGE" offset="12" length="2" />
             <Signal name="CSTMZSTAT_BSMCNTPTN_MDE" offset="10" length="2" />
         </Message>
+        <Message id="0x493" name="Unknown_0x493" length="8">
+            <Producer><NodeRef id="11" /></Producer>
+            <Signal name="0" offset="2" length="2" />
+            <Signal name="1" offset="4" length="4" />
+            <Signal name="ParkingSensorInd" offset="0" length="2" />
+            <Signal name="IG_ON_AutoDisplay" offset="14" length="2" />
+            <Signal name="GuideLineDisplay" offset="12" length="2" />
+            <Signal name="FrontViewDispaly" offset="15" endianess="big" length="2" />
+        </Message>
         <Message id="0x494" name="CAM_VIEW_Customised_Group_Response" length="3">
             <Signal name="contents" offset="2" length="2" />
             <Signal name="ParkingSensorInd" offset="0" length="2" />
@@ -828,6 +837,15 @@
             <Signal name="IG_ON_AutoDisplay" offset="14" length="2" />
             <Signal name="GuideLineDisplay" offset="12" length="2" />
             <Signal name="FrontViewDispaly" offset="15" endianess="big" length="2" />
+        </Message>
+        <Message id="0x497" name="Unknown_0x497" length="8">
+            <Producer><NodeRef id="11" /></Producer>
+            <Signal name="0" offset="2" length="2" />
+            <Signal name="1" offset="4" length="4" />
+            <Signal name="pcs_onoff" offset="14" length="2" />
+            <Signal name="pcs_warning_thres" offset="12" length="2" />
+            <Signal name="drss_onoff" offset="10" length="2" />
+            <Signal name="drss_warning_thres" offset="14" endianess="big" length="4" />
         </Message>
         <Message id="0x498" name="CCM_CUSTOMIZE_RESPONSE" length="3">
             <Signal name="contents" offset="2" length="2" />
