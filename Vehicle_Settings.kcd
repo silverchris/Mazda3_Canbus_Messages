@@ -1,0 +1,697 @@
+<NetworkDefinition xmlns="http://kayak.2codeornot2code.org/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Definition.xsd" xsi:schemaLocation="http://kayak.2codeornot2code.org/1.0 Definition.xsd">
+    <Document name="Mazda SkyActiv CANbus Vehicle Settings" version="0.01" date="2023-04-16" />
+    <Node id="1" name="Powertrain Control Module (PCM)" />
+    <Node id="2" name="DSC HU/CM (ABS)" />
+    <Node id="3" name="Radar unit (SBS/MRCC)" />
+    <Node id="4" name="Adaptive front lighting system (AFS)" />
+    <Node id="5" name="DC-DC Converter i-ELOOP (DCDC)" />
+    <Node id="6" name="Transmission Control Module (TCM)" />
+    <Node id="7" name="Front body control module (FBCM)" />
+    <Node id="8" name="Forward sensing camera (FSC)" />
+    <Node id="9" name="EPS control module (EPS)" />
+    <Node id="10" name="Start stop unit (SSU)" />
+    <Node id="11" name="Connectivity master unit (CMU)" />
+    <Node id="12" name="SAS control module (RCM)" />
+    <Node id="13" name="Audio amplifier (AM)" />
+    <Node id="14" name="Electric parking brake control module (EPB)" />
+    <Node id="15" name="Occupant classification sensor" />
+    <Node id="16" name="Instrument cluster (IC)" />
+    <Node id="17" name="Climate control unit (EATC)" />
+    <Node id="18" name="Blind spot monitoring control module (BSML)" />
+    <Node id="19" name="Rear body control module (RBCM)" />
+    <Bus name="HS-CAN" baudrate="500000">
+        <Message id="0x480" name="Advanced Keyless Entry (Set)" length="8">
+            <Notes>Sent by CMU to configure settings</Notes>
+            <Producer>
+                <NodeRef id="11" />
+            </Producer>
+            <Signal name="0" offset="2" length="2" />
+            <Signal name="1" offset="4" length="4" />
+            <Signal name="Keyless Lock Beep Volume" offset="14" length="3" endianess="big">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="Low" value="2" />
+                    <Label name="Medium" value="3" />
+                    <Label name="High" value="4" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Unlock Mode" offset="10" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="All Doors: Once" value="1" />
+                    <Label name="Driver's: Once, All Doors: Twice" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Auto Relock Time" offset="12" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="30 seconds" value="1" />
+                    <Label name="60 seconds" value="2" />
+                    <Label name="90 seconds" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Walk Away Lock" offset="14" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+        </Message>
+        <Message id="0x481" name="Advanced Keyless Entry (Response)" length="3" triggered="true">
+            <Notes>Sent as response to Advanced Keyless Entry (Set)</Notes>
+            <Producer>
+                <NodeRef id="10" /> <!-- This is a guess -->
+            </Producer>
+            <Signal name="contents" offset="2" length="2" />
+            <Signal name="status" offset="0" length="2" />
+            <Signal name="Keyless Lock Beep Volume" offset="14" length="3" endianess="big">
+                <Notes> Verified </Notes>
+                <Consumer>
+                    <NodeRef id="11" />
+                </Consumer>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="Low" value="2" />
+                    <Label name="Medium" value="3" />
+                    <Label name="High" value="4" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Unlock Mode" offset="10" length="2">
+                <Notes> Verified </Notes>
+                <Consumer>
+                    <NodeRef id="11" />
+                </Consumer>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="All Doors: Once" value="1" />
+                    <Label name="Driver's: Once, All Doors: Twice" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Auto Relock Time" offset="12" length="2">
+                <Notes> Verified </Notes>
+                <Consumer>
+                    <NodeRef id="11" />
+                </Consumer>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="30 seconds" value="1" />
+                    <Label name="60 seconds" value="2" />
+                    <Label name="90 seconds" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Walk Away Lock" offset="14" length="2">
+                <Notes> Verified </Notes>
+                <Consumer>
+                    <NodeRef id="11" />
+                </Consumer>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+        </Message>
+        <Message id="0x482" name="Advanced Keyless Entry (Periodic)" length="3">
+            <Notes>Periodically sent</Notes>
+            <Producer>
+                <NodeRef id="10" /> <!-- This is a guess -->
+            </Producer>
+            <Signal name="Keyless Lock Beep Volume" offset="14" length="3" endianess="big">
+                <Notes> Verified </Notes>
+                <Consumer>
+                    <NodeRef id="11" />
+                </Consumer>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="Low" value="2" />
+                    <Label name="Medium" value="3" />
+                    <Label name="High" value="4" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Unlock Mode" offset="10" length="2">
+                <Notes> Verified </Notes>
+                <Consumer>
+                    <NodeRef id="11" />
+                </Consumer>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="All Doors: Once" value="1" />
+                    <Label name="Driver's: Once, All Doors: Twice" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Auto Relock Time" offset="12" length="2">
+                <Notes> Verified </Notes>
+                <Consumer>
+                    <NodeRef id="11" />
+                </Consumer>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="30 seconds" value="1" />
+                    <Label name="60 seconds" value="2" />
+                    <Label name="90 seconds" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Walk Away Lock" offset="14" length="2">
+                <Notes> Verified </Notes>
+                <Consumer>
+                    <NodeRef id="11" />
+                </Consumer>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+        </Message>
+        <Message id="0x483" name="Unknown_0x483" length="8">
+            <Producer>
+                <NodeRef id="11" />
+            </Producer>
+            <Signal name="0" offset="2" length="2" />
+            <Signal name="1" offset="4" length="4" />
+            <Signal name="Alert Timing" offset="13" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="At" value="3" />
+                    <Label name="Before" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Sensitivity/Warning" offset="10" length="3">
+                <Notes> Verified. Sensitivity if Intervention is On, Warning if Off</Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="High/Often" value="1" />
+                    <Label name="Low/Rare" value="4" />
+                </LabelSet>
+            </Signal>
+            <Signal name="cstmzStat_LdwVibration_OnOff" offset="20" length="2" />
+            <Signal name="cstmzRsp_LkaBzVolume" offset="29" length="2" />
+            <Signal name="Intervention" offset="17" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="2" />
+                    <Label name="On" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Lane Departure Alert" offset="23" endianess="big" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="AEB_OnOff" offset="27" length="2" />
+            <Signal name="AEB_Sens" offset="24" length="3" />
+        </Message>
+        <Message id="0x484" name="FSC_Customised_Group1_Response" length="4">
+            <Signal name="contents" offset="2" length="2" />
+            <Signal name="status" offset="0" length="2" />
+            <Signal name="cstmzStat_LdwJudge_Thres" offset="13" length="3" />
+            <Signal name="cstmzStat_LdwCancel_Sens" offset="10" length="3" />
+            <Signal name="cstmzStat_LdwVibration_OnOff" offset="20" length="2" />
+            <Signal name="cstmzRsp_LkaBzVolume" offset="29" length="2" />
+            <Signal name="cstmzRsp_LdwLka_Mode" offset="17" length="3" />
+            <Signal name="cstmzRsp_Lka_Alart" offset="23" endianess="big" length="2" />
+            <Signal name="AEB_OnOff" offset="27" length="2" />
+            <Signal name="AEB_Sens" offset="24" length="3" />
+        </Message>
+        <Message id="0x485" name="FSC_Customised_Group1" length="4">
+            <Signal name="cstmzStat_LdwJudge_Thres" offset="13" length="3" />
+            <Signal name="cstmzStat_LdwCancel_Sens" offset="10" length="3" />
+            <Signal name="cstmzStat_LdwVibration_OnOff" offset="20" length="2" />
+            <Signal name="cstmzRsp_LkaBzVolume" offset="29" length="2" />
+            <Signal name="cstmzRsp_LdwLka_Mode" offset="17" length="3" />
+            <Signal name="cstmzRsp_Lka_Alart" offset="23" endianess="big" length="2" />
+            <Signal name="AEB_OnOff" offset="27" length="2" />
+            <Signal name="AEB_Sens" offset="24" length="3" />
+        </Message>
+        <Message id="0x486" name="Unknown_0x486" length="8">
+            <Producer>
+                <NodeRef id="11" />
+            </Producer>
+            <Signal name="0" offset="2" length="2" />
+            <Signal name="1" offset="4" length="4" />
+            <Signal name="HBC_OnOff" offset="22" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="cstmzStat_HBC_Sens" offset="17" length="3" />
+        </Message>
+        <Message id="0x487" name="FSC_Customised_Group2_Response" length="3">
+            <Signal name="contents" offset="2" length="2" />
+            <Signal name="status" offset="0" length="2" />
+            <Signal name="cstmzStat_HBC_OnOff" offset="22" length="2" />
+            <Signal name="cstmzStat_HBC_Sens" offset="17" length="3" />
+        </Message>
+        <Message id="0x488" name="FSC_Customised_Group2" length="3">
+            <Signal name="cstmzStat_HBC_OnOff" offset="22" length="2" />
+            <Signal name="cstmzStat_HBC_Sens" offset="17" length="3" />
+        </Message>
+        <Message id="0x489" name="Unknown_0x489" length="8">
+            <Producer>
+                <NodeRef id="11" />
+            </Producer>
+            <Signal name="0" offset="2" length="2" />
+            <Signal name="1" offset="4" length="4" />
+            <Signal name="Auto Door Lock Mode (Automatic Transmission)" offset="12" length="4" />
+            <Signal name="Interior Light Timeout-Door Close" offset="9" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="7.5 seconds" value="2" />
+                    <Label name="15 seconds" value="1" />
+                    <Label name="30 seconds" value="3" />
+                    <Label name="60 seconds" value="4" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Interior Light Time-Door Open" offset="15" endianess="big" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="10 minutes" value="3" />
+                    <Label name="30 minutes" value="1" />
+                    <Label name="60 minutes" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Headlight Off Timer" offset="20" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="30 seconds" value="2" />
+                    <Label name="60 seconds" value="3" />
+                    <Label name="90 seconds" value="4" />
+                    <Label name="120 seconds" value="5" />
+                </LabelSet>
+            </Signal>
+            <Signal name="3 Flash Turn Signal" offset="18" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Rain Sensing Wiper" offset="16" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Auto Headlight On" offset="29" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Low" value="1" />
+                    <Label name="Med. Low" value="2" />
+                    <Label name="Medium" value="3" />
+                    <Label name="Med. High" value="4" />
+                    <Label name="High" value="5" />
+                </LabelSet>
+            </Signal>
+            <Signal name="CSTMZSTAT_DRL_ONOFF" offset="27" length="2" />
+            <Signal name="Auto Door Lock Mode (Manual Transmission)" offset="29" endianess="big" length="4" />
+            <Signal name="Coming Home Light" offset="36" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="30 seconds" value="2" />
+                    <Label name="60 seconds" value="3" />
+                    <Label name="90 seconds" value="4" />
+                    <Label name="120 seconds" value="5" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Leaving Home Light" offset="34" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Auto Door Lock Mode (6 speed Automatic Transmission)" offset="38" endianess="big" length="4" />
+            <Signal name="14" offset="43" length="3" />
+        </Message>
+        <Message id="0x48A" name="RBCM_CustomizedStatus_Response" length="6">
+            <!-- see if this is wrong, and actually contains CSTMZSTAT_AUTOLGHT_SENS at 56? -->
+            <Signal name="contents" offset="2" length="2" />
+            <Signal name="status" offset="0" length="2" />
+            <Signal name="Auto Door Lock Mode (Automatic Transmission)" offset="12" length="4" />
+            <Signal name="Interior Light Timeout-Door Close" offset="9" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="7.5 seconds" value="2" />
+                    <Label name="15 seconds" value="1" />
+                    <Label name="30 seconds" value="3" />
+                    <Label name="60 seconds" value="4" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Interior Light Time-Door Open" offset="15" endianess="big" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="10 minutes" value="3" />
+                    <Label name="30 minutes" value="1" />
+                    <Label name="60 minutes" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Headlight Off Timer" offset="20" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="30 seconds" value="2" />
+                    <Label name="60 seconds" value="3" />
+                    <Label name="90 seconds" value="4" />
+                    <Label name="120 seconds" value="5" />
+                </LabelSet>
+            </Signal>
+            <Signal name="3 Flash Turn Signal" offset="18" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Rain Sensing Wiper" offset="16" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Auto Headlight On" offset="29" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Low" value="1" />
+                    <Label name="Med. Low" value="2" />
+                    <Label name="Medium" value="3" />
+                    <Label name="Med. High" value="4" />
+                    <Label name="High" value="5" />
+                </LabelSet>
+            </Signal>
+            <Signal name="CSTMZSTAT_DRL_ONOFF" offset="27" length="2" />
+            <Signal name="Auto Door Lock Mode (Manual Transmission)" offset="29" endianess="big" length="4" />
+            <Signal name="Coming Home Light" offset="36" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="30 seconds" value="2" />
+                    <Label name="60 seconds" value="3" />
+                    <Label name="90 seconds" value="4" />
+                    <Label name="120 seconds" value="5" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Leaving Home Light" offset="34" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Auto Door Lock Mode (6 speed Automatic Transmission)" offset="38" endianess="big" length="4" />
+            <Signal name="14" offset="43" length="3" />
+        </Message>
+        <Message id="0x48B" name="RBCM_CustomizedStatus" length="8">
+            <Signal name="Auto Door Lock Mode (Automatic Transmission)" offset="12" length="4" />
+            <Signal name="Interior Light Timeout-Door Close" offset="9" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="7.5 seconds" value="2" />
+                    <Label name="15 seconds" value="1" />
+                    <Label name="30 seconds" value="3" />
+                    <Label name="60 seconds" value="4" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Interior Light Time-Door Open" offset="15" endianess="big" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="10 minutes" value="3" />
+                    <Label name="30 minutes" value="1" />
+                    <Label name="60 minutes" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Headlight Off Timer" offset="20" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="30 seconds" value="2" />
+                    <Label name="60 seconds" value="3" />
+                    <Label name="90 seconds" value="4" />
+                    <Label name="120 seconds" value="5" />
+                </LabelSet>
+            </Signal>
+            <Signal name="3 Flash Turn Signal" offset="18" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Rain Sensing Wiper" offset="16" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Auto Headlight On" offset="29" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Low" value="1" />
+                    <Label name="Med. Low" value="2" />
+                    <Label name="Medium" value="3" />
+                    <Label name="Med. High" value="4" />
+                    <Label name="High" value="5" />
+                </LabelSet>
+            </Signal>
+            <Signal name="CSTMZSTAT_DRL_ONOFF" offset="27" length="2" />
+            <Signal name="Auto Door Lock Mode (Manual Transmission)" offset="29" endianess="big" length="4" />
+            <Signal name="Coming Home Light" offset="36" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="30 seconds" value="2" />
+                    <Label name="60 seconds" value="3" />
+                    <Label name="90 seconds" value="4" />
+                    <Label name="120 seconds" value="5" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Leaving Home Light" offset="34" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Auto Door Lock Mode (6 speed Automatic Transmission)" offset="38" endianess="big" length="4" />
+            <Signal name="14" offset="43" length="3" />
+        </Message>
+        <Message id="0x48C" name="Unknown_0x48C" length="8">
+            <Producer>
+                <NodeRef id="11" />
+            </Producer>
+            <Signal name="0" offset="2" length="2" />
+            <Signal name="1" offset="4" length="4" />
+            <Signal name="frontBzVol" offset="13" length="3" />
+            <Signal name="rearBzVol" offset="10" length="3" />
+            <Signal name="drvAlt_onOff" offset="8" length="2" />
+        </Message>
+        <Message id="0x48D" name="PSM_CUSTOMIZE_STATUS_Response" length="2">
+            <Signal name="contents" offset="2" length="2" />
+            <Signal name="status" offset="0" length="2" />
+            <Signal name="frontBzVol" offset="13" length="3" />
+            <Signal name="rearBzVol" offset="10" length="3" />
+            <Signal name="drvAlt_onOff" offset="8" length="2" />
+        </Message>
+        <Message id="0x48E" name="PSM_CUSTOMIZE_STATUS" length="2">
+            <Signal name="frontBzVol" offset="13" length="3" />
+            <Signal name="rearBzVol" offset="10" length="3" />
+            <Signal name="drvAlt_onOff" offset="8" length="2" />
+        </Message>
+        <Message id="0x490" name="Unknown_0x490" length="8">
+            <Producer>
+                <NodeRef id="11" />
+            </Producer>
+            <Signal name="0" offset="2" length="2" />
+            <Signal name="1" offset="4" length="4" />
+            <Signal name="CSTMZSTAT_BSMIND_BRGHTNS" offset="14" length="2" />
+            <Signal name="CSTMZSTAT_BSMSPTZONE_RNGE" offset="12" length="2" />
+            <Signal name="CSTMZSTAT_BSMCNTPTN_MDE" offset="10" length="2" />
+        </Message>
+        <Message id="0x491" name="CSTMZSTAT_BSM_Response" length="2">
+            <Signal name="contents" offset="2" length="2" />
+            <Signal name="status" offset="0" length="2" />
+            <Signal name="CSTMZSTAT_BSMIND_BRGHTNS" offset="14" length="2" />
+            <Signal name="CSTMZSTAT_BSMSPTZONE_RNGE" offset="12" length="2" />
+            <Signal name="CSTMZSTAT_BSMCNTPTN_MDE" offset="10" length="2" />
+        </Message>
+        <Message id="0x492" name="CSTMZSTAT_BSM" length="2">
+            <Signal name="CSTMZSTAT_BSMIND_BRGHTNS" offset="14" length="2" />
+            <Signal name="CSTMZSTAT_BSMSPTZONE_RNGE" offset="12" length="2" />
+            <Signal name="CSTMZSTAT_BSMCNTPTN_MDE" offset="10" length="2" />
+        </Message>
+        <Message id="0x493" name="Unknown_0x493" length="8">
+            <Producer>
+                <NodeRef id="11" />
+            </Producer>
+            <Signal name="0" offset="2" length="2" />
+            <Signal name="1" offset="4" length="4" />
+            <Signal name="ParkingSensorInd" offset="0" length="2" />
+            <Signal name="IG_ON_AutoDisplay" offset="14" length="2" />
+            <Signal name="GuideLineDisplay" offset="12" length="2" />
+            <Signal name="FrontViewDispaly" offset="15" endianess="big" length="2" />
+        </Message>
+        <Message id="0x494" name="CAM_VIEW_Customised_Group_Response" length="3">
+            <Signal name="contents" offset="2" length="2" />
+            <Signal name="ParkingSensorInd" offset="0" length="2" />
+            <Signal name="IG_ON_AutoDisplay" offset="14" length="2" />
+            <Signal name="GuideLineDisplay" offset="12" length="2" />
+            <Signal name="FrontViewDispaly" offset="15" endianess="big" length="2" />
+        </Message>
+        <Message id="0x495" name="CAM_VIEW_Customised_Group" length="3">
+            <Signal name="ParkingSensorInd" offset="0" length="2" />
+            <Signal name="IG_ON_AutoDisplay" offset="14" length="2" />
+            <Signal name="GuideLineDisplay" offset="12" length="2" />
+            <Signal name="FrontViewDispaly" offset="15" endianess="big" length="2" />
+        </Message>
+        <Message id="0x497" name="Unknown_0x497" length="8">
+            <Producer>
+                <NodeRef id="11" />
+            </Producer>
+            <Signal name="0" offset="2" length="2" />
+            <Signal name="1" offset="4" length="4" />
+            <Signal name="pcs_onoff" offset="14" length="2" />
+            <Signal name="pcs_warning_thres" offset="12" length="2" />
+            <Signal name="drss_onoff" offset="10" length="2" />
+            <Signal name="drss_warning_thres" offset="14" endianess="big" length="4" />
+        </Message>
+        <Message id="0x498" name="CCM_CUSTOMIZE_RESPONSE" length="3">
+            <Signal name="contents" offset="2" length="2" />
+            <Signal name="status" offset="0" length="2" />
+            <Signal name="pcs_onoff" offset="14" length="2" />
+            <Signal name="pcs_warning_thres" offset="12" length="2" />
+            <Signal name="drss_onoff" offset="10" length="2" />
+            <Signal name="drss_warning_thres" offset="14" endianess="big" length="4" />
+        </Message>
+        <Message id="0x499" name="CCM_CUSTOMIZE" length="3">
+            <Signal name="cstmzStat_PCS_OnOff" offset="14" length="2" />
+            <Signal name="cstmzStat_PCS_Warning_Thres" offset="12" length="2" />
+            <Signal name="cstmzStat_DRSS_OnOff" offset="10" length="2" />
+            <Signal name="cstmzStat_DRSS_Warning_Thres" offset="14" endianess="big" length="4" />
+        </Message>
+        <Message id="0x49A" name="Unknown_0x49A" length="8">
+            <Producer>
+                <NodeRef id="11" />
+            </Producer>
+            <Signal name="0" offset="2" length="2" />
+            <Signal name="1" offset="4" length="4" />
+            <Signal name="Afs_OnOff" offset="36" length="2" />
+            <Signal name="SpLmt_OnOff" offset="34" length="2" />
+            <Signal name="SpLmt_Caution" offset="32" length="2" />
+            <Signal name="SpLmt_SpLvl" offset="46" length="2" />
+            <Signal name="Nav_GPD_Timg" offset="44" length="2" />
+            <Signal name="HUD_Gsi_OnOff" offset="40" length="2" />
+            <Signal name="SpeedAlarm" offset="49" length="7" />
+            <!-- <Signal name="10" offset="28" length="2"></Signal> -->
+
+            <Signal name="stbeltrmdr_bz" offset="14" length="2" />
+            <Signal name="lghtrndr_bz_vol" offset="12" length="2" />
+            <Signal name="ldwbz_sound" offset="10" length="2" />
+            <Signal name="turn_bz_vol" offset="8" length="2" />
+            <Signal name="sbs_bz_vol" offset="22" length="2" />
+            <Signal name="rvm_bz_vol" offset="20" length="2" />
+            <Signal name="ldw_bz_vol" offset="18" length="2" />
+            <Signal name="bsm_bz_vol" offset="16" length="2" />
+            <Signal name="CSTMZRSP_IND_CLR_ONOFF" offset="30" length="2" />
+            <Signal name="trip_rst_mde" offset="28" length="2" />
+            <Signal name="26" offset="26" length="2" />
+            <Signal name="42" offset="42" length="2" />
+            <Signal name="turn_ind_onoff" offset="24" length="2" />
+            <Signal name="idm_max_stage" offset="38" length="2" />
+        </Message>
+        <Message id="0x49B" name="Unknown_0x49B" length="7">
+            <Signal name="contents" offset="2" length="2" />
+            <Signal name="status" offset="0" length="2" />
+            <Signal name="Afs_OnOff" offset="36" length="2" />
+            <Signal name="SpLmt_OnOff" offset="34" length="2" />
+            <Signal name="SpLmt_Caution" offset="32" length="2" />
+            <Signal name="SpLmt_SpLvl" offset="46" length="2" />
+            <Signal name="Nav_GPD_Timg" offset="44" length="2" />
+            <Signal name="HUD_Gsi_OnOff" offset="40" length="2" />
+            <Signal name="SpeedAlarm" offset="49" length="7" />
+            <!-- <Signal name="10" offset="28" length="2"></Signal> -->
+
+            <Signal name="stbeltrmdr_bz" offset="14" length="2" />
+            <Signal name="lghtrndr_bz_vol" offset="12" length="2" />
+            <Signal name="ldwbz_sound" offset="10" length="2" />
+            <Signal name="turn_bz_vol" offset="8" length="2" />
+            <Signal name="sbs_bz_vol" offset="22" length="2" />
+            <Signal name="rvm_bz_vol" offset="20" length="2" />
+            <Signal name="ldw_bz_vol" offset="18" length="2" />
+            <Signal name="bsm_bz_vol" offset="16" length="2" />
+            <Signal name="CSTMZRSP_IND_CLR_ONOFF" offset="30" length="2" />
+            <Signal name="trip_rst_mde" offset="28" length="2" />
+            <Signal name="turn_ind_onoff" offset="24" length="2" />
+            <Signal name="idm_max_stage" offset="38" length="2" />
+
+        </Message>
+        <Message id="0x49C" name="Unknown_0x49C" length="8">
+            <!-- this might have some multiplexing that I don't fully understand -->
+            <Signal name="CSTMZSTAT_STBELTRMDR_BZ_VOL" offset="14" length="2" />
+            <Signal name="CSTMZSTAT_LGHTRNDR_BZ_VOL" offset="12" length="2" />
+            <Signal name="CSTMZSTAT_LDWBZ_SOUND" offset="10" length="2" />
+            <Signal name="CSTMZSTAT_TURN_BZ_VOL" offset="8" length="2" />
+            <Signal name="CSTMZSTAT_SBS_BZ_VOL" offset="22" length="2" />
+            <Signal name="CSTMZSTAT_RVM_BZ_VOL" offset="20" length="2" />
+            <Signal name="CSTMZSTAT_LDW_BZ_VOL" offset="18" length="2" />
+            <Signal name="CSTMZSTAT_BSM_BZ_VOL" offset="16" length="2" />
+            <Signal name="CSTMZSTAT_IND_CLR_ONOFF" offset="30" length="2" />
+            <Signal name="CSTMZSTAT_TRIP_RST_MDE" offset="26" length="2" />
+            <Signal name="CSTMZSTAT_TURN_IND_ONOFF" offset="24" length="2" />
+            <Signal name="CSTMZSTAT_IDM_MAX_STAGE" offset="38" length="2" />
+            <Signal name="13" offset="36" length="2" />
+            <Signal name="14" offset="49" length="7" />
+            <Signal name="flag" offset="59" length="3" />
+            <Signal name="HECCustStat1_0xE" offset="34" length="2" />
+            <Signal name="HECCustStat1_0xF" offset="32" length="2" />
+            <Signal name="HECCustStat1_0x10" offset="46" length="2" />
+            <Signal name="HECCustStat1_0x11" offset="44" length="2" />
+            <!-- This space intentionally left blank Duplicate of 15? -->
+            <Signal name="HECCustStat1_0x12" offset="40" length="2" />
+            <Signal name="HECCustStat1_0x15" offset="28" length="2" />
+        </Message>
+    </Bus>
+</NetworkDefinition>
