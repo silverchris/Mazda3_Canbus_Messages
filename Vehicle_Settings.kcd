@@ -171,7 +171,7 @@
                 </LabelSet>
             </Signal>
         </Message>
-        <Message id="0x483" name="Unknown_0x483" length="8">
+        <Message id="0x483" name="Lane Keep Assist/Lane Departure Warning (Set)" length="8">
             <Producer>
                 <NodeRef id="11" />
             </Producer>
@@ -193,8 +193,12 @@
                     <Label name="Low/Rare" value="4" />
                 </LabelSet>
             </Signal>
-            <Signal name="cstmzStat_LdwVibration_OnOff" offset="20" length="2" />
-            <Signal name="cstmzRsp_LkaBzVolume" offset="29" length="2" />
+            <Signal name="cstmzStat_LdwVibration_OnOff" offset="20" length="2">
+                <Notes> May not be used. Doesn't seem to be changed by CMU. Replaced by Signal "Lane Departure Alert Type" in Message 0x499? </Notes>
+            </Signal>
+            <Signal name="cstmzRsp_LkaBzVolume" offset="29" length="2">
+                <Notes> May not be used. Doesn't seem to be changed by CMU. Replaced by Signal "Lane Departure Warning Level" in Message 0x499? </Notes>
+            </Signal>
             <Signal name="Intervention" offset="17" length="3">
                 <Notes> Verified </Notes>
                 <LabelSet>
@@ -214,25 +218,89 @@
             <Signal name="AEB_OnOff" offset="27" length="2" />
             <Signal name="AEB_Sens" offset="24" length="3" />
         </Message>
-        <Message id="0x484" name="FSC_Customised_Group1_Response" length="4">
+        <Message id="0x484" name="Lane Keep Assist/Lane Departure Warning (Response)" length="4">
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
-            <Signal name="cstmzStat_LdwJudge_Thres" offset="13" length="3" />
-            <Signal name="cstmzStat_LdwCancel_Sens" offset="10" length="3" />
-            <Signal name="cstmzStat_LdwVibration_OnOff" offset="20" length="2" />
-            <Signal name="cstmzRsp_LkaBzVolume" offset="29" length="2" />
-            <Signal name="cstmzRsp_LdwLka_Mode" offset="17" length="3" />
-            <Signal name="cstmzRsp_Lka_Alart" offset="23" endianess="big" length="2" />
+            <Signal name="Alert Timing" offset="13" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="At" value="3" />
+                    <Label name="Before" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Sensitivity/Warning" offset="10" length="3">
+                <Notes> Verified. Sensitivity if Intervention is On, Warning if Off</Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="High/Often" value="1" />
+                    <Label name="Low/Rare" value="4" />
+                </LabelSet>
+            </Signal>
+            <Signal name="cstmzStat_LdwVibration_OnOff" offset="20" length="2">
+                <Notes> May not be used. Doesn't seem to be changed by CMU. Replaced by Signal "Lane Departure Alert Type" in Message 0x49A? </Notes>
+            </Signal>
+            <Signal name="cstmzRsp_LkaBzVolume" offset="29" length="2">
+                <Notes> May not be used. Doesn't seem to be changed by CMU. Replaced by Signal "Lane Departure Warning Level" in Message 0x49A? </Notes>
+            </Signal>
+            <Signal name="Intervention" offset="17" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="2" />
+                    <Label name="On" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Lane Departure Alert" offset="23" endianess="big" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
             <Signal name="AEB_OnOff" offset="27" length="2" />
             <Signal name="AEB_Sens" offset="24" length="3" />
         </Message>
-        <Message id="0x485" name="FSC_Customised_Group1" length="4">
-            <Signal name="cstmzStat_LdwJudge_Thres" offset="13" length="3" />
-            <Signal name="cstmzStat_LdwCancel_Sens" offset="10" length="3" />
-            <Signal name="cstmzStat_LdwVibration_OnOff" offset="20" length="2" />
-            <Signal name="cstmzRsp_LkaBzVolume" offset="29" length="2" />
-            <Signal name="cstmzRsp_LdwLka_Mode" offset="17" length="3" />
-            <Signal name="cstmzRsp_Lka_Alart" offset="23" endianess="big" length="2" />
+        <Message id="0x485" name="Lane Keep Assist/Lane Departure Warning (Periodic)" length="4">
+            <Signal name="Alert Timing" offset="13" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="At" value="3" />
+                    <Label name="Before" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Sensitivity/Warning" offset="10" length="3">
+                <Notes> Verified. Sensitivity if Intervention is On, Warning if Off</Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="High/Often" value="1" />
+                    <Label name="Low/Rare" value="4" />
+                </LabelSet>
+            </Signal>
+            <Signal name="cstmzStat_LdwVibration_OnOff" offset="20" length="2">
+                <Notes> May not be used. Doesn't seem to be changed by CMU. Replaced by Signal "Lane Departure Alert Type" in Message 0x49B? </Notes>
+            </Signal>
+            <Signal name="cstmzRsp_LkaBzVolume" offset="29" length="2">
+                <Notes> May not be used. Doesn't seem to be changed by CMU. Replaced by Signal "Lane Departure Warning Level" in Message 0x49B? </Notes>
+            </Signal>
+            <Signal name="Intervention" offset="17" length="3">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="2" />
+                    <Label name="On" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Lane Departure Alert" offset="23" endianess="big" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
             <Signal name="AEB_OnOff" offset="27" length="2" />
             <Signal name="AEB_Sens" offset="24" length="3" />
         </Message>
@@ -242,7 +310,7 @@
             </Producer>
             <Signal name="0" offset="2" length="2" />
             <Signal name="1" offset="4" length="4" />
-            <Signal name="HBC_OnOff" offset="22" length="2">
+            <Signal name="High Beam Control" offset="22" length="2">
                 <Notes> Verified </Notes>
                 <LabelSet>
                     <Label name="No Change" value="0" />
@@ -255,11 +323,25 @@
         <Message id="0x487" name="FSC_Customised_Group2_Response" length="3">
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
-            <Signal name="cstmzStat_HBC_OnOff" offset="22" length="2" />
+            <Signal name="High Beam Control" offset="22" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
             <Signal name="cstmzStat_HBC_Sens" offset="17" length="3" />
         </Message>
         <Message id="0x488" name="FSC_Customised_Group2" length="3">
-            <Signal name="cstmzStat_HBC_OnOff" offset="22" length="2" />
+            <Signal name="High Beam Control" offset="22" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
             <Signal name="cstmzStat_HBC_Sens" offset="17" length="3" />
         </Message>
         <Message id="0x489" name="Unknown_0x489" length="8">
@@ -347,7 +429,18 @@
                     <Label name="On" value="2" />
                 </LabelSet>
             </Signal>
-            <Signal name="Auto Door Lock Mode (6 speed Automatic Transmission)" offset="38" endianess="big" length="4" />
+            <Signal name="Auto Door Lock Mode (6 speed Automatic Transmission)" offset="38" endianess="big" length="4">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="Lock: When Driving" value="2" />
+                    <Label name="Lock: When Driving Unlock: IGN Off" value="3" />
+                    <Label name="Lock: When Driving Unlock: In Park" value="10" />
+                    <Label name="Lock: Shifting Out of Park" value="4" />
+                    <Label name="Lock: Out of Park Unlock: In Park" value="5" />
+                </LabelSet>
+            </Signal>
             <Signal name="14" offset="43" length="3" />
         </Message>
         <Message id="0x48A" name="RBCM_CustomizedStatus_Response" length="6">
@@ -433,7 +526,18 @@
                     <Label name="On" value="2" />
                 </LabelSet>
             </Signal>
-            <Signal name="Auto Door Lock Mode (6 speed Automatic Transmission)" offset="38" endianess="big" length="4" />
+            <Signal name="Auto Door Lock Mode (6 speed Automatic Transmission)" offset="38" endianess="big" length="4">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="Lock: When Driving" value="2" />
+                    <Label name="Lock: When Driving Unlock: IGN Off" value="3" />
+                    <Label name="Lock: When Driving Unlock: In Park" value="10" />
+                    <Label name="Lock: Shifting Out of Park" value="4" />
+                    <Label name="Lock: Out of Park Unlock: In Park" value="5" />
+                </LabelSet>
+            </Signal>
             <Signal name="14" offset="43" length="3" />
         </Message>
         <Message id="0x48B" name="RBCM_CustomizedStatus" length="8">
@@ -516,7 +620,18 @@
                     <Label name="On" value="2" />
                 </LabelSet>
             </Signal>
-            <Signal name="Auto Door Lock Mode (6 speed Automatic Transmission)" offset="38" endianess="big" length="4" />
+            <Signal name="Auto Door Lock Mode (6 speed Automatic Transmission)" offset="38" endianess="big" length="4">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="Lock: When Driving" value="2" />
+                    <Label name="Lock: When Driving Unlock: IGN Off" value="3" />
+                    <Label name="Lock: When Driving Unlock: In Park" value="10" />
+                    <Label name="Lock: Shifting Out of Park" value="4" />
+                    <Label name="Lock: Out of Park Unlock: In Park" value="5" />
+                </LabelSet>
+            </Signal>
             <Signal name="14" offset="43" length="3" />
         </Message>
         <Message id="0x48C" name="Unknown_0x48C" length="8">
@@ -595,22 +710,67 @@
             <Signal name="1" offset="4" length="4" />
             <Signal name="pcs_onoff" offset="14" length="2" />
             <Signal name="pcs_warning_thres" offset="12" length="2" />
-            <Signal name="drss_onoff" offset="10" length="2" />
-            <Signal name="drss_warning_thres" offset="14" endianess="big" length="4" />
+            <Signal name="DRSS System" offset="10" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="DRSS Warning Distance" offset="14" endianess="big" length="4">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Far" value="1" />
+                    <Label name="Medium" value="2" />
+                    <Label name="Near" value="3" />
+                </LabelSet>
+            </Signal>
         </Message>
         <Message id="0x498" name="CCM_CUSTOMIZE_RESPONSE" length="3">
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
             <Signal name="pcs_onoff" offset="14" length="2" />
             <Signal name="pcs_warning_thres" offset="12" length="2" />
-            <Signal name="drss_onoff" offset="10" length="2" />
-            <Signal name="drss_warning_thres" offset="14" endianess="big" length="4" />
+            <Signal name="DRSS System" offset="10" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="DRSS Warning Distance" offset="14" endianess="big" length="4">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Far" value="1" />
+                    <Label name="Medium" value="2" />
+                    <Label name="Near" value="3" />
+                </LabelSet>
+            </Signal>
         </Message>
         <Message id="0x499" name="CCM_CUSTOMIZE" length="3">
             <Signal name="cstmzStat_PCS_OnOff" offset="14" length="2" />
             <Signal name="cstmzStat_PCS_Warning_Thres" offset="12" length="2" />
-            <Signal name="cstmzStat_DRSS_OnOff" offset="10" length="2" />
-            <Signal name="cstmzStat_DRSS_Warning_Thres" offset="14" endianess="big" length="4" />
+            <Signal name="DRSS System" offset="10" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="DRSS Warning Distance" offset="14" endianess="big" length="4">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Far" value="1" />
+                    <Label name="Medium" value="2" />
+                    <Label name="Near" value="3" />
+                </LabelSet>
+            </Signal>
         </Message>
         <Message id="0x49A" name="Unknown_0x49A" length="8">
             <Producer>
@@ -618,80 +778,285 @@
             </Producer>
             <Signal name="0" offset="2" length="2" />
             <Signal name="1" offset="4" length="4" />
-            <Signal name="Afs_OnOff" offset="36" length="2" />
+            <Signal name="Active Front-lighting System" offset="36" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
             <Signal name="SpLmt_OnOff" offset="34" length="2" />
             <Signal name="SpLmt_Caution" offset="32" length="2" />
             <Signal name="SpLmt_SpLvl" offset="46" length="2" />
-            <Signal name="Nav_GPD_Timg" offset="44" length="2" />
+            <Signal name="Nav_GPD_Timg" offset="44" length="2">
+                <Notes> something to do with hud </Notes>
+            </Signal>
             <Signal name="HUD_Gsi_OnOff" offset="40" length="2" />
             <Signal name="SpeedAlarm" offset="49" length="7" />
             <!-- <Signal name="10" offset="28" length="2"></Signal> -->
 
             <Signal name="stbeltrmdr_bz" offset="14" length="2" />
-            <Signal name="lghtrndr_bz_vol" offset="12" length="2" />
-            <Signal name="ldwbz_sound" offset="10" length="2" />
-            <Signal name="turn_bz_vol" offset="8" length="2" />
-            <Signal name="sbs_bz_vol" offset="22" length="2" />
+            <Signal name="Light On Vol" offset="12" length="2">
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="Low" value="2" />
+                    <Label name="High" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Lane Departure Alert Type" offset="10" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Beep" value="1" />
+                    <Label name="Rumble" value="2" />
+                    <Label name="Vibration" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Turn Signal Volume" offset="8" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Low" value="1" />
+                    <Label name="High" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="SBS/SCBS Warning Volume" offset="22" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="Low" value="2" />
+                    <Label name="High" value="3" />
+                </LabelSet>
+            </Signal>
             <Signal name="rvm_bz_vol" offset="20" length="2" />
-            <Signal name="ldw_bz_vol" offset="18" length="2" />
-            <Signal name="bsm_bz_vol" offset="16" length="2" />
+            <Signal name="Lane Departure Warning Level" offset="18" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Low" value="1" />
+                    <Label name="High" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="BSM Warning Volume" offset="16" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="Low" value="2" />
+                    <Label name="High" value="3" />
+                </LabelSet>
+            </Signal>
             <Signal name="CSTMZRSP_IND_CLR_ONOFF" offset="30" length="2" />
             <Signal name="trip_rst_mde" offset="28" length="2" />
-            <Signal name="26" offset="26" length="2" />
+            <Signal name="Fuel Economy Sync Average and Trip A" offset="26" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
             <Signal name="42" offset="42" length="2" />
-            <Signal name="turn_ind_onoff" offset="24" length="2" />
+            <Signal name="HUD Next Turn Indication" offset="24" length="2">
+                <Notes> Unconfirmed </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
             <Signal name="idm_max_stage" offset="38" length="2" />
         </Message>
         <Message id="0x49B" name="Unknown_0x49B" length="7">
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
-            <Signal name="Afs_OnOff" offset="36" length="2" />
+            <Signal name="Active Front-lighting System" offset="36" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
             <Signal name="SpLmt_OnOff" offset="34" length="2" />
             <Signal name="SpLmt_Caution" offset="32" length="2" />
             <Signal name="SpLmt_SpLvl" offset="46" length="2" />
-            <Signal name="Nav_GPD_Timg" offset="44" length="2" />
+            <Signal name="Nav_GPD_Timg" offset="44" length="2">
+                <Notes> something to do with hud </Notes>
+            </Signal>
             <Signal name="HUD_Gsi_OnOff" offset="40" length="2" />
             <Signal name="SpeedAlarm" offset="49" length="7" />
             <!-- <Signal name="10" offset="28" length="2"></Signal> -->
 
             <Signal name="stbeltrmdr_bz" offset="14" length="2" />
-            <Signal name="lghtrndr_bz_vol" offset="12" length="2" />
-            <Signal name="ldwbz_sound" offset="10" length="2" />
-            <Signal name="turn_bz_vol" offset="8" length="2" />
-            <Signal name="sbs_bz_vol" offset="22" length="2" />
+            <Signal name="Light On Vol" offset="12" length="2">
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="Low" value="2" />
+                    <Label name="High" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Lane Departure Alert Type" offset="10" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Beep" value="1" />
+                    <Label name="Rumble" value="2" />
+                    <Label name="Vibration" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Turn Signal Volume" offset="8" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Low" value="1" />
+                    <Label name="High" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="SBS/SCBS Warning Volume" offset="22" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="Low" value="2" />
+                    <Label name="High" value="3" />
+                </LabelSet>
+            </Signal>
             <Signal name="rvm_bz_vol" offset="20" length="2" />
-            <Signal name="ldw_bz_vol" offset="18" length="2" />
-            <Signal name="bsm_bz_vol" offset="16" length="2" />
+            <Signal name="Lane Departure Warning Level" offset="18" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Low" value="1" />
+                    <Label name="High" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="BSM Warning Volume" offset="16" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="Low" value="2" />
+                    <Label name="High" value="3" />
+                </LabelSet>
+            </Signal>
             <Signal name="CSTMZRSP_IND_CLR_ONOFF" offset="30" length="2" />
             <Signal name="trip_rst_mde" offset="28" length="2" />
-            <Signal name="turn_ind_onoff" offset="24" length="2" />
+            <Signal name="Fuel Economy Sync Average and Trip A" offset="26" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="42" offset="42" length="2" />
+            <Signal name="HUD Next Turn Indication" offset="24" length="2">
+                <Notes> Unconfirmed </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
             <Signal name="idm_max_stage" offset="38" length="2" />
-
         </Message>
         <Message id="0x49C" name="Unknown_0x49C" length="8">
-            <!-- this might have some multiplexing that I don't fully understand -->
-            <Signal name="CSTMZSTAT_STBELTRMDR_BZ_VOL" offset="14" length="2" />
-            <Signal name="CSTMZSTAT_LGHTRNDR_BZ_VOL" offset="12" length="2" />
-            <Signal name="CSTMZSTAT_LDWBZ_SOUND" offset="10" length="2" />
-            <Signal name="CSTMZSTAT_TURN_BZ_VOL" offset="8" length="2" />
-            <Signal name="CSTMZSTAT_SBS_BZ_VOL" offset="22" length="2" />
-            <Signal name="CSTMZSTAT_RVM_BZ_VOL" offset="20" length="2" />
-            <Signal name="CSTMZSTAT_LDW_BZ_VOL" offset="18" length="2" />
-            <Signal name="CSTMZSTAT_BSM_BZ_VOL" offset="16" length="2" />
-            <Signal name="CSTMZSTAT_IND_CLR_ONOFF" offset="30" length="2" />
-            <Signal name="CSTMZSTAT_TRIP_RST_MDE" offset="26" length="2" />
-            <Signal name="CSTMZSTAT_TURN_IND_ONOFF" offset="24" length="2" />
-            <Signal name="CSTMZSTAT_IDM_MAX_STAGE" offset="38" length="2" />
-            <Signal name="13" offset="36" length="2" />
-            <Signal name="14" offset="49" length="7" />
-            <Signal name="flag" offset="59" length="3" />
-            <Signal name="HECCustStat1_0xE" offset="34" length="2" />
-            <Signal name="HECCustStat1_0xF" offset="32" length="2" />
-            <Signal name="HECCustStat1_0x10" offset="46" length="2" />
-            <Signal name="HECCustStat1_0x11" offset="44" length="2" />
-            <!-- This space intentionally left blank Duplicate of 15? -->
-            <Signal name="HECCustStat1_0x12" offset="40" length="2" />
-            <Signal name="HECCustStat1_0x15" offset="28" length="2" />
+            <Signal name="Active Front-lighting System" offset="36" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="SpLmt_OnOff" offset="34" length="2" />
+            <Signal name="SpLmt_Caution" offset="32" length="2" />
+            <Signal name="SpLmt_SpLvl" offset="46" length="2" />
+            <Signal name="Nav_GPD_Timg" offset="44" length="2">
+                <Notes> something to do with hud </Notes>
+            </Signal>
+            <Signal name="HUD_Gsi_OnOff" offset="40" length="2" />
+            <Signal name="SpeedAlarm" offset="49" length="7" />
+            <!-- <Signal name="10" offset="28" length="2"></Signal> -->
+
+            <Signal name="stbeltrmdr_bz" offset="14" length="2" />
+            <Signal name="Light On Vol" offset="12" length="2">
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="Low" value="2" />
+                    <Label name="High" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Lane Departure Alert Type" offset="10" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Beep" value="1" />
+                    <Label name="Rumble" value="2" />
+                    <Label name="Vibration" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Turn Signal Volume" offset="8" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Low" value="1" />
+                    <Label name="High" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="SBS/SCBS Warning Volume" offset="22" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="Low" value="2" />
+                    <Label name="High" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="rvm_bz_vol" offset="20" length="2" />
+            <Signal name="Lane Departure Warning Level" offset="18" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Low" value="1" />
+                    <Label name="High" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="BSM Warning Volume" offset="16" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="Low" value="2" />
+                    <Label name="High" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="CSTMZRSP_IND_CLR_ONOFF" offset="30" length="2" />
+            <Signal name="trip_rst_mde" offset="28" length="2" />
+            <Signal name="Fuel Economy Sync Average and Trip A" offset="26" length="2">
+                <Notes> Verified </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="42" offset="42" length="2" />
+            <Signal name="HUD Next Turn Indication" offset="24" length="2">
+                <Notes> Unconfirmed </Notes>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="idm_max_stage" offset="38" length="2" />
         </Message>
     </Bus>
 </NetworkDefinition>
