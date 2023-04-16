@@ -226,13 +226,24 @@
         <Message id="0x21C" name="CCM_Information" length="7">
             <!-- TODO: Test this -->
             <Signal name="Warn_ACC_Status_Lamp" offset="3" length="3" />
-            <Signal name="Warn_LDW_Status_Lamp" offset="0" length="3" />
+            <Signal name="Warn_LDW_Status_Lamp" offset="0" length="3">
+            	<LabelSet>
+            		<Label name="Off" value="2" />
+            		<Label name="On" value="0" />
+            		</LabelSet>
+            </Signal>
             <Signal name="Warn_HBC_Status_Lamp" offset="13" length="3">
                 <Notes>Verified! Lights up High Beam Control lamp on instrument panel/Indicates that HBC is active</Notes>
             </Signal>
             <Signal name="Warn_DisplayColor" offset="12" length="1" />
             <Signal name="Warn_FLASH_IND" offset="11" length="1" />
-            <Signal name="Warn_LDW_Status" offset="8" length="3" />
+            <Signal name="Warn_LDW_Status" offset="8" length="3">
+            	<Notes> Verified </Notes>
+            	<LabelSet>
+            		<Label name="Off" value="0" />
+            		<Label name="On" value="1" />
+            	</LabelSet>
+            </Signal>
             <Signal name="Warn_Leading_Vehicle_Display" offset="23" length="1" />
             <Signal name="Warn_PopUp_Display_Request" offset="22" length="1" />
             <Signal name="Warn_Distance_SW_Status" offset="18" length="3" />
@@ -929,13 +940,13 @@
             <Signal name="ODR_Data3" offset="32" endianess="big" length="16" />
             <Signal name="ODR_Data4" offset="48" endianess="big" length="16" />
         </Message>
-        <Message id="0x7E8" name="Unknown_0x7E8" length="8">
+        <Message id="0x7E8" name="OBD2_0x7E8" length="8">
             <Notes>Defined but not used</Notes>
         </Message>
-        <Message id="0x7E9" name="Unknown_0x7E9" length="8">
+        <Message id="0x7E9" name="OBD2_0x7E9" length="8">
             <Notes>Defined but not used</Notes>
         </Message>
-        <Message id="0x7EA" name="Unknown_0x7EA" length="8">
+        <Message id="0x7EA" name="OBD2_0x7EA" length="8">
             <Notes>Exists but I can't find use</Notes>
         </Message>
     </Bus>
