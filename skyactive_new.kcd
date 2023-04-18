@@ -15,7 +15,7 @@
     <Node id="13" name="Audio amplifier (AM)" />
     <Node id="14" name="Electric parking brake control module (EPB)" />
     <Node id="15" name="Occupant classification sensor" />
-    <Node id="16" name="Instrument cluster (IC)" />
+    <Node id="16" name="Instrument cluster (IC)" /> <!-- Also Called HEC (Hybrid Electronic Cluster) -->
     <Node id="17" name="Climate control unit (EATC)" />
     <Node id="18" name="Blind spot monitoring control module (BSML)" />
     <Node id="19" name="Rear body control module (RBCM)" />
@@ -122,6 +122,7 @@
             decoded by VIP -->
         </Message>
         <Message id="0x130" name="EATC_SIS_Group" length="8">
+            <!-- SISS == Smart Idle Stop System == i-Stop? -->
             <Signal name="SISS_Status" offset="0" length="1" />
             <Signal name="SISS_AlarmBuzzer" offset="13" length="3" />
             <Signal name="SISS_WarningLamp_G" offset="10" length="3" />
@@ -940,14 +941,40 @@
             <Signal name="ODR_Data3" offset="32" endianess="big" length="16" />
             <Signal name="ODR_Data4" offset="48" endianess="big" length="16" />
         </Message>
+        <Message id="0x7DF" name="OBD2_0x7DF" length="8">
+            <Notes>OBD2 Broadcast</Notes>
+        </Message>
+        <Message id="0x7E0" name="OBD2_0x7E0" length="8">
+        </Message>
+        <Message id="0x7E1" name="OBD2_0x7E1" length="8">
+        </Message>
+        <Message id="0x7E2" name="OBD2_0x7E2" length="8">
+        </Message>
+        <Message id="0x7E3" name="OBD2_0x7E3" length="8">
+        </Message>
+        <Message id="0x7E4" name="OBD2_0x7E4" length="8">
+        </Message>
+        <Message id="0x7E5" name="OBD2_0x7E5" length="8">
+        </Message>
+        <Message id="0x7E6" name="OBD2_0x7E6" length="8">
+        </Message>
+        <Message id="0x7E7" name="OBD2_0x7E7" length="8">
+        </Message>
         <Message id="0x7E8" name="OBD2_0x7E8" length="8">
-            <Notes>Defined but not used</Notes>
         </Message>
         <Message id="0x7E9" name="OBD2_0x7E9" length="8">
-            <Notes>Defined but not used</Notes>
         </Message>
         <Message id="0x7EA" name="OBD2_0x7EA" length="8">
-            <Notes>Exists but I can't find use</Notes>
+        </Message>
+        <Message id="0x7EB" name="OBD2_0x7EB" length="8">
+        </Message>
+        <Message id="0x7EC" name="OBD2_0x7EC" length="8">
+        </Message>
+        <Message id="0x7ED" name="OBD2_0x7ED" length="8">
+        </Message>
+        <Message id="0x7EE" name="OBD2_0x7EE" length="8">
+        </Message>
+        <Message id="0x7EF" name="OBD2_0x7EF" length="8">
         </Message>
     </Bus>
 </NetworkDefinition>

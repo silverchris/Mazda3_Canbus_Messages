@@ -304,7 +304,7 @@
             <Signal name="AEB_OnOff" offset="27" length="2" />
             <Signal name="AEB_Sens" offset="24" length="3" />
         </Message>
-        <Message id="0x486" name="Unknown_0x486" length="8">
+        <Message id="0x486" name="High Beam Control (Set)" length="8">
             <Producer>
                 <NodeRef id="11" />
             </Producer>
@@ -320,7 +320,7 @@
             </Signal>
             <Signal name="cstmzStat_HBC_Sens" offset="17" length="3" />
         </Message>
-        <Message id="0x487" name="FSC_Customised_Group2_Response" length="3">
+        <Message id="0x487" name="High Beam Control (Response)" length="3">
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
             <Signal name="High Beam Control" offset="22" length="2">
@@ -333,7 +333,7 @@
             </Signal>
             <Signal name="cstmzStat_HBC_Sens" offset="17" length="3" />
         </Message>
-        <Message id="0x488" name="FSC_Customised_Group2" length="3">
+        <Message id="0x488" name="High Beam Control (Periodic)" length="3">
             <Signal name="High Beam Control" offset="22" length="2">
                 <Notes> Verified </Notes>
                 <LabelSet>
@@ -344,7 +344,7 @@
             </Signal>
             <Signal name="cstmzStat_HBC_Sens" offset="17" length="3" />
         </Message>
-        <Message id="0x489" name="Unknown_0x489" length="8">
+        <Message id="0x489" name="RBCM (Set)" length="8">
             <Producer>
                 <NodeRef id="11" />
             </Producer>
@@ -443,7 +443,7 @@
             </Signal>
             <Signal name="14" offset="43" length="3" />
         </Message>
-        <Message id="0x48A" name="RBCM_CustomizedStatus_Response" length="6">
+        <Message id="0x48A" name="RBCM (Response)" length="6">
             <!-- see if this is wrong, and actually contains CSTMZSTAT_AUTOLGHT_SENS at 56? -->
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
@@ -540,7 +540,7 @@
             </Signal>
             <Signal name="14" offset="43" length="3" />
         </Message>
-        <Message id="0x48B" name="RBCM_CustomizedStatus" length="8">
+        <Message id="0x48B" name="RBCM (Periodic)" length="8">
             <Signal name="Auto Door Lock Mode (Automatic Transmission)" offset="12" length="4" />
             <Signal name="Interior Light Timeout-Door Close" offset="9" length="3">
                 <Notes> Verified </Notes>
