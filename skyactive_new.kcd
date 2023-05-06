@@ -736,26 +736,6 @@
             <Signal name="Warn_RVM_EME" offset="3" length="1" />
             <Signal name="Warn_RVM_BuzzerRequest" offset="2" length="1" />
         </Message>
-        <Message id="0x48B" name="Unknown_0x48B">
-            <Producer>
-                <NodeRef id="16" />
-            </Producer>
-        </Message>
-        <Message id="0x48E" name="Unknown_0x48E">
-            <Producer>
-                <NodeRef id="16" />
-            </Producer>
-        </Message>
-        <Message id="0x492" name="Unknown_0x492">
-            <Producer>
-                <NodeRef id="16" />
-            </Producer>
-        </Message>
-        <Message id="0x49C" name="Unknown_0x49C">
-            <Producer>
-                <NodeRef id="16" />
-            </Producer>
-        </Message>
         <Message id="0x4CA" name="Unknown_0x4CA" length="8">
             <!-- Defined by not used? -->
         </Message>
