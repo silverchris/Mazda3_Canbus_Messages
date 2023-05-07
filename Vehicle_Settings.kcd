@@ -66,7 +66,7 @@
         <Message id="0x481" name="Advanced Keyless Entry (Response)" length="3" triggered="true">
             <Notes>Sent as response to Advanced Keyless Entry (Set)</Notes>
             <Producer>
-                <NodeRef id="10" /> <!-- This is a guess -->
+                <NodeRef id="16" />
             </Producer>
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
@@ -121,7 +121,7 @@
         <Message id="0x482" name="Advanced Keyless Entry (Periodic)" length="3">
             <Notes>Periodically sent</Notes>
             <Producer>
-                <NodeRef id="10" /> <!-- This is a guess -->
+                <NodeRef id="16" />
             </Producer>
             <Signal name="Keyless Lock Beep Volume" offset="14" length="3" endianess="big">
                 <Notes> Verified </Notes>
@@ -219,6 +219,9 @@
             <Signal name="AEB_Sens" offset="24" length="3" />
         </Message>
         <Message id="0x484" name="Lane Keep Assist/Lane Departure Warning (Response)" length="4">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
             <Signal name="Alert Timing" offset="13" length="3">
@@ -263,6 +266,9 @@
             <Signal name="AEB_Sens" offset="24" length="3" />
         </Message>
         <Message id="0x485" name="Lane Keep Assist/Lane Departure Warning (Periodic)" length="4">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <Signal name="Alert Timing" offset="13" length="3">
                 <Notes> Verified </Notes>
                 <LabelSet>
@@ -321,6 +327,9 @@
             <Signal name="cstmzStat_HBC_Sens" offset="17" length="3" />
         </Message>
         <Message id="0x487" name="High Beam Control (Response)" length="3">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
             <Signal name="High Beam Control" offset="22" length="2">
@@ -334,6 +343,9 @@
             <Signal name="cstmzStat_HBC_Sens" offset="17" length="3" />
         </Message>
         <Message id="0x488" name="High Beam Control (Periodic)" length="3">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <Signal name="High Beam Control" offset="22" length="2">
                 <Notes> Verified </Notes>
                 <LabelSet>
@@ -444,6 +456,9 @@
             <Signal name="14" offset="43" length="3" />
         </Message>
         <Message id="0x48A" name="RBCM (Response)" length="6">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <!-- see if this is wrong, and actually contains CSTMZSTAT_AUTOLGHT_SENS at 56? -->
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
@@ -541,6 +556,9 @@
             <Signal name="14" offset="43" length="3" />
         </Message>
         <Message id="0x48B" name="RBCM (Periodic)" length="8">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <Signal name="Auto Door Lock Mode (Automatic Transmission)" offset="12" length="4" />
             <Signal name="Interior Light Timeout-Door Close" offset="9" length="3">
                 <Notes> Verified </Notes>
@@ -645,6 +663,9 @@
             <Signal name="drvAlt_onOff" offset="8" length="2" />
         </Message>
         <Message id="0x48D" name="PSM_CUSTOMIZE_STATUS_Response" length="2">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
             <Signal name="frontBzVol" offset="13" length="3" />
@@ -652,6 +673,9 @@
             <Signal name="drvAlt_onOff" offset="8" length="2" />
         </Message>
         <Message id="0x48E" name="PSM_CUSTOMIZE_STATUS" length="2">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <Signal name="frontBzVol" offset="13" length="3" />
             <Signal name="rearBzVol" offset="10" length="3" />
             <Signal name="drvAlt_onOff" offset="8" length="2" />
@@ -667,6 +691,9 @@
             <Signal name="CSTMZSTAT_BSMCNTPTN_MDE" offset="10" length="2" />
         </Message>
         <Message id="0x491" name="CSTMZSTAT_BSM_Response" length="2">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
             <Signal name="CSTMZSTAT_BSMIND_BRGHTNS" offset="14" length="2" />
@@ -674,6 +701,9 @@
             <Signal name="CSTMZSTAT_BSMCNTPTN_MDE" offset="10" length="2" />
         </Message>
         <Message id="0x492" name="CSTMZSTAT_BSM" length="2">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <Signal name="CSTMZSTAT_BSMIND_BRGHTNS" offset="14" length="2" />
             <Signal name="CSTMZSTAT_BSMSPTZONE_RNGE" offset="12" length="2" />
             <Signal name="CSTMZSTAT_BSMCNTPTN_MDE" offset="10" length="2" />
@@ -690,6 +720,9 @@
             <Signal name="FrontViewDispaly" offset="15" endianess="big" length="2" />
         </Message>
         <Message id="0x494" name="CAM_VIEW_Customised_Group_Response" length="3">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <Signal name="contents" offset="2" length="2" />
             <Signal name="ParkingSensorInd" offset="0" length="2" />
             <Signal name="IG_ON_AutoDisplay" offset="14" length="2" />
@@ -697,6 +730,9 @@
             <Signal name="FrontViewDispaly" offset="15" endianess="big" length="2" />
         </Message>
         <Message id="0x495" name="CAM_VIEW_Customised_Group" length="3">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <Signal name="ParkingSensorInd" offset="0" length="2" />
             <Signal name="IG_ON_AutoDisplay" offset="14" length="2" />
             <Signal name="GuideLineDisplay" offset="12" length="2" />
@@ -729,6 +765,9 @@
             </Signal>
         </Message>
         <Message id="0x498" name="CCM_CUSTOMIZE_RESPONSE" length="3">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
             <Signal name="pcs_onoff" offset="14" length="2" />
@@ -752,6 +791,9 @@
             </Signal>
         </Message>
         <Message id="0x499" name="CCM_CUSTOMIZE" length="3">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <Signal name="cstmzStat_PCS_OnOff" offset="14" length="2" />
             <Signal name="cstmzStat_PCS_Warning_Thres" offset="12" length="2" />
             <Signal name="DRSS System" offset="10" length="2">
@@ -871,6 +913,9 @@
             <Signal name="idm_max_stage" offset="38" length="2" />
         </Message>
         <Message id="0x49B" name="Unknown_0x49B" length="7">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <Signal name="contents" offset="2" length="2" />
             <Signal name="status" offset="0" length="2" />
             <Signal name="Active Front-lighting System" offset="36" length="2">
@@ -966,6 +1011,9 @@
             <Signal name="idm_max_stage" offset="38" length="2" />
         </Message>
         <Message id="0x49C" name="Unknown_0x49C" length="8">
+            <Producer>
+                <NodeRef id="16" />
+            </Producer>
             <Signal name="Active Front-lighting System" offset="36" length="2">
                 <Notes> Verified </Notes>
                 <LabelSet>
