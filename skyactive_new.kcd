@@ -371,7 +371,7 @@
             <Signal name="HvTmPcm_Tq_Actl" offset="32" length="16" endianess="big" />
             <Signal name="HvRgBrkP_Tq_Rq" offset="48" length="16" endianess="big" />
         </Message>
-        <Message id="0x24A" name="Unknown_0x24A" length="8">
+        <Message id="0x24A" name="HVCntRecord" length="8">
             <!-- Not sure I can test this. May be for hybrids? -->
             <Signal name="HvMtrGen1Aout_N_Actl" offset="0" length="16" endianess="big" />
             <Signal name="HvMtrGen2Aout_N_Actl" offset="16" length="16" endianess="big" />
@@ -633,11 +633,19 @@
             <Signal name="AirAmb_P_Actl" offset="24" length="6" />
             <Signal name="cvdECMMILRequest" offset="38" length="2" />
             <Signal name="DieselGlowplugTelltale" offset="34" length="1" />
-            <Signal name="BatteryChargingTelltale" offset="33" length="1" />
-            <Signal name="cvdFuelCap" offset="47" length="1" />
-            <Signal name="cvdOilPressureWarning" offset="44" length="1" />
+            <Signal name="BatteryChargingTelltale" offset="33" length="1">
+                <Notes>Lights up battery warning light on Instrument Cluster</Notes>
+            </Signal>
+            <Signal name="Fuel_Cap_Warning" offset="47" length="1">
+                <Notes>Lights up Fuel Cap indicator on Instrument Cluster</Notes>
+            </Signal>
+            <Signal name="Oil_Pressure_Warning" offset="44" length="1">
+                <Notes>Lights up Oil Pressure indicator on Instrument Cluster</Notes>
+            </Signal>
             <Signal name="FuelFilterWarning" offset="43" length="1" />
-            <Signal name="Oil_deteriorate_warning" offset="42" length="1" />
+            <Signal name="Oil_Deteriorate_Warning" offset="42" length="1">
+                <Notes>Activates Maintenece reminder indicator on Instrument Cluster</Notes>
+            </Signal>
             <Signal name="OilDtrWrn_Init_B_Eco" offset="41" length="1" />
             <Signal name="DPFTelltale" offset="40" length="1" />
             <Signal name="SedimentWarning" offset="51" length="1" />
@@ -646,6 +654,29 @@
             <Signal name="ElecThrotCnt_Warning" offset="30" length="2" />
             <Signal name="AfterRunCool_Actl" offset="35" length="1" />
             <Signal name="ColdStrtDisable_Telltale" offset="32" length="1" />
+            <Signal name="ENG_CLNT" offset="54" length="2">
+                <Notes>
+                    Controls the coolant temperature indicator in combination with EngClnt_Te_Actl
+                    0 == RED
+                    1 == temperature controled
+                    2 == temperature controled
+                    3 == temperature controled
+                </Notes>
+            </Signal>
+            <Signal name="AIR_AMB_QF" offset="52" length="2">
+                <Notes>
+                    Controls if ambient temperature is display
+                    3 = Displayed
+                    All others = off
+                </Notes>
+            </Signal>
+            <Signal name="AIR_AMB_ACTL" offset="54" endianess="big" length="10">
+                <Notes>
+                    Ambient Temperature in &#188;&#176;C +511
+                    &#176;C = (AIR_AMB_ACTL - 511)/4
+                </Notes>
+                <Value intercept="-511" unit="0.25C" />
+            </Signal>
         </Message>
         <Message id="0x425" name="AFS_Info_Status" length="2" interval="100">
             <Signal name="Warn_AFS_Warning_Status" offset="5" length="3" />
