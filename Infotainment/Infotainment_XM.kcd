@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-->
+<NetworkDefinition
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://kayak.2codeornot2code.org/1.0" xsi:noNamespaceSchemaLocation="../Definition.xsd">
+    <Document name="Mazda SkyActiv CANbus" version="0.01" date="2016-12-11" />
+    <Node id="1" name="CMU" />
+    <Node id="2" name="TAU" />
+    <Node id="3" name="CD" />
+    <Bus name="HS-CAN" baudrate="500000">
+        <Message id="0x140" name="SiriusXmChannel" length="8">
+            <Signal name="Unknown6_1" offset="0" length="8"></Signal>
+            <Signal name="SourceSelect" offset="9" length="2">
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="On" value="1" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Unknown6_3" offset="11" length="1"></Signal>
+            <Signal name="Unknown6_4" offset="13" length="2"></Signal>
+            <Signal name="Channel" offset="16" length="8"></Signal>
+            <Signal name="Unknown6_6" offset="24" length="8"></Signal>
+        </Message>
+        <Message id="0x351" name="XmChannelList">
+            <Producer>
+                <NodeRef id="2" />
+            </Producer>
+            <Multiplex name="XM_Channel_InfoMux" offset="0" length="8">
+                <MuxGroup count="0">
+                    <Signal name="XM Channel ID" offset="8" length="8" />
+                    <Signal name="XM Channel Valid" offset="23" length="1" />
+                    <Signal name="XM Category Valid" offset="22" length="1" />
+                    <Signal name="XM Channel Name Valid" offset="21" length="1" />
+                    <Signal name="XM Channel SID" offset="24" length="8" />
+                    <Signal name="XM Channel Catagory Number" offset="32" length="8" />
+                    <Signal name="XM Channel Name 0" offset="40" length="8" />
+                    <Signal name="XM Channel Name 1" offset="48" length="8" />
+                    <Signal name="XM Channel Name 2" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="1">
+                    <Signal name="XM Channel Name 3" offset="8" length="8" />
+                    <Signal name="XM Channel Name 4" offset="16" length="8" />
+                    <Signal name="XM Channel Name 5" offset="24" length="8" />
+                    <Signal name="XM Channel Name 6" offset="32" length="8" />
+                    <Signal name="XM Channel Name 7" offset="40" length="8" />
+                    <Signal name="XM Channel Name 8" offset="48" length="8" />
+                    <Signal name="XM Channel Name 9" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="2">
+                    <Signal name="XM Channel Name 10" offset="8" length="8" />
+                    <Signal name="XM Channel Name 11" offset="16" length="8" />
+                    <Signal name="XM Channel Name 12" offset="24" length="8" />
+                    <Signal name="XM Channel Name 13" offset="32" length="8" />
+                    <Signal name="XM Channel Name 14" offset="40" length="8" />
+                    <Signal name="XM Channel Name 15" offset="48" length="8" />
+                    <Signal name="XM Channel Name 16" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="3">
+                    <Signal name="XM Channel Name 17" offset="8" length="8" />
+                    <Signal name="XM Channel Name 18" offset="16" length="8" />
+                    <Signal name="XM Channel Category 0" offset="24" length="8" />
+                    <Signal name="XM Channel Category 1" offset="32" length="8" />
+                    <Signal name="XM Channel Category 2" offset="40" length="8" />
+                    <Signal name="XM Channel Category 3" offset="48" length="8" />
+                    <Signal name="XM Channel Category 4" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="4">
+                    <Signal name="XM Channel Category 5" offset="8" length="8" />
+                    <Signal name="XM Channel Category 6" offset="16" length="8" />
+                    <Signal name="XM Channel Category 7" offset="24" length="8" />
+                    <Signal name="XM Channel Category 8" offset="32" length="8" />
+                    <Signal name="XM Channel Category 9" offset="40" length="8" />
+                    <Signal name="XM Channel Category 10" offset="48" length="8" />
+                    <Signal name="XM Channel Category 11" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="5">
+                    <Signal name="XM Channel Category 12" offset="8" length="8" />
+                    <Signal name="XM Channel Category 13" offset="16" length="8" />
+                    <Signal name="XM Channel Category 14" offset="24" length="8" />
+                    <Signal name="XM Channel Category 15" offset="32" length="8" />
+                </MuxGroup>
+            </Multiplex>
+        </Message>
+        <Message id="0x36D" name="XmSignalInfo" length="8" />
+        <Message id="0x36E" name="XmTitleStatus">
+            <Producer>
+                <NodeRef id="2" />
+            </Producer>
+            <Multiplex name="XM_Program_InfoMux" offset="0" length="8">
+                <MuxGroup count="0">
+                    <Signal name="XM Channel" offset="8" length="8" />
+                    <Signal name="XM Program Info Type" offset="16" length="8">
+                        <LabelSet>
+                            <Label name="Channel Name" value="1" />
+                            <Label name="Category" value="2" />
+                            <Label name="Title" value="3" />
+                            <Label name="Artist" value="4" />
+                        </LabelSet>
+                    </Signal>
+                    <Signal name="XM Program String Length" offset="24" length="8" />
+                    <Signal name="XM Program Character 0" offset="32" length="8" />
+                    <Signal name="XM Program Character 1" offset="40" length="8" />
+                    <Signal name="XM Program Character 2" offset="48" length="8" />
+                    <Signal name="XM Program Character 3" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="1">
+                    <Signal name="XM Program Character 4" offset="8" length="8" />
+                    <Signal name="XM Program Character 5" offset="16" length="8" />
+                    <Signal name="XM Program Character 6" offset="24" length="8" />
+                    <Signal name="XM Program Character 7" offset="32" length="8" />
+                    <Signal name="XM Program Character 8" offset="40" length="8" />
+                    <Signal name="XM Program Character 9" offset="48" length="8" />
+                    <Signal name="XM Program Character 10" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="2">
+                    <Signal name="XM Program Character 11" offset="8" length="8" />
+                    <Signal name="XM Program Character 12" offset="16" length="8" />
+                    <Signal name="XM Program Character 13" offset="24" length="8" />
+                    <Signal name="XM Program Character 14" offset="32" length="8" />
+                    <Signal name="XM Program Character 15" offset="40" length="8" />
+                </MuxGroup>
+            </Multiplex>
+        </Message>
+        <Message id="0x412" name="XmSerialNumber" length="8" interval="2000">
+            <Signal name="Character 0" offset="0" length="8" />
+            <Signal name="Character 1" offset="8" length="8" />
+            <Signal name="Character 2" offset="16" length="8" />
+            <Signal name="Character 3" offset="24" length="8" />
+            <Signal name="Character 4" offset="32" length="8" />
+            <Signal name="Character 5" offset="40" length="8" />
+            <Signal name="Character 6" offset="48" length="8" />
+            <Signal name="Character 7" offset="56" length="8" />
+        </Message>
+        <Message id="0x421" name="XmStatus" length="8" interval="1000">
+            <Signal name="RadioStatus" offset="0" length="8" />
+            <Signal name="ErrorStatus" offset="8" length="4" />
+            <Signal name="OperationMode" offset="12" length="2" />
+            <Signal name="RefreshStatus" offset="16" length="1" />
+            <Signal name="CHNameChange" offset="20" length="1" />
+            <Signal name="SongChange" offset="21" length="1" />
+            <Signal name="CATNameChange" offset="22" length="1" />
+            <Signal name="ArtistChange" offset="23" length="1" />
+            <Signal name="ReceivingCh" offset="24" length="8" />
+            <Signal name="ReceivingSID" offset="32" length="8" />
+            <Signal name="ReceivingCAT" offset="40" length="8" />
+            <Signal name="SignalInfoChange" offset="54" length="1" />
+            <Signal name="MuteStatus" offset="55" length="1" />
+        </Message>
+        <Message id="0x422" name="XmModuleStatus" length="8" interval="2000">
+            <Notes>
+                Matches the values reported by the diagnostic menu, but the values don't make sense.
+                XmStackDate is 2029/19/18, which doesn't seem right :)
+            </Notes>
+            <Multiplex name="XmModuleStatusMux" offset="0" length="8">
+                <MuxGroup count="0">
+                    <Signal name="DspSoftwareVersion" offset="8" length="8" />
+                    <Signal name="DspSoftwareDate_YearUpper" offset="16" length="8" />
+                    <Signal name="DspSoftwareDate_YearLower" offset="24" length="8" />
+                    <Signal name="DspSoftwareDate_Month" offset="32" length="8" />
+                    <Signal name="DspSoftwareDate_Day" offset="40" length="8" />
+                    <Signal name="ServiceAuthorizationCode" offset="48" length="8" />
+                    <Signal name="RecieverAuthorizationCode" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="1">
+                    <Signal name="XmStackSoftwareVersion" offset="8" length="8" />
+                    <Signal name="XmStackDate_YearUpper" offset="16" length="8" />
+                    <Signal name="XmStackDate_YearLower" offset="24" length="8" />
+                    <Signal name="XmStackDate_Month" offset="32" length="8" />
+                    <Signal name="XmStackDate_Day" offset="40" length="8" />
+                </MuxGroup>
+            </Multiplex>
+        </Message>
+    </Bus>
+</NetworkDefinition>

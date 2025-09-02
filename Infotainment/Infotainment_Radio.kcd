@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-->
+<NetworkDefinition
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://kayak.2codeornot2code.org/1.0" xsi:noNamespaceSchemaLocation="../Definition.xsd">
+    <Document name="Mazda SkyActiv CANbus" version="0.01" date="2016-12-11" />
+    <Node id="1" name="CMU" />
+    <Node id="2" name="TAU" />
+    <Node id="3" name="CD" />
+    <Bus name="HS-CAN" baudrate="500000">
+        <Message id="0x101" name="AmFmTune" length="8">
+            <Producer>
+                <NodeRef id="1" />
+            </Producer>
+            <Signal name="Tune" offset="0" length="8">
+                <Consumer>
+                    <NodeRef id="2" />
+                </Consumer>
+                <Value type="signed" />
+            </Signal>
+            <Signal name="QuickSeek" offset="10" length="3"/>
+            <Signal name="Seek" offset="13" length="3">
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Down" value="3" />
+                    <Label name="Up" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Search" offset="20" length="4">
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Start" value="15" />
+                    <Label name="Stop" value="1" />
+                </LabelSet>
+            </Signal>
+        </Message>
+        <Message id="0x102" name="RadioProgramSelect" length="8" interval="6000">
+            <Signal name="FreqStep" offset="0" length="16" endianess="big">
+                <Notes>Tune to selected frequency directly</Notes>
+                <Value slope="0.2" intercept="87.5" unit="MHz" />
+            </Signal>
+            <Signal name="Band" offset="16" length="8" />
+            <Signal name="PiCode" offset="32" length="16" endianess="big" />
+            <Signal name="SpsNo" offset="48" length="8" />
+        </Message>
+        <Message id="0x103" name="AmFmAutoMemory" length="8">
+            <Producer>
+                <NodeRef id="1" />
+            </Producer>
+            <Signal name="TestPageSelecion" offset="0" length="2">
+                <Notes>Related to enabling Field Strength Measurements</Notes>
+            </Signal>
+            <Signal name="TestVariation" offset="2" length="2">
+                <Notes>Related to enabling Field Strength Measurements</Notes>
+            </Signal>
+            <Signal name="TestMode" offset="4" length="2">
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="MeasureFieldStrength" offset="6" length="2"></Signal>
+            <Signal name="TestAntenna" offset="11" length="2">
+                <Notes>Related to enabling Field Strength Measurements</Notes>
+            </Signal>
+            <Signal name="Control1HarWrite" offset="13" length="1"></Signal>
+            <Signal name="AutoMemory" offset="14" length="2">
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Start" value="1" />
+                </LabelSet>
+            </Signal>
+        </Message>
+        <Message id="0x104" name="RadioControl" length="8">
+            <Signal name="RdsPtyRequest" offset="0" length="8" />
+            <Signal name="TaRequest" offset="8" length="2" />
+            <Signal name="HdRadioRequest" offset="10" length="2">
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="Off" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="RdsReqRequest" offset="12" length="2" />
+            <Signal name="RdsAfRequest" offset="14" length="2" />
+        </Message>
+        <Message id="0x111" name="SubTunerControlRequest" length="8">
+            <Producer>
+                <NodeRef id="1" />
+            </Producer>
+            <Signal name="SubTuner" offset="0" length="8" />
+            <Signal name="FreqStep" offset="8" length="16" endianess="big">
+                <Value slope="0.2" intercept="87.5" unit="MHz" />
+            </Signal>
+        </Message>
+        <Message id="0x112" name="HdRadioControl" length="8">
+            <Signal name="HdChannelUp" offset="7" length="1" />
+            <Signal name="HdErrorRateDisplayMode" offset="4" length="3" />
+            <Signal name="HdTunerType" offset="2" length="2" />
+            <Signal name="HdPageNumberRequest" offset="8" length="8" />
+            <Signal name="HdDiagTestNumRequest" offset="16" length="8" />
+            <Signal name="HdParameter1Request" offset="24" length="8" />
+            <Signal name="HdParameter2Request" offset="32" length="8" />
+        </Message>
+        <Message id="0x313" name="AutoMemory" length="8">
+            <Producer>
+                <NodeRef id="1" />
+            </Producer>
+            <Signal name="1" offset="2" length="4" />
+            <Signal name="2" offset="6" length="4" />
+        </Message>
+        <Message id="0x363" name="PresetInfo" length="8">
+            <Multiplex name="?" offset="0" length="8">
+                <MuxGroup count="0">
+                    <Signal name="Band" offset="14" length="2">
+                        <LabelSet>
+                            <Label name="AM" value="1" />
+                            <Label name="FM" value="2" />
+                        </LabelSet>
+                    </Signal>
+                    <Signal name="Preset" offset="8" length="4" />
+                    <Signal name="Step" offset="24" length="16" endianess="big">
+                        <Notes>Same values as in 0x414</Notes>
+                        <Value slope="0.2" intercept="87.5" unit="MHz" />
+                    </Signal>
+                </MuxGroup>
+                <MuxGroup count="1">
+                    <Signal name="Station Name 0" offset="8" length="8" />
+                    <Signal name="Station Name 1" offset="16" length="8" />
+                    <Signal name="Station Name 2" offset="24" length="8" />
+                    <Signal name="Station Name 3" offset="32" length="8" />
+                    <Signal name="Station Name 4" offset="40" length="8" />
+                    <Signal name="Station Name 5" offset="48" length="8" />
+                    <Signal name="Station Name 6" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="2">
+                    <Signal name="Station Name 7" offset="8" length="8" />
+                </MuxGroup>
+            </Multiplex>
+        </Message>
+        <Message id="0x364" name="RdsText" length="8">
+            <Notes>VBS_BUS_CAN_Text_Response</Notes>
+            <Multiplex name="RdsText_Infomux" offset="0" length="8">
+                <MuxGroup count="0">
+                    <Signal name="Unknown" offset="8" length="8" />
+                    <Signal name="Character 1" offset="16" length="8" />
+                    <Signal name="Character 2" offset="24" length="8" />
+                    <Signal name="Character 3" offset="32" length="8" />
+                    <Signal name="Character 4" offset="40" length="8" />
+                    <Signal name="Character 5" offset="48" length="8" />
+                    <Signal name="Character 6" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="1">
+                    <Signal name="Character 7" offset="8" length="8" />
+                    <Signal name="Character 8" offset="16" length="8" />
+                    <Signal name="Character 9" offset="24" length="8" />
+                    <Signal name="Character 10" offset="32" length="8" />
+                    <Signal name="Character 11" offset="40" length="8" />
+                    <Signal name="Character 12" offset="48" length="8" />
+                    <Signal name="Character 13" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="2">
+                    <Signal name="Character 14" offset="8" length="8" />
+                    <Signal name="Character 15" offset="16" length="8" />
+                    <Signal name="Character 16" offset="24" length="8" />
+                    <Signal name="Character 17" offset="32" length="8" />
+                    <Signal name="Character 18" offset="40" length="8" />
+                    <Signal name="Character 19" offset="48" length="8" />
+                    <Signal name="Character 20" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="3">
+                    <Signal name="Character 21" offset="8" length="8" />
+                    <Signal name="Character 22" offset="16" length="8" />
+                    <Signal name="Character 23" offset="24" length="8" />
+                    <Signal name="Character 24" offset="32" length="8" />
+                    <Signal name="Character 25" offset="40" length="8" />
+                    <Signal name="Character 26" offset="48" length="8" />
+                    <Signal name="Character 27" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="4">
+                    <Signal name="Character 28" offset="8" length="8" />
+                    <Signal name="Character 29" offset="16" length="8" />
+                    <Signal name="Character 30" offset="24" length="8" />
+                    <Signal name="Character 31" offset="32" length="8" />
+                    <Signal name="Character 32" offset="40" length="8" />
+                    <Signal name="Character 33" offset="48" length="8" />
+                    <Signal name="Character 34" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="5">
+                    <Signal name="Character 35" offset="8" length="8" />
+                    <Signal name="Character 36" offset="16" length="8" />
+                    <Signal name="Character 37" offset="24" length="8" />
+                    <Signal name="Character 38" offset="32" length="8" />
+                    <Signal name="Character 39" offset="40" length="8" />
+                    <Signal name="Character 40" offset="48" length="8" />
+                    <Signal name="Character 41" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="6">
+                    <Signal name="Character 42" offset="8" length="8" />
+                    <Signal name="Character 43" offset="16" length="8" />
+                    <Signal name="Character 44" offset="24" length="8" />
+                    <Signal name="Character 45" offset="32" length="8" />
+                    <Signal name="Character 46" offset="40" length="8" />
+                    <Signal name="Character 47" offset="48" length="8" />
+                    <Signal name="Character 48" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="7">
+                    <Signal name="Character 49" offset="8" length="8" />
+                    <Signal name="Character 50" offset="16" length="8" />
+                    <Signal name="Character 51" offset="24" length="8" />
+                    <Signal name="Character 52" offset="32" length="8" />
+                    <Signal name="Character 53" offset="40" length="8" />
+                    <Signal name="Character 54" offset="48" length="8" />
+                    <Signal name="Character 55" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="8">
+                    <Signal name="Character 56" offset="8" length="8" />
+                    <Signal name="Character 57" offset="16" length="8" />
+                    <Signal name="Character 58" offset="24" length="8" />
+                    <Signal name="Character 59" offset="32" length="8" />
+                    <Signal name="Character 60" offset="40" length="8" />
+                    <Signal name="Character 61" offset="48" length="8" />
+                    <Signal name="Character 62" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="9">
+                    <Signal name="Character 63" offset="8" length="8" />
+                    <Signal name="Character 64" offset="16" length="8" />
+                    <Signal name="Character 65" offset="24" length="8" />
+                </MuxGroup>
+            </Multiplex>
+        </Message>
+        <Message id="0x365" name="HdRadioSis" length="8">
+            <Multiplex name="HdRadioSis_Infomux" offset="0" length="8">
+                <MuxGroup count="0">
+                    <Signal name="Character 1" offset="24" length="8" />
+                    <Signal name="Character 2" offset="32" length="8" />
+                    <Signal name="Character 3" offset="40" length="8" />
+                    <Signal name="Character 4" offset="48" length="8" />
+                    <Signal name="Character 5" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="1">
+                    <Signal name="Character 6" offset="8" length="8" />
+                    <Signal name="Character 7" offset="16" length="8" />
+                </MuxGroup>
+            </Multiplex>
+        </Message>
+        <Message id="0x366" name="HdRadioText" length="8">
+            <Multiplex name="Unknown_0x366_Infomux" offset="0" length="8">
+                <MuxGroup count="0">
+                    <Signal name="Type" offset="8" length="8">
+                        <LabelSet>
+                            <Label name="Title" value="128" />
+                            <Label name="Artist" value="129" />
+                            <Label name="Unknown1" value="130" />
+                            <Label name="Unknown2" value="131" />
+                            <Label name="Unknown3" value="132" />
+                            <Label name="Unknown4" value="133" />
+                            <Label name="Unknown5" value="134" />
+                        </LabelSet>
+                    </Signal>
+                    <Signal name="Encoding" offset="16" length="8">
+                        <LabelSet>
+                            <Label name="ASCII" value="0" />
+                            <Label name="UTF-8" value="1" />
+                        </LabelSet>
+                    </Signal>
+                    <Signal name="Length" offset="24" length="8" />
+                    <Signal name="Character 1" offset="32" length="8" />
+                    <Signal name="Character 2" offset="40" length="8" />
+                    <Signal name="Character 3" offset="48" length="8" />
+                    <Signal name="Character 4" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="1">
+                    <Signal name="Character 5" offset="8" length="8" />
+                    <Signal name="Character 6" offset="16" length="8" />
+                    <Signal name="Character 7" offset="24" length="8" />
+                    <Signal name="Character 8" offset="32" length="8" />
+                    <Signal name="Character 9" offset="40" length="8" />
+                    <Signal name="Character 10" offset="48" length="8" />
+                    <Signal name="Character 11" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="2">
+                    <Signal name="Character 12" offset="8" length="8" />
+                    <Signal name="Character 13" offset="16" length="8" />
+                    <Signal name="Character 14" offset="24" length="8" />
+                    <Signal name="Character 15" offset="32" length="8" />
+                    <Signal name="Character 16" offset="40" length="8" />
+                    <Signal name="Character 17" offset="48" length="8" />
+                    <Signal name="Character 18" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="3">
+                    <Signal name="Character 19" offset="8" length="8" />
+                    <Signal name="Character 20" offset="16" length="8" />
+                    <Signal name="Character 21" offset="24" length="8" />
+                    <Signal name="Character 22" offset="32" length="8" />
+                    <Signal name="Character 23" offset="40" length="8" />
+                    <Signal name="Character 24" offset="48" length="8" />
+                    <Signal name="Character 25" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="4">
+                    <Signal name="Character 26" offset="8" length="8" />
+                    <Signal name="Character 27" offset="16" length="8" />
+                    <Signal name="Character 28" offset="24" length="8" />
+                    <Signal name="Character 29" offset="32" length="8" />
+                    <Signal name="Character 30" offset="40" length="8" />
+                    <Signal name="Character 31" offset="48" length="8" />
+                    <Signal name="Character 32" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="5">
+                    <Signal name="Character 33" offset="8" length="8" />
+                    <Signal name="Character 34" offset="16" length="8" />
+                    <Signal name="Character 35" offset="24" length="8" />
+                    <Signal name="Character 36" offset="32" length="8" />
+                    <Signal name="Character 37" offset="40" length="8" />
+                    <Signal name="Character 38" offset="48" length="8" />
+                    <Signal name="Character 39" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="6">
+                    <Signal name="Character 40" offset="8" length="8" />
+                    <Signal name="Character 41" offset="16" length="8" />
+                    <Signal name="Character 42" offset="24" length="8" />
+                    <Signal name="Character 43" offset="32" length="8" />
+                    <Signal name="Character 44" offset="40" length="8" />
+                    <Signal name="Character 45" offset="48" length="8" />
+                    <Signal name="Character 46" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="7">
+                    <Signal name="Character 47" offset="8" length="8" />
+                    <Signal name="Character 48" offset="16" length="8" />
+                    <Signal name="Character 49" offset="24" length="8" />
+                    <Signal name="Character 50" offset="32" length="8" />
+                    <Signal name="Character 51" offset="40" length="8" />
+                    <Signal name="Character 52" offset="48" length="8" />
+                    <Signal name="Character 53" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="8">
+                    <Signal name="Character 54" offset="8" length="8" />
+                    <Signal name="Character 55" offset="16" length="8" />
+                    <Signal name="Character 56" offset="24" length="8" />
+                    <Signal name="Character 57" offset="32" length="8" />
+                    <Signal name="Character 58" offset="40" length="8" />
+                    <Signal name="Character 59" offset="48" length="8" />
+                    <Signal name="Character 60" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="9">
+                    <Signal name="Character 61" offset="8" length="8" />
+                    <Signal name="Character 62" offset="16" length="8" />
+                    <Signal name="Character 63" offset="24" length="8" />
+                    <Signal name="Character 64" offset="32" length="8" />
+                    <Signal name="Character 65" offset="40" length="8" />
+                    <Signal name="Character 66" offset="48" length="8" />
+                    <Signal name="Character 67" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="10">
+                    <Signal name="Character 68" offset="8" length="8" />
+                    <Signal name="Character 69" offset="16" length="8" />
+                    <Signal name="Character 70" offset="24" length="8" />
+                    <Signal name="Character 71" offset="32" length="8" />
+                    <Signal name="Character 72" offset="40" length="8" />
+                    <Signal name="Character 73" offset="48" length="8" />
+                    <Signal name="Character 74" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="11">
+                    <Signal name="Character 75" offset="8" length="8" />
+                    <Signal name="Character 76" offset="16" length="8" />
+                    <Signal name="Character 77" offset="24" length="8" />
+                    <Signal name="Character 78" offset="32" length="8" />
+                    <Signal name="Character 79" offset="40" length="8" />
+                    <Signal name="Character 80" offset="48" length="8" />
+                    <Signal name="Character 81" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="12">
+                    <Signal name="Character 82" offset="8" length="8" />
+                    <Signal name="Character 83" offset="16" length="8" />
+                    <Signal name="Character 84" offset="24" length="8" />
+                    <Signal name="Character 85" offset="32" length="8" />
+                    <Signal name="Character 86" offset="40" length="8" />
+                    <Signal name="Character 87" offset="48" length="8" />
+                    <Signal name="Character 88" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="13">
+                    <Signal name="Character 89" offset="8" length="8" />
+                    <Signal name="Character 90" offset="16" length="8" />
+                    <Signal name="Character 91" offset="24" length="8" />
+                    <Signal name="Character 92" offset="32" length="8" />
+                    <Signal name="Character 93" offset="40" length="8" />
+                    <Signal name="Character 94" offset="48" length="8" />
+                    <Signal name="Character 95" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="14">
+                    <Signal name="Character 96" offset="8" length="8" />
+                    <Signal name="Character 97" offset="16" length="8" />
+                    <Signal name="Character 98" offset="24" length="8" />
+                    <Signal name="Character 99" offset="32" length="8" />
+                    <Signal name="Character 100" offset="40" length="8" />
+                    <Signal name="Character 101" offset="48" length="8" />
+                    <Signal name="Character 102" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="15">
+                    <Signal name="Character 103" offset="8" length="8" />
+                    <Signal name="Character 104" offset="16" length="8" />
+                    <Signal name="Character 105" offset="24" length="8" />
+                    <Signal name="Character 106" offset="32" length="8" />
+                    <Signal name="Character 107" offset="40" length="8" />
+                    <Signal name="Character 108" offset="48" length="8" />
+                    <Signal name="Character 109" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="16">
+                    <Signal name="Character 110" offset="8" length="8" />
+                    <Signal name="Character 111" offset="16" length="8" />
+                    <Signal name="Character 112" offset="24" length="8" />
+                    <Signal name="Character 113" offset="32" length="8" />
+                    <Signal name="Character 114" offset="40" length="8" />
+                    <Signal name="Character 115" offset="48" length="8" />
+                    <Signal name="Character 116" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="17">
+                    <Signal name="Character 118" offset="8" length="8" />
+                    <Signal name="Character 119" offset="16" length="8" />
+                    <Signal name="Character 120" offset="24" length="8" />
+                    <Signal name="Character 121" offset="32" length="8" />
+                    <Signal name="Character 122" offset="40" length="8" />
+                    <Signal name="Character 123" offset="48" length="8" />
+                    <Signal name="Character 124" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="18">
+                    <Notes>I bet this only goes up to 128</Notes>
+                    <Signal name="Character 125" offset="8" length="8" />
+                    <Signal name="Character 126" offset="16" length="8" />
+                    <Signal name="Character 127" offset="24" length="8" />
+                    <Signal name="Character 128" offset="32" length="8" />
+                    <Signal name="Character 129" offset="40" length="8" />
+                </MuxGroup>
+            </Multiplex>
+        </Message>
+        <Message id="0x36A" name="HdRadioError" length="8" />
+        <Message id="0x414" name="AmFmStatus" length="8" interval="1000">
+            <Multiplex name="Band" offset="8" length="8">
+                <MuxGroup count="0">
+                    <Signal name="FM Frequency" length="16" offset="16" endianess="big">
+                        <!-- Region 1, Europe -->
+                        <!-- <Value slope="0.1" intercept="87.5" unit="MHz" /> -->
+                        <!-- Region 2, North America -->
+                        <Value slope="0.2" intercept="87.5" unit="MHz" />
+                        <!-- Region 3 can be either the same as Region 1 or Region 2 depending on
+                        DestCode -->
+                        <!-- Region 4, China -->
+                        <!-- <Value slope="0.1" intercept="87.5" unit="MHz" /> -->
+                        <!-- Region 5, Japan -->
+                        <!-- <Value slope="0.1" intercept="76.0" unit="MHz" /> -->
+                    </Signal>
+                </MuxGroup>
+                <MuxGroup count="16">
+                    <Signal name="AM Frequency" length="16" offset="16" endianess="big">
+                        <!-- Region 1, Europe -->
+                        <!-- <Value slope="9.0" intercept="531.0" unit="kHz" /> -->
+                        <!-- Region 2, North America -->
+                        <Value slope="10.0" intercept="520.0" unit="kHz" />
+                        <!-- Region 3, Destcode 2 -->
+                        <!-- <Value slope="9.0" intercept="531.0" unit="kHz" /> -->
+                        <!-- Region 3, Destcode 4 -->
+                        <!-- <Value slope="9.0" intercept="531.0" unit="kHz" /> -->
+                        <!-- Region 3, Destcode 5 -->
+                        <!-- <Value slope="9.0" intercept="522.0" unit="kHz" /> -->
+                        <!-- Region 4, China -->
+                        <!-- <Value slope="9.0" intercept="531.0" unit="kHz" /> -->
+                        <!-- Region 5, Japan -->
+                        <!-- <Value slope="9.0" intercept="522.0" unit="kHz" /> -->
+                    </Signal>
+                </MuxGroup>
+                <MuxGroup count="17">
+                    <Signal name="LW Frequency" length="16" offset="16" endianess="big">
+                        <Value slope="9.0" intercept="153.0" unit="kHz" /> <!-- Region 1, Europe -->
+                    </Signal>
+                </MuxGroup>
+            </Multiplex>
+            <Signal name="Mode" offset="0" length="8" />
+            <Signal name="Stereo" offset="36" length="1" />
+            <Signal name="AntB Status" offset="37" length="2" />
+        </Message>
+        <Message id="0x416" name="RadioText" interval="1000">
+            <Notes>Seems to be the same text as RdsText, but in a less usable format</Notes>
+            <Producer>
+                <NodeRef id="2" />
+            </Producer>
+            <Signal name="Character 0" offset="0" length="8" />
+            <Signal name="Character 1" offset="8" length="8" />
+            <Signal name="Character 2" offset="16" length="8" />
+            <Signal name="Character 3" offset="24" length="8" />
+            <Signal name="Character 4" offset="32" length="8" />
+            <Signal name="Character 5" offset="40" length="8" />
+            <Signal name="Character 6" offset="48" length="8" />
+            <Signal name="Character 7" offset="56" length="8" />
+        </Message>
+        <Message id="0x417" name="HDRadioStatus" length="8" interval="1000">
+            <Signal name="ProgramNumber" offset="0" length="4">
+                <LabelSet>
+                    <Label name="HD1" value="0" />
+                    <Label name="HD2" value="1" />
+                    <Label name="HD3" value="2" />
+                    <Label name="HD4" value="3" />
+                    <Label name="HD5" value="4" />
+                    <Label name="HD6" value="5" />
+                    <Label name="HD7" value="6" />
+                    <Label name="HD8" value="7" />
+                </LabelSet>
+            </Signal>
+            <!-- <Signal name="Unknown 2" offset="4" length="1" /> -->
+            <Signal name="HdAvailable" offset="5" length="1" />
+            <Signal name="HdActive" offset="6" length="1" />
+            <Signal name="HdEnabled" offset="7" length="1" />
+            <Signal name="HD1Available" offset="8" length="1" />
+            <Signal name="HD2Available" offset="9" length="1" />
+            <Signal name="HD3Available" offset="10" length="1" />
+            <Signal name="HD4Available" offset="11" length="1" />
+            <Signal name="HD5Available" offset="12" length="1" />
+            <Signal name="HD6Available" offset="13" length="1" />
+            <Signal name="HD7Available" offset="14" length="1" />
+            <Signal name="HD8Available" offset="15" length="1" />
+            <!-- <Signal name="Unknown 13" offset="16" length="1" /> -->
+        </Message>
+        <Message id="0x41B" name="HdRadioTuner2Status" length="8" interval="1000">
+            <Signal name="Status" offset="0" length="8" />
+            <Signal name="FreqStep" offset="8" length="16" endianess="big">
+                <Value slope="0.2" intercept="87.5" unit="MHz" />
+            </Signal>
+        </Message>
+        <Message id="0x415" name="RdsStatus" length="8" interval="1000">
+            <Notes>I Think this is correct, but don't have enough information to verify</Notes>
+            <Signal name="0" offset="0" length="8" />
+            <Signal name="1" offset="16" length="8" />
+            <Signal name="2" offset="15" length="1" />
+            <Signal name="3" offset="13" length="2" />
+            <Signal name="4" offset="12" length="1" />
+            <Signal name="5" offset="10" length="2" />
+            <Signal name="6" offset="31" length="1" />
+            <Signal name="7" offset="30" length="1" />
+            <Signal name="8" offset="29" length="1" />
+            <Signal name="9" offset="28" length="1" />
+            <Signal name="10" offset="27" length="1" />
+            <Signal name="11" offset="26" length="1" />
+            <Signal name="12" offset="32" length="16" endianess="big" />
+        </Message>
+        <Message id="0x41A" name="TauTestModeResponse" length="8" interval="1000">
+            <Notes>Data only seems to be valid when enabled, otherwise all 0</Notes>
+            <Signal name="FieldStrength" offset="0" length="8">
+                <Value unit="dBuV" />
+            </Signal>
+            <Signal name="Offset" offset="8" length="8">
+                <Value unit="kHz" type="signed" />
+            </Signal>
+            <Signal name="NeighboringChannel" offset="16" length="8" />
+            <Signal name="Multipath" offset="24" length="8" />
+            <Signal name="Quality" offset="32" length="8" />
+            <Signal name="AutoGain" offset="40" length="8" />
+            <Signal name="Pilot" offset="48" length="8" />
+        </Message>
+    </Bus>
+</NetworkDefinition>

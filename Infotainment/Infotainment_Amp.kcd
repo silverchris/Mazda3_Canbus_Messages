@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-->
+<NetworkDefinition
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://kayak.2codeornot2code.org/1.0" xsi:noNamespaceSchemaLocation="../Definition.xsd">
+    <Document name="Mazda SkyActiv CANbus" version="0.01" date="2016-12-11" />
+    <Node id="1" name="CMU" />
+    <Node id="2" name="TAU" />
+    <Node id="3" name="CD" />
+    <Bus name="HS-CAN" baudrate="500000">
+        <Message id="0x113" name="Volume" length="8">
+            <Producer>
+                <NodeRef id="1" />
+            </Producer>
+            <Signal name="VolumeUnknown0" offset="4" length="2"></Signal>
+            <Signal name="MuteState" offset="6" length="2">
+                <Consumer>
+                    <NodeRef id="2" />
+                </Consumer>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="OFF" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="VolumeChange" offset="8" length="8">
+                <Notes>Amount to add or subtract from the volume setting. Not absolute</Notes>
+                <Consumer>
+                    <NodeRef id="2" />
+                </Consumer>
+                <Value type="signed"></Value>
+            </Signal>
+            <Signal name="VolumeUnknown1" offset="18" length="4"></Signal>
+            <Signal name="Ducking" offset="22" length="2">
+                <Notes>Not fully understood. Seen when Navigation audio is played</Notes>
+                <Consumer>
+                    <NodeRef id="2" />
+                </Consumer>
+            </Signal>
+        </Message>
+        <Message id="0x120" name="AudioSettings" length="8">
+            <Notes>Contains Bass, Treble, Balance, Fade, Bose Settings</Notes>
+            <Producer>
+                <NodeRef id="1" />
+            </Producer>
+            <Signal name="Bass" offset="0" length="8">
+                <Notes></Notes>
+                <Consumer>
+                    <NodeRef id="2" />
+                </Consumer>
+                <Value type="signed"></Value>
+            </Signal>
+            <Signal name="Treble" offset="8" length="8">
+                <Notes></Notes>
+                <Consumer>
+                    <NodeRef id="2" />
+                </Consumer>
+                <Value type="signed"></Value>
+            </Signal>
+            <Signal name="Fade" offset="16" length="8">
+                <Notes>Negative values move towards front, Positive towards back</Notes>
+                <Consumer>
+                    <NodeRef id="2" />
+                </Consumer>
+                <Value type="signed"></Value>
+            </Signal>
+            <Signal name="Balance" offset="24" length="8">
+                <Notes>Negative values move towards left, Positive towards right</Notes>
+                <Consumer>
+                    <NodeRef id="2" />
+                </Consumer>
+                <Value type="signed"></Value>
+            </Signal>
+            <Signal name="AudioSettingsUnknown0" offset="32" length="8">
+            </Signal>
+            <Signal name="BoseCenterpoint" offset="42" length="2">
+                <Consumer>
+                    <NodeRef id="2" />
+                </Consumer>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="OFF" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="BoseAudioPilot" offset="44" length="2">
+                <Consumer>
+                    <NodeRef id="2" />
+                </Consumer>
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="OFF" value="1" />
+                    <Label name="On" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="AudioSettingsUnknown1" offset="46" length="2"></Signal>
+        </Message>
+        <Message id="0x418" name="AmpStatus" length="8" interval="1000">
+            <Notes>VBS_BUS_CAN_SoundSelect_Status</Notes>
+            <Signal name="Volume" offset="0" length="8">
+                <Value min="0" max="64" />
+            </Signal>
+            <Signal name="Bass" offset="8" length="8">
+                <Value type="signed" min="-6" max="6" />
+            </Signal>
+            <Signal name="Treble" offset="16" length="8">
+                <Value type="signed" min="-6" max="6" />
+            </Signal>
+            <Signal name="Balance" offset="24" length="8">
+                <Value type="signed" min="-8" max="8" />
+            </Signal>
+            <Signal name="Fade" offset="32" length="8">
+                <Value type="signed" min="-8" max="8" />
+            </Signal>
+            <Signal name="ASL" offset="40" length="8"></Signal>
+            <Signal name="NAVI" offset="48" length="1">
+                <Notes>Indicates that the TAU is using specific volume for the Navigation source</Notes>
+            </Signal>
+            <Signal name="RingTone" offset="49" length="1">
+                <Notes>Indicates that the TAU is using specific volume for the RingTone source(24)</Notes>
+            </Signal>
+            <Signal name="BTHF" offset="50" length="1">
+                <Notes>Indicates that the TAU is using specific volume for the BTHF source(19)</Notes>
+            </Signal>
+            <Signal name="AUX_VOL" offset="51" length="1"></Signal>
+            <Signal name="TA_VOL" offset="52" length="1"></Signal>
+            <Signal name="Mute_System" offset="53" length="1"></Signal>
+            <Signal name="Mute_SW" offset="54" length="1"></Signal>
+            <Signal name="Mute_Event" offset="55" length="1"></Signal>
+            <Signal name="DVD_VOL" offset="58" length="1"></Signal>
+            <Signal name="TV_VOL" offset="59" length="1"></Signal>
+            <Signal name="AMP_Types" offset="60" length="1"></Signal>
+            <Signal name="Bose_CenterPoint" offset="61" length="1" />
+            <Signal name="Bose_AudioPilot" offset="62" length="1" />
+        </Message>
+        <!--Input
+        Switching Messages-->
+        <Message id="0x31B" name="SourceChangeRequest" length="8">
+            <Signal name="To" offset="0" length="8">
+                <LabelSet>
+                    <Label name="AM" value="2" />
+                    <Label name="FM" value="3" />
+                    <Label name="CD" value="14" />
+                    <Label name="XM" value="17" />
+                    <Label name="BTHF" value="19" />
+                    <Label name="RingTone" value="24" />
+                </LabelSet>
+            </Signal>
+            <Signal name="From" offset="8" length="8">
+                <LabelSet>
+                    <Label name="AM" value="2" />
+                    <Label name="FM" value="3" />
+                    <Label name="CD" value="14" />
+                    <Label name="XM" value="17" />
+                    <Label name="BTHF" value="19" />
+                    <Label name="RingTone" value="24" />
+                </LabelSet>
+            </Signal>
+        </Message>
+        <Message id="0x36B" name="SourceChangeResponse" length="8">
+            <Notes>The function of this is unknown</Notes>
+            <Signal name="On" offset="0" length="8" />
+            <Signal name="Off" offset="8" length="8" />
+        </Message>
+        <Message id="0x419" name="SoundSelectStatus" length="8" interval="1000">
+            <Signal name="Source" offset="0" length="8">
+                <LabelSet>
+                    <Label name="AM" value="2" />
+                    <Label name="FM" value="3" />
+                    <Label name="CD" value="14" />
+                    <Label name="XM" value="17" />
+                    <Label name="BTHF" value="19" />
+                    <Label name="RingTone" value="24" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Interrupt" offset="8" length="8"></Signal>
+        </Message>
+
+        <!-- TAU general -->
+        <Message id="0x410" name="TauVersion" length="8">
+            <Multiplex name="TauVersionMux" offset="0" length="8">
+                <MuxGroup count="0">
+                    <Signal name="Manufacturer" offset="8" length="8">
+                        <LabelSet>
+                            <Label name="Panasonic" value="2"/>
+                        </LabelSet>
+                    </Signal>
+                    <Signal name="PartNumber 1" offset="16" length="8" />
+                    <Signal name="PartNumber 2" offset="24" length="8" />
+                    <Signal name="PartNumber 3" offset="32" length="8" />
+                    <Signal name="PartNumber 4" offset="40" length="8" />
+                    <Signal name="SoftwareVer 0" offset="48" length="8" />
+                    <Signal name="SoftwareVer 1" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="1">
+                    <Signal name="SoftwareVer 2" offset="8" length="8" />
+                    <Signal name="SoftwareVer 3" offset="16" length="8" />
+                    <Signal name="SoftwareVer 4" offset="24" length="8" />
+                    <Signal name="SoftwareVer 5" offset="32" length="8" />
+                    <Signal name="SoftwareVer 6" offset="40" length="8" />
+                    <Signal name="SoftwareVer 7" offset="48" length="8" />
+                </MuxGroup>
+            </Multiplex>
+        </Message>
+        <Message id="0x411" name="TauStatus" length="8" interval="1000">
+            <Notes>Seems to oscillate between two sets of values</Notes>
+            <Signal name="TauType" offset="32" length="4" />
+            <Signal name="DestCode" offset="45" length="3" />
+            <Signal name="XmConfigStatus" offset="44" length="1" />
+            <Signal name="TauConnectStandby" offset="43" length="1">
+                <LabelSet>
+                    <Label name="Standby" value="0" />
+                    <Label name="Connected" value="1" />
+                </LabelSet>
+            </Signal>
+            <Signal name="RsesConnect" offset="42" length="1" />
+            <Signal name="AuxConnect" offset="41" length="1" />
+            <Signal name="DabConfigStatus" offset="40" length="1" />
+        </Message>
+    </Bus>
+</NetworkDefinition>

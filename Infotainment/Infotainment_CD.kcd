@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-->
+<NetworkDefinition
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://kayak.2codeornot2code.org/1.0" xsi:noNamespaceSchemaLocation="../Definition.xsd">
+    <Document name="Mazda SkyActiv CANbus" version="0.01" date="2016-12-11" />
+    <Node id="1" name="CMU" />
+    <Node id="2" name="TAU" />
+    <Node id="3" name="CD" />
+    <Bus name="HS-CAN" baudrate="500000">
+        <Message id="0x150" name="CdControl" length="8">
+            <Signal name="Command" offset="0" length="8">
+                <LabelSet>
+                    <Label name="No change" value="0" />
+                    <Label name="Pause" value="1" />
+                    <Label name="Play" value="2" />
+                    <Label name="Next" value="3" />
+                    <Label name="Previous" value="4" />
+                    <Label name="FastForward" value="5" />
+                    <Label name="Rewind" value="6" />
+                    <Label name="Scan" value="12" />
+                </LabelSet>
+            </Signal>
+            <!-- <Signal name="0" offset="10" length="2" /> -->
+            <Signal name="Random" offset="12" length="2">
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="On" value="2" />
+                    <Label name="Off" value="3" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Repeat" offset="14" length="2">
+                <LabelSet>
+                    <Label name="No Change" value="0" />
+                    <Label name="On" value="1" />
+                    <Label name="Off" value="3" />
+                </LabelSet>
+            </Signal>
+            <!-- <Signal name="1" offset="16" length="8"/> -->
+            <Signal name="2" offset="24" length="8">
+                <Notes>Possibly select track by index?</Notes>
+            </Signal>
+            <!-- <Signal name="3" offset="32" length="4"/>
+            <Signal name="4" offset="36" length="4"/>
+            <Signal name="5" offset="40" length="7"/>
+            <Signal name="6" offset="47" length="1"/>
+            <Signal name="7" offset="54" length="2"/> -->
+        </Message>
+        <Message id="0x320" name="TrackMetadataRequest" length="8">
+            <Notes>Requests 0x370 be sent</Notes>
+            <Signal name="Type" offset="0" length="8">
+                <LabelSet>
+                    <Label name="TrackTitle" value="1" />
+                    <Label name="AlbumTitle" value="2" />
+                    <Label name="Artist" value="3" />
+                    <Label name="Folder" value="5" />
+                    <Label name="AlbumTitle2" value="6" />
+                </LabelSet>
+            </Signal>
+        </Message>
+        <Message id="0x330" name="FolderMetadataRequest" length="8">
+            <Notes>Requests 0x380 be sent</Notes>
+            <Signal name="CMD" offset="2" length="3">
+                <LabelSet>
+                    <Label name="ChangeFolder" value="4" />
+                    <Label name="ListFiles" value="2" />
+                    <Label name="ListFolders" value="3" />
+                    <Label name="ChangeFolder" value="4" />
+                </LabelSet>
+            </Signal>
+            <Signal name="?" offset="5" length="3">
+                <Notes>Set to 3 or 4 when CMD is ChangeFolder</Notes>
+            </Signal>
+            <Signal name="0" offset="8" length="8" />
+            <Signal name="SelectedIndex" offset="16" length="8">
+                <Notes>Index of the folder to change too when CMD is ChangeFolder</Notes>
+            </Signal>
+            <Signal name="1" offset="24" length="8" />
+            <Signal name="2" offset="32" length="8" />
+            <Signal name="3" offset="40" length="8">
+                <Notes>Set to 1 when CMD is ListFolders or ListFiles</Notes>
+            </Signal>
+            <Signal name="Length" offset="48" length="8">
+                <Notes>Seems to be the number of entries requested + 1</Notes>
+            </Signal>
+        </Message>
+        <Message id="0x370" name="CdDvdMetadata" length="8">
+            <Notes>
+                Requested by 0x320
+            </Notes>
+            <Signal name="Terminator" offset="2" length="2" />
+            <Signal name="End" offset="0" length="1">
+                <Notes>
+                    Indicates the end of this entry
+                </Notes>
+            </Signal>
+            <Multiplex name="TrackMetaData" offset="4" length="4">
+                <MuxGroup count="0">
+                    <Signal name="Encoding" offset="8" length="8">
+                        <LabelSet>
+                            <Label name="SHIFT-JIS" value="0" />
+                            <Label name="ISO8859-1" value="1" />
+                            <Label name="ASCII" value="2" />
+                            <Label name="UTF-8" value="3" />
+                            <Label name="UTF-16BE" value="4" />
+                            <Label name="UTF-16LE" value="5" />
+                            <Label name="UTF-32" value="6" />
+                        </LabelSet>
+                    </Signal>
+                    <Signal name="Type" offset="16" length="8">
+                        <LabelSet>
+                            <Label name="TrackTitle" value="1" />
+                            <Label name="AlbumTitle" value="2" />
+                            <Label name="Artist" value="3" />
+                            <Label name="Folder" value="5" />
+                            <Label name="AlbumTitle2" value="6" />
+                        </LabelSet>
+                    </Signal>
+                    <Signal name="?" offset="24" length="8" />
+                    <Signal name="Character 1" offset="32" length="8" />
+                    <Signal name="Character 2" offset="40" length="8" />
+                    <Signal name="Character 3" offset="48" length="8" />
+                    <Signal name="Character 4" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="1">
+                    <Signal name="Character 5" offset="8" length="8" />
+                    <Signal name="Character 6" offset="16" length="8" />
+                    <Signal name="Character 7" offset="24" length="8" />
+                    <Signal name="Character 8" offset="32" length="8" />
+                    <Signal name="Character 9" offset="40" length="8" />
+                    <Signal name="Character 10" offset="48" length="8" />
+                    <Signal name="Character 11" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="2">
+                    <Signal name="Character 12" offset="8" length="8" />
+                    <Signal name="Character 13" offset="16" length="8" />
+                    <Signal name="Character 14" offset="24" length="8" />
+                    <Signal name="Character 15" offset="32" length="8" />
+                    <Signal name="Character 16" offset="40" length="8" />
+                    <Signal name="Character 17" offset="48" length="8" />
+                    <Signal name="Character 18" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="3">
+                    <Signal name="Character 19" offset="8" length="8" />
+                    <Signal name="Character 20" offset="16" length="8" />
+                    <Signal name="Character 21" offset="24" length="8" />
+                    <Signal name="Character 22" offset="32" length="8" />
+                    <Signal name="Character 23" offset="40" length="8" />
+                    <Signal name="Character 24" offset="48" length="8" />
+                    <Signal name="Character 25" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="4">
+                    <Signal name="Character 26" offset="8" length="8" />
+                    <Signal name="Character 27" offset="16" length="8" />
+                    <Signal name="Character 28" offset="24" length="8" />
+                    <Signal name="Character 29" offset="32" length="8" />
+                    <Signal name="Character 30" offset="40" length="8" />
+                    <Signal name="Character 31" offset="48" length="8" />
+                    <Signal name="Character 32" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="5">
+                    <Signal name="Character 33" offset="8" length="8" />
+                    <Signal name="Character 34" offset="16" length="8" />
+                    <Signal name="Character 35" offset="24" length="8" />
+                    <Signal name="Character 36" offset="32" length="8" />
+                    <Signal name="Character 37" offset="40" length="8" />
+                    <Signal name="Character 38" offset="48" length="8" />
+                    <Signal name="Character 39" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="6">
+                    <Signal name="Character 40" offset="8" length="8" />
+                    <Signal name="Character 41" offset="16" length="8" />
+                    <Signal name="Character 42" offset="24" length="8" />
+                    <Signal name="Character 43" offset="32" length="8" />
+                    <Signal name="Character 44" offset="40" length="8" />
+                    <Signal name="Character 45" offset="48" length="8" />
+                    <Signal name="Character 46" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="7">
+                    <Signal name="Character 47" offset="8" length="8" />
+                    <Signal name="Character 48" offset="16" length="8" />
+                    <Signal name="Character 49" offset="24" length="8" />
+                    <Signal name="Character 50" offset="32" length="8" />
+                    <Signal name="Character 51" offset="40" length="8" />
+                    <Signal name="Character 52" offset="48" length="8" />
+                    <Signal name="Character 53" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="8">
+                    <Signal name="Character 54" offset="8" length="8" />
+                    <Signal name="Character 55" offset="16" length="8" />
+                    <Signal name="Character 56" offset="24" length="8" />
+                    <Signal name="Character 57" offset="32" length="8" />
+                    <Signal name="Character 58" offset="40" length="8" />
+                    <Signal name="Character 59" offset="48" length="8" />
+                    <Signal name="Character 60" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="9">
+                    <Signal name="Character 61" offset="8" length="8" />
+                    <Signal name="Character 62" offset="16" length="8" />
+                    <Signal name="Character 63" offset="24" length="8" />
+                    <Signal name="Character 64" offset="32" length="8" />
+                </MuxGroup>
+            </Multiplex>
+        </Message>
+        <Message id="0x379" name="CdSourceChangeResponse" length="8">
+            <Signal name="On" offset="0" length="8" />
+            <Signal name="Off" offset="8" length="8" />
+        </Message>
+        <Message id="0x380" name="CdDvdTrackFolderList" length="8" triggered="true">
+            <Notes>
+                Triggered when compatable CD is inserted
+            </Notes>
+            <Signal name="Terminator" offset="2" length="2" />
+            <Signal name="End" offset="0" length="1">
+                <Notes>
+                    Indicates the end of this entry
+                </Notes>
+            </Signal>
+            <Multiplex name="TrackFolderList" offset="4" length="4">
+                <MuxGroup count="0">
+                    <Signal name="Encoding" offset="8" length="8">
+                        <LabelSet>
+                            <Label name="SHIFT-JIS" value="0" />
+                            <Label name="ISO8859-1" value="1" />
+                            <Label name="ASCII" value="2" />
+                            <Label name="UTF-8" value="3" />
+                            <Label name="UTF-16BE" value="4" />
+                            <Label name="UTF-16LE" value="5" />
+                            <Label name="UTF-32" value="6" />
+                        </LabelSet>
+                    </Signal>
+                    <Signal name="ListType" offset="16" length="8" />
+                    <Signal name="Index" offset="24" length="8">
+                        <Notes>
+                            Coorisponds to track number on audio cd. File Index on MP3 CD
+                        </Notes>
+                    </Signal>
+                    <Signal name="TotalIndex" offset="32" length="8" />
+                    <Signal name="Type" offset="40" length="8">
+                        <Notes>
+
+                        </Notes>
+                        <LabelSet>
+                            <Label name="Disc Title" value="1" />
+                            <Label name="Folder" value="2" />
+                            <Label name="Track Title" value="10" />
+                        </LabelSet>
+                    </Signal>
+                    <Signal name="Character 1" offset="48" length="8" />
+                    <Signal name="Character 2" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="1">
+                    <Signal name="Character 3" offset="8" length="8" />
+                    <Signal name="Character 4" offset="16" length="8" />
+                    <Signal name="Character 5" offset="24" length="8" />
+                    <Signal name="Character 6" offset="32" length="8" />
+                    <Signal name="Character 7" offset="40" length="8" />
+                    <Signal name="Character 8" offset="48" length="8" />
+                    <Signal name="Character 9" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="2">
+                    <Signal name="Character 10" offset="8" length="8" />
+                    <Signal name="Character 11" offset="16" length="8" />
+                    <Signal name="Character 12" offset="24" length="8" />
+                    <Signal name="Character 13" offset="32" length="8" />
+                    <Signal name="Character 14" offset="40" length="8" />
+                    <Signal name="Character 15" offset="48" length="8" />
+                    <Signal name="Character 16" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="3">
+                    <Signal name="Character 17" offset="8" length="8" />
+                    <Signal name="Character 18" offset="16" length="8" />
+                    <Signal name="Character 19" offset="24" length="8" />
+                    <Signal name="Character 20" offset="32" length="8" />
+                    <Signal name="Character 21" offset="40" length="8" />
+                    <Signal name="Character 22" offset="48" length="8" />
+                    <Signal name="Character 23" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="4">
+                    <Signal name="Character 24" offset="8" length="8" />
+                    <Signal name="Character 25" offset="16" length="8" />
+                    <Signal name="Character 26" offset="24" length="8" />
+                    <Signal name="Character 27" offset="32" length="8" />
+                    <Signal name="Character 28" offset="40" length="8" />
+                    <Signal name="Character 29" offset="48" length="8" />
+                    <Signal name="Character 30" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="5">
+                    <Signal name="Character 31" offset="8" length="8" />
+                    <Signal name="Character 32" offset="16" length="8" />
+                    <Signal name="Character 33" offset="24" length="8" />
+                    <Signal name="Character 34" offset="32" length="8" />
+                    <Signal name="Character 35" offset="40" length="8" />
+                    <Signal name="Character 36" offset="48" length="8" />
+                    <Signal name="Character 37" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="6">
+                    <Signal name="Character 38" offset="8" length="8" />
+                    <Signal name="Character 39" offset="16" length="8" />
+                    <Signal name="Character 40" offset="24" length="8" />
+                    <Signal name="Character 41" offset="32" length="8" />
+                    <Signal name="Character 42" offset="40" length="8" />
+                    <Signal name="Character 43" offset="48" length="8" />
+                    <Signal name="Character 44" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="7">
+                    <Signal name="Character 45" offset="8" length="8" />
+                    <Signal name="Character 46" offset="16" length="8" />
+                    <Signal name="Character 47" offset="24" length="8" />
+                    <Signal name="Character 48" offset="32" length="8" />
+                    <Signal name="Character 49" offset="40" length="8" />
+                    <Signal name="Character 50" offset="48" length="8" />
+                    <Signal name="Character 51" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="8">
+                    <Signal name="Character 52" offset="8" length="8" />
+                    <Signal name="Character 53" offset="16" length="8" />
+                    <Signal name="Character 54" offset="24" length="8" />
+                    <Signal name="Character 55" offset="32" length="8" />
+                    <Signal name="Character 56" offset="40" length="8" />
+                    <Signal name="Character 57" offset="48" length="8" />
+                    <Signal name="Character 58" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="9">
+                    <Signal name="Character 59" offset="8" length="8" />
+                    <Signal name="Character 60" offset="16" length="8" />
+                    <Signal name="Character 61" offset="24" length="8" />
+                    <Signal name="Character 62" offset="32" length="8" />
+                    <Signal name="Character 63" offset="40" length="8" />
+                    <Signal name="Character 64" offset="48" length="8" />
+                </MuxGroup>
+            </Multiplex>
+        </Message>
+        <Message id="0x381" name="CdDvdFolderContents" length="8">
+            <Notes>Need to test with MP3 CD</Notes>
+            <Signal name="1" offset="4" length="4" />
+            <Signal name="2" offset="8" length="8" />
+            <Signal name="3" offset="16" length="8" />
+            <Signal name="4" offset="24" length="8" />
+            <Signal name="Total Tracks" offset="32" length="8" />
+            <Signal name="5" offset="40" length="8" />
+            <Signal name="6" offset="48" length="8" />
+        </Message>
+        <Message id="0x450" name="CdDvdStatus" length="8" interval="1000">
+            <Signal name="OperationStatus" offset="0" length="8" />
+            <Signal name="DvdMainMenuPlaying" offset="24" length="1" />
+            <Signal name="TitleMenuPlayingStat" offset="45" length="1" />
+            <Signal name="OperationErrors" offset="8" length="8" />
+            <Signal name="DiscType" offset="21" length="3">
+                <LabelSet>
+                    <Label name="Audio CD" value="1" />
+                    <Label name="MP3" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="RepeatingStatus" offset="19" length="2" />
+            <Signal name="RandomSettingStatus" offset="17" length="2" />
+            <Signal name="TrackListStatus" offset="30" length="2" />
+            <Signal name="FolderListStatus" offset="26" length="2" />
+            <Signal name="DiscUpdateStatus" offset="28" length="2" />
+            <Signal name="CdReadyStatus" offset="25" length="1" />
+            <Signal name="SubtitleStatus" offset="38" length="2" />
+            <Signal name="CdDvdSource" offset="36" length="2" />
+            <Signal name="MultiAnglesAvailable" offset="32" length="4" />
+        </Message>
+        <Message id="0x451" name="CdDvdTrackPlayStatus" length="8" interval="1000">
+            <Signal name="DvdViewingAngles" offset="0" length="8" />
+            <Signal name="TrackNumber" offset="8" length="8" />
+            <Signal name="TrackTimeHours" offset="16" length="4" />
+            <Signal name="TrackTimeMinutes" offset="24" length="8" />
+            <Signal name="TrackTimeSeconds" offset="34" length="6" />
+            <Signal name="ElapsedTimeHours" offset="44" length="4" />
+            <Signal name="ElapsedTimeMinutes" offset="44" length="8" endianess="big" />
+            <Signal name="ElapsedTimeSeconds" offset="52" length="6" endianess="big" />
+        </Message>
+        <Message id="0x452" name="CdDvdVersion" length="8" interval="2000">
+            <Notes>
+                Partnumber Strings:
+                BHP3 - CD
+                B45D - DVD
+            </Notes>
+            <Multiplex name="Unknown_0x451_InfoMux" offset="0" length="8">
+                <MuxGroup count="0">
+                    <Signal name="PartNumber 0" offset="8" length="8" />
+                    <Signal name="PartNumber 1" offset="16" length="8" />
+                    <Signal name="PartNumber 2" offset="24" length="8" />
+                    <Signal name="PartNumber 4" offset="32" length="8" />
+                    <Signal name="SoftwareVer 0" offset="40" length="8" />
+                    <Signal name="SoftwareVer 1" offset="48" length="8" />
+                    <Signal name="SoftwareVer 2" offset="56" length="8" />
+                </MuxGroup>
+                <MuxGroup count="1">
+                    <Signal name="SoftwareVer 3" offset="8" length="8" />
+                    <Signal name="SoftwareVer 4" offset="16" length="8" />
+                    <Signal name="SoftwareVer 5" offset="24" length="8" />
+                    <Signal name="SoftwareVer 6" offset="32" length="8" />
+                    <Signal name="SoftwareVer 7" offset="40" length="8" />
+                    <Signal name="SoftwareVer 8" offset="48" length="8" />
+                </MuxGroup>
+            </Multiplex>
+        </Message>
+        <Message id="0x37C" name="CDVDTVRoutineTestResponse" length="8" interval="1000">
+            <Signal name="RoutineTest" offset="5" length="3" />
+            <Signal name="1" offset="0" length="1" />
+            <Signal name="TestDActl" offset="8" length="8" />
+            <Signal name="Dtc1" offset="16" length="8" />
+            <Signal name="Dtc2" offset="24" length="8" />
+            <Signal name="Dtc3" offset="32" length="8" />
+        </Message>
+    </Bus>
+</NetworkDefinition>

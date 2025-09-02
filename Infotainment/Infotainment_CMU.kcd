@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-->
+<NetworkDefinition
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://kayak.2codeornot2code.org/1.0" xsi:noNamespaceSchemaLocation="../Definition.xsd">
+    <Document name="Mazda SkyActiv CANbus" version="0.01" date="2016-12-11" />
+    <Node id="1" name="CMU" />
+    <Node id="2" name="TAU" />
+    <Node id="3" name="CD" />
+    <Bus name="HS-CAN" baudrate="500000">
+        <Message id="0x131" name="CMU_HeartBeat" length="8" interval="100">
+            <Signal name="Key_B3" offset="15" length="1" />
+            <Signal name="Key_B3_2" offset="14" length="1" />
+            <Signal name="Key_89" offset="8" length="1" />
+            <Signal name="Key_AA" offset="23" length="1" />
+            <Signal name="Key_AC" offset="19" length="1" />
+            <Signal name="Key_AE" offset="21" length="1" />
+            <Signal name="Key_AD" offset="17" length="1" />
+        </Message>
+    </Bus>
+</NetworkDefinition>
