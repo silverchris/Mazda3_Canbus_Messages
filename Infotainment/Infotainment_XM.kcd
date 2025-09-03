@@ -13,17 +13,35 @@
     <Node id="3" name="CD" />
     <Bus name="HS-CAN" baudrate="500000">
         <Message id="0x140" name="SiriusXmChannel" length="8">
-            <Signal name="Unknown6_1" offset="0" length="8"></Signal>
-            <Signal name="SourceSelect" offset="9" length="2">
+            <Signal name="TuneDirection" offset="0" length="8"></Signal>
+            <Signal name="MuteRequest" offset="9" length="2">
                 <LabelSet>
                     <Label name="No Change" value="0" />
                     <Label name="On" value="1" />
                 </LabelSet>
             </Signal>
-            <Signal name="Unknown6_3" offset="11" length="1"></Signal>
-            <Signal name="Unknown6_4" offset="13" length="2"></Signal>
+            <Signal name="ExpandedDiagMode" offset="11" length="1"></Signal>
+            <Signal name="DiagRequest" offset="12" length="1" />
+            <Signal name="DirectType" offset="13" length="2"></Signal>
             <Signal name="Channel" offset="16" length="8"></Signal>
-            <Signal name="Unknown6_6" offset="24" length="8"></Signal>
+            <Signal name="SID" offset="24" length="8"></Signal>
+        </Message>
+        <Message id="0x31E" name="0x31E" length="8" interval="1000">
+            <Producer>
+                <NodeRef id="1" />
+            </Producer>
+            <Signal name="XmTitleRequest" offset="5" length="3"></Signal>
+        </Message>
+        <Message id="0x343" name="XmDiag" length="8" interval="1000">
+            <Producer>
+                <NodeRef id="1" />
+            </Producer>
+            <Signal name="XmDiagCmd" offset="0" length="8">
+                <Notes>Always set to 1 when sending other signals in this message</Notes>
+            </Signal>
+            <Signal name="XmSxiPowerSts" offset="8" length="8" />
+            <Signal name="XmSxiBaudRate" offset="16" length="8" />
+            <Signal name="XmModuleReset" offset="24" length="8" />
         </Message>
         <Message id="0x351" name="XmChannelList">
             <Producer>

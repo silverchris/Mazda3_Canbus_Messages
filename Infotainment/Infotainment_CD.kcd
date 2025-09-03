@@ -25,7 +25,7 @@
                     <Label name="Scan" value="12" />
                 </LabelSet>
             </Signal>
-            <!-- <Signal name="0" offset="10" length="2" /> -->
+            <Signal name="Subtitle" offset="10" length="2" />
             <Signal name="Random" offset="12" length="2">
                 <LabelSet>
                     <Label name="No Change" value="0" />
@@ -40,17 +40,14 @@
                     <Label name="Off" value="3" />
                 </LabelSet>
             </Signal>
-            <!-- <Signal name="1" offset="16" length="8"/> -->
-            <Signal name="2" offset="24" length="8">
-                <Notes>Possibly select track by index?</Notes>
-            </Signal>
-            <!-- <Signal name="3" offset="32" length="4"/>
-            <Signal name="4" offset="36" length="4"/>
-            <Signal name="5" offset="40" length="7"/>
-            <Signal name="6" offset="47" length="1"/>
-            <Signal name="7" offset="54" length="2"/> -->
+            <Signal name="DirectTrackSeek" offset="16" length="16" endianess="big" />
+            <Signal name="MultiAngle" offset="32" length="4" />
+            <Signal name="DvdMenuOperation" offset="36" length="4" />
+            <Signal name="PlaybackJumpPercentage" offset="40" length="7" />
+            <Signal name="PlaybackJump" offset="47" length="1" />
+            <Signal name="DvdAspectRatio" offset="54" length="2" />
         </Message>
-        <Message id="0x320" name="TrackMetadataRequest" length="8">
+        <Message id="0x320" name="MetadataRequest" length="8">
             <Notes>Requests 0x370 be sent</Notes>
             <Signal name="Type" offset="0" length="8">
                 <LabelSet>
@@ -64,7 +61,7 @@
         </Message>
         <Message id="0x330" name="FolderMetadataRequest" length="8">
             <Notes>Requests 0x380 be sent</Notes>
-            <Signal name="CMD" offset="2" length="3">
+            <Signal name="ListType" offset="2" length="3">
                 <LabelSet>
                     <Label name="ChangeFolder" value="4" />
                     <Label name="ListFiles" value="2" />
@@ -72,19 +69,14 @@
                     <Label name="ChangeFolder" value="4" />
                 </LabelSet>
             </Signal>
-            <Signal name="?" offset="5" length="3">
+            <Signal name="ListDirectoryType" offset="5" length="3">
                 <Notes>Set to 3 or 4 when CMD is ChangeFolder</Notes>
             </Signal>
-            <Signal name="0" offset="8" length="8" />
-            <Signal name="SelectedIndex" offset="16" length="8">
+            <Signal name="FolderIndex" offset="8" length="16" endianess="big">
                 <Notes>Index of the folder to change too when CMD is ChangeFolder</Notes>
             </Signal>
-            <Signal name="1" offset="24" length="8" />
-            <Signal name="2" offset="32" length="8" />
-            <Signal name="3" offset="40" length="8">
-                <Notes>Set to 1 when CMD is ListFolders or ListFiles</Notes>
-            </Signal>
-            <Signal name="Length" offset="48" length="8">
+            <Signal name="IndexStart" offset="24" length="16" endianess="big" />
+            <Signal name="IndexStop" offset="40" length="16" endianess="big">
                 <Notes>Seems to be the number of entries requested + 1</Notes>
             </Signal>
         </Message>
@@ -344,6 +336,12 @@
             <Signal name="Total Tracks" offset="32" length="8" />
             <Signal name="5" offset="40" length="8" />
             <Signal name="6" offset="48" length="8" />
+        </Message>
+        <Message id="0x430" name="TouchPanel" length="8" interval="100">
+            <!-- Todo: Complete and verify this -->
+            <Producer>
+                <NodeRef id="1" />
+            </Producer>
         </Message>
         <Message id="0x450" name="CdDvdStatus" length="8" interval="1000">
             <Signal name="OperationStatus" offset="0" length="8" />

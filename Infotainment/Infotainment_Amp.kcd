@@ -16,14 +16,14 @@
             <Producer>
                 <NodeRef id="1" />
             </Producer>
-            <Signal name="VolumeUnknown0" offset="4" length="2"></Signal>
+            <Signal name="MuteType" offset="4" length="2"></Signal>
             <Signal name="MuteState" offset="6" length="2">
                 <Consumer>
                     <NodeRef id="2" />
                 </Consumer>
                 <LabelSet>
                     <Label name="No Change" value="0" />
-                    <Label name="OFF" value="1" />
+                    <Label name="Off" value="1" />
                     <Label name="On" value="2" />
                 </LabelSet>
             </Signal>
@@ -34,8 +34,8 @@
                 </Consumer>
                 <Value type="signed"></Value>
             </Signal>
-            <Signal name="VolumeUnknown1" offset="18" length="4"></Signal>
-            <Signal name="Ducking" offset="22" length="2">
+            <Signal name="SourceChangeRequest" offset="18" length="4"></Signal>
+            <Signal name="SourceChangeRequestInterruptOn" offset="22" length="2">
                 <Notes>Not fully understood. Seen when Navigation audio is played</Notes>
                 <Consumer>
                     <NodeRef id="2" />
@@ -75,7 +75,7 @@
                 </Consumer>
                 <Value type="signed"></Value>
             </Signal>
-            <Signal name="AudioSettingsUnknown0" offset="32" length="8">
+            <Signal name="ASL" offset="32" length="8">
             </Signal>
             <Signal name="BoseCenterpoint" offset="42" length="2">
                 <Consumer>
@@ -97,7 +97,7 @@
                     <Label name="On" value="2" />
                 </LabelSet>
             </Signal>
-            <Signal name="AudioSettingsUnknown1" offset="46" length="2"></Signal>
+            <Signal name="ACUInitialization" offset="46" length="2"></Signal>
         </Message>
         <Message id="0x418" name="AmpStatus" length="8" interval="1000">
             <Notes>VBS_BUS_CAN_SoundSelect_Status</Notes>
@@ -142,22 +142,40 @@
         <Message id="0x31B" name="SourceChangeRequest" length="8">
             <Signal name="To" offset="0" length="8">
                 <LabelSet>
+                    <Label name="LM" value="1" />
                     <Label name="AM" value="2" />
                     <Label name="FM" value="3" />
+                    <Label name="TA" value="5" />
+                    <Label name="HAR" value="7" />
+                    <Label name="DAB" value="9" />
                     <Label name="CD" value="14" />
-                    <Label name="XM" value="17" />
+                    <Label name="AUX" value="15" />
+                    <Label name="CMU" value="16" />
                     <Label name="BTHF" value="19" />
-                    <Label name="RingTone" value="24" />
+                    <Label name="Navi" value="20" />
+                    <Label name="TV" value="21" />
+                    <Label name="DVD" value="22" />
+                    <Label name="BTHFALERT" value="24" />
+                    <Label name="XM" value="23" />
                 </LabelSet>
             </Signal>
             <Signal name="From" offset="8" length="8">
                 <LabelSet>
+                    <Label name="LM" value="1" />
                     <Label name="AM" value="2" />
                     <Label name="FM" value="3" />
+                    <Label name="TA" value="5" />
+                    <Label name="HAR" value="7" />
+                    <Label name="DAB" value="9" />
                     <Label name="CD" value="14" />
-                    <Label name="XM" value="17" />
+                    <Label name="AUX" value="15" />
+                    <Label name="CMU" value="16" />
                     <Label name="BTHF" value="19" />
-                    <Label name="RingTone" value="24" />
+                    <Label name="Navi" value="20" />
+                    <Label name="TV" value="21" />
+                    <Label name="DVD" value="22" />
+                    <Label name="BTHFALERT" value="24" />
+                    <Label name="XM" value="23" />
                 </LabelSet>
             </Signal>
         </Message>
@@ -169,12 +187,21 @@
         <Message id="0x419" name="SoundSelectStatus" length="8" interval="1000">
             <Signal name="Source" offset="0" length="8">
                 <LabelSet>
+                    <Label name="LM" value="1" />
                     <Label name="AM" value="2" />
                     <Label name="FM" value="3" />
+                    <Label name="TA" value="5" />
+                    <Label name="HAR" value="7" />
+                    <Label name="DAB" value="9" />
                     <Label name="CD" value="14" />
-                    <Label name="XM" value="17" />
+                    <Label name="AUX" value="15" />
+                    <Label name="CMU" value="16" />
                     <Label name="BTHF" value="19" />
-                    <Label name="RingTone" value="24" />
+                    <Label name="Navi" value="20" />
+                    <Label name="TV" value="21" />
+                    <Label name="DVD" value="22" />
+                    <Label name="BTHFALERT" value="24" />
+                    <Label name="XM" value="23" />
                 </LabelSet>
             </Signal>
             <Signal name="Interrupt" offset="8" length="8"></Signal>
@@ -186,7 +213,7 @@
                 <MuxGroup count="0">
                     <Signal name="Manufacturer" offset="8" length="8">
                         <LabelSet>
-                            <Label name="Panasonic" value="2"/>
+                            <Label name="Panasonic" value="2" />
                         </LabelSet>
                     </Signal>
                     <Signal name="PartNumber 1" offset="16" length="8" />

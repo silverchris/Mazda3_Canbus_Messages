@@ -22,7 +22,7 @@
                 </Consumer>
                 <Value type="signed" />
             </Signal>
-            <Signal name="QuickSeek" offset="10" length="3"/>
+            <Signal name="QuickSeek" offset="10" length="3" />
             <Signal name="Seek" offset="13" length="3">
                 <LabelSet>
                     <Label name="No Change" value="0" />
@@ -107,12 +107,11 @@
             <Signal name="HdParameter1Request" offset="24" length="8" />
             <Signal name="HdParameter2Request" offset="32" length="8" />
         </Message>
-        <Message id="0x313" name="AutoMemory" length="8">
+        <Message id="0x314" name="RdsTextRequest" length="8">
             <Producer>
                 <NodeRef id="1" />
             </Producer>
-            <Signal name="1" offset="2" length="4" />
-            <Signal name="2" offset="6" length="4" />
+            <Signal name="RdsTextRequest" offset="0" length="8" />
         </Message>
         <Message id="0x363" name="PresetInfo" length="8">
             <Multiplex name="?" offset="0" length="8">

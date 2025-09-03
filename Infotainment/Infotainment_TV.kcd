@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-->
+<NetworkDefinition
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://kayak.2codeornot2code.org/1.0" xsi:noNamespaceSchemaLocation="../Definition.xsd">
+    <Document name="Mazda SkyActiv CANbus" version="0.01" date="2016-12-11" />
+    <Node id="1" name="CMU" />
+    <Node id="2" name="TAU" />
+    <Node id="3" name="CD" />
+    <Bus name="HS-CAN" baudrate="500000">
+        <Message id="0x170" name="TvCtrl" length="8">
+            <Producer>
+                <NodeRef id="1" />
+            </Producer>
+            <Signal name="CtrlCmd0" offset="6" length="2" />
+            <Signal name="CtrlCmd1" offset="5" length="1" />
+            <Signal name="CtrlCmd2" offset="3" length="1" />
+            <Signal name="CtrlCmd3" offset="45" length="2" />
+            <Signal name="CtrlCmd4" offset="43" length="2" />
+            <Signal name="CtrlCmd5" offset="41" length="2" />
+            <Signal name="CtrlCmd6" offset="40" length="1" />
+            <Signal name="CtrlCmd7" offset="54" length="2" />
+        </Message>
+        <Message id="0x432" name="TvParentalControls" length="8" interval="1000">
+            <Signal name="ParentalControl0" offset="0" length="16" endianess="big" />
+            <Signal name="ParentalControl1" offset="16" length="16" endianess="big" />
+        </Message>
+    </Bus>
+</NetworkDefinition>
