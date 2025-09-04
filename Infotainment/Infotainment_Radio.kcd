@@ -107,11 +107,41 @@
             <Signal name="HdParameter1Request" offset="24" length="8" />
             <Signal name="HdParameter2Request" offset="32" length="8" />
         </Message>
+        <Message id="0x313" name="AutoMemory" length="8">
+            <Producer>
+                <NodeRef id="1" />
+            </Producer>
+            <Signal name="BandType" offset="6" length="2">
+                <LabelSet>
+                    <Label name="AM" value="1" />
+                    <Label name="FM" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Count" offset="2" length="4" />
+        </Message>
         <Message id="0x314" name="RdsTextRequest" length="8">
             <Producer>
                 <NodeRef id="1" />
             </Producer>
             <Signal name="RdsTextRequest" offset="0" length="8" />
+        </Message>
+        <Message id="0x315" name="HdMetadataChangeNotifcation" length="8">
+            <Producer>
+                <NodeRef id="1" />
+            </Producer>
+            <Signal name="HdMetadataChangeNotifcation" offset="7" length="1" />
+        </Message>
+        <Message id="0x316" name="HdRadioPsdState" length="8">
+            <Producer>
+                <NodeRef id="1" />
+            </Producer>
+            <Signal name="HdRadioPsdState" offset="4" length="4" />
+        </Message>
+        <Message id="0x31A" name="HdRadioErrorStatusRequest" length="8">
+            <Producer>
+                <NodeRef id="1" />
+            </Producer>
+            <Signal name="HdRadioErrorStatusRequest" offset="7" length="1" />
         </Message>
         <Message id="0x363" name="PresetInfo" length="8">
             <Multiplex name="?" offset="0" length="8">

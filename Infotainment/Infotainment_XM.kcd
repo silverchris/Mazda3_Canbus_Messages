@@ -26,6 +26,12 @@
             <Signal name="Channel" offset="16" length="8"></Signal>
             <Signal name="SID" offset="24" length="8"></Signal>
         </Message>
+        <Message id="0x31D" name="XmSignalInfoRequest" length="8" interval="1000">
+            <Producer>
+                <NodeRef id="1" />
+            </Producer>
+            <Signal name="XmSignalInfoRequest" offset="6" length="2" />
+        </Message>
         <Message id="0x31E" name="0x31E" length="8" interval="1000">
             <Producer>
                 <NodeRef id="1" />

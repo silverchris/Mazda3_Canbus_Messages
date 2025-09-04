@@ -21,22 +21,32 @@
                     <Label name="Next" value="3" />
                     <Label name="Previous" value="4" />
                     <Label name="FastForward" value="5" />
-                    <Label name="Rewind" value="6" />
+                    <Label name="FastReverse" value="6" />
+                    <Label name="Eject" value="7" />
+                    <Label name="FolderUp" value="8" />
+                    <Label name="FolderDown" value="9" />
+                    <Label name="UpdateDisc" value="10" />
                     <Label name="Scan" value="12" />
+                    <Label name="SlowForward" value="13" />
+                    <Label name="SlowReverse" value="14" />
+                    <Label name="Menu" value="15" />
+                    <Label name="PlayerMenu" value="17" />
                 </LabelSet>
             </Signal>
             <Signal name="Subtitle" offset="10" length="2" />
             <Signal name="Random" offset="12" length="2">
                 <LabelSet>
                     <Label name="No Change" value="0" />
-                    <Label name="On" value="2" />
+                    <Label name="Folder Random On" value="1" />
+                    <Label name="Disc Random On" value="2" />
                     <Label name="Off" value="3" />
                 </LabelSet>
             </Signal>
             <Signal name="Repeat" offset="14" length="2">
                 <LabelSet>
                     <Label name="No Change" value="0" />
-                    <Label name="On" value="1" />
+                    <Label name="Track Repeat On" value="1" />
+                    <Label name="Folder Repeat On" value="2" />
                     <Label name="Off" value="3" />
                 </LabelSet>
             </Signal>
@@ -60,20 +70,34 @@
             </Signal>
         </Message>
         <Message id="0x330" name="FolderMetadataRequest" length="8">
-            <Notes>Requests 0x380 be sent</Notes>
+            <Notes>Requests 0x380 be sent
+                VBS_CD_TrackFolderListReq('\x04','\x01',uVar1,0,0); = VBS_CD_TrackFolderListReq(CD_DVD_DIR_LOCATION_SPECIFIED_DIRECTORY, CD_DVD_TRACKFOLDER_LIST_TYPE_REQUEST_CONTENT, %d, 0, 0);
+                VBS_CD_TrackFolderListReq('\x01','\x01',0,    0,0); = VBS_CD_TrackFolderListReq(CD_DVD_DIR_LOCATION_ROOT_DIRECTORY, CD_DVD_TRACKFOLDER_LIST_TYPE_REQUEST_CONTENT, 0, 0, 0);
+                VBS_CD_TrackFolderListReq('\x02','\x01',0,0,0); = VBS_CD_TrackFolderListReq(CD_DVD_DIR_LOCATION_PARENT_DIRECTORY, CD_DVD_TRACKFOLDER_LIST_TYPE_REQUEST_CONTENT, 0, 0, 0);
+                VBS_CD_TrackFolderListReq('\x03','\x01',0,0,0); = VBS_CD_TrackFolderListReq(CD_DVD_DIR_LOCATION_NOWPLAYING_DIRECTORY, CD_DVD_TRACKFOLDER_LIST_TYPE _REQUEST_CONTENT, 0, 0, 0);
+                VBS_CD_TrackFolderListReq('\0','\x04',0,0,0); = VBS_CD_TrackFolderListReq(CD_DVD_DIR_LOCATION_NOREQUEST, CD_DVD_TRACKFOLDER_LIST_TYPE_REQUEST_ FOLDERNAME, 0, 0, 0);
+                VBS_CD_TrackFolderListReq('\0','\x02',0,1,(short)*(undefined4 *)(this + 0x10) + 1); = VBS_CD_TrackFolderListReq(CD_DVD_DIR_LOCATION_NOREQUEST, CD_DVD_TRACKFOLDER_LIST_TYPE_REQUEST_TRACK, 0, 1, %d);
+                VBS_CD_TrackFolderListReq('\0','\x03',0,1,(short)*(undefined4 *)(this + 0xc) + 1); = VBS_CD_TrackFolderListReq(CD_DVD_DIR_LOCATION_NOREQUEST, CD_DVD_TRACKFOLDER_LIST_TYPE_REQUEST_FOLDER, 0, 1, %d);
+            </Notes>
             <Signal name="ListType" offset="2" length="3">
                 <LabelSet>
-                    <Label name="ChangeFolder" value="4" />
-                    <Label name="ListFiles" value="2" />
-                    <Label name="ListFolders" value="3" />
-                    <Label name="ChangeFolder" value="4" />
+                    <Label name="RequestContent" value="1" />
+                    <Label name="RequestFiles" value="2" />
+                    <Label name="RequestFolders" value="3" />
+                    <Label name="RequestFolderName" value="4" />
                 </LabelSet>
             </Signal>
             <Signal name="ListDirectoryType" offset="5" length="3">
-                <Notes>Set to 3 or 4 when CMD is ChangeFolder</Notes>
+                <LabelSet>
+                    <Label name="NoRequest" value="0"/>
+                    <Label name="Root" value="1" />
+                    <Label name="Parent" value="2" />
+                    <Label name="NowPlaying" value="3" />
+                    <Label name="Specified" value="4" />
+                </LabelSet>
             </Signal>
             <Signal name="FolderIndex" offset="8" length="16" endianess="big">
-                <Notes>Index of the folder to change too when CMD is ChangeFolder</Notes>
+                <Notes>Folder to change to when ListDirectoryType == Specified</Notes>
             </Signal>
             <Signal name="IndexStart" offset="24" length="16" endianess="big" />
             <Signal name="IndexStop" offset="40" length="16" endianess="big">
@@ -242,8 +266,8 @@
                             <Label name="Track Title" value="10" />
                         </LabelSet>
                     </Signal>
-                    <Signal name="Character 1" offset="48" length="8" />
-                    <Signal name="Character 2" offset="56" length="8" />
+                    <!-- <Signal name="Character 1" offset="48" length="8" />
+                    <Signal name="Character 2" offset="56" length="8" /> -->
                 </MuxGroup>
                 <MuxGroup count="1">
                     <Signal name="Character 3" offset="8" length="8" />
@@ -329,13 +353,20 @@
         </Message>
         <Message id="0x381" name="CdDvdFolderContents" length="8">
             <Notes>Need to test with MP3 CD</Notes>
-            <Signal name="1" offset="4" length="4" />
+            <Signal name="1" offset="4" length="4">
+                <LabelSet>
+                    <Label name="Root Directory" value="1"/>
+                    <Label name="Parent Directory" value="2"/>
+                    <Label name="Now Playing Directory" value="3"/>
+                    <Label name="Specified Directory" value="4" />
+                </LabelSet>
+            </Signal>
             <Signal name="2" offset="8" length="8" />
             <Signal name="3" offset="16" length="8" />
             <Signal name="4" offset="24" length="8" />
-            <Signal name="Total Tracks" offset="32" length="8" />
+            <Signal name="Files" offset="32" length="8" />
             <Signal name="5" offset="40" length="8" />
-            <Signal name="6" offset="48" length="8" />
+            <Signal name="Folders" offset="48" length="8" />
         </Message>
         <Message id="0x430" name="TouchPanel" length="8" interval="100">
             <!-- Todo: Complete and verify this -->
@@ -344,18 +375,63 @@
             </Producer>
         </Message>
         <Message id="0x450" name="CdDvdStatus" length="8" interval="1000">
-            <Signal name="OperationStatus" offset="0" length="8" />
+            <Signal name="OperationStatus" offset="0" length="8">
+                <LabelSet>
+                    <Label name="No Status" value="0" />
+                    <Label name="Ejecting" value="1" />
+                    <Label name="Ejected" value="2" />
+                    <Label name="Loading" value="3" />
+                    <Label name="Reading" value="4" />
+                    <Label name="Playing" value="5" />
+                    <Label name="Paused" value="6" />
+                    <Label name="Rewind" value="7" />
+                    <Label name="Fastforward" value="8" />
+                    <Label name="Track Changed" value="9" />
+                    <Label name="Folder Changed" value="10" />
+                    <Label name="Updating Software" value="11" />
+                    <Label name="Update Complete" value="12" />
+                    <Label name="Scan" value="13" />
+                    <Label name="SlowFastforward" value="14" />
+                    <Label name="SlowRewind" value="15" />
+                    <Label name="Standby" value="16" />
+                </LabelSet>
+            </Signal>
             <Signal name="DvdMainMenuPlaying" offset="24" length="1" />
             <Signal name="TitleMenuPlayingStat" offset="45" length="1" />
-            <Signal name="OperationErrors" offset="8" length="8" />
+            <Signal name="OperationErrors" offset="8" length="8">
+                <LabelSet>
+                    <Label name="No Error" value="0" />
+                    <Label name="Loading Error" value="1" />
+                    <Label name="Unsupported Disc" value="2" />
+                    <Label name="Region Code Error" value="3" />
+                    <Label name="Parental Code Error" value="4" />
+                    <Label name="Too Hot" value="5" />
+                    <Label name="Eject No Disc Inserted" value="6" />
+                    <Label name="No Response" value="7" />
+                </LabelSet>
+            </Signal>
             <Signal name="DiscType" offset="21" length="3">
                 <LabelSet>
                     <Label name="Audio CD" value="1" />
-                    <Label name="MP3" value="2" />
+                    <Label name="Data CD" value="2" />
+                    <Label name="DVD" value="3" />
+                    <Label name="DVD VR" value="4" />
                 </LabelSet>
             </Signal>
-            <Signal name="RepeatingStatus" offset="19" length="2" />
-            <Signal name="RandomSettingStatus" offset="17" length="2" />
+            <Signal name="RepeatingStatus" offset="19" length="2">
+                <LabelSet>
+                    <Label name="Off" value="0" />
+                    <Label name="Track" value="1" />
+                    <Label name="Folder" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="RandomSettingStatus" offset="17" length="2">
+                <LabelSet>
+                    <Label name="Off" value="0" />
+                    <Label name="Folder" value="1" />
+                    <Label name="Disc" value="2" />
+                </LabelSet>
+            </Signal>
             <Signal name="TrackListStatus" offset="30" length="2" />
             <Signal name="FolderListStatus" offset="26" length="2" />
             <Signal name="DiscUpdateStatus" offset="28" length="2" />

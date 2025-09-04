@@ -29,5 +29,6 @@
             <Signal name="ParentalControl0" offset="0" length="16" endianess="big" />
             <Signal name="ParentalControl1" offset="16" length="16" endianess="big" />
         </Message>
+        <Message id="0x453" name="DtvStatus" length="8" interval="2000" />
     </Bus>
 </NetworkDefinition>
