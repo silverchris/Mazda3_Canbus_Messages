@@ -64,8 +64,9 @@
                     <Label name="TrackTitle" value="1" />
                     <Label name="AlbumTitle" value="2" />
                     <Label name="Artist" value="3" />
+                    <Label name="Genre" value="4" />
                     <Label name="Folder" value="5" />
-                    <Label name="AlbumTitle2" value="6" />
+                    <Label name="DiscTitle" value="6" />
                 </LabelSet>
             </Signal>
         </Message>
